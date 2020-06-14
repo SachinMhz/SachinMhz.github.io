@@ -1,0 +1,233 @@
+/* ---------------------------------------------------Styles of Header components */
+
+.search-container {
+  margin-top: 20px;
+  padding-left: 24px;
+}
+
+.search-bar-container {
+  background: url("../images/search-bar-container.png") no-repeat;
+  width: 254px;
+  height: 20px;
+}
+.search-text-input {
+  background-color: transparent;
+  border: none;
+  font-size: 9px;
+  padding-left: 8px;
+  padding-top: 5px;
+  width: 245px;
+  height: 12px;
+  outline: none;
+}
+.search-icon-container {
+  background: url("../images/search-icon-cnotainer.png") no-repeat;
+  width: 20px;
+  margin-left: 1px;
+  height: 20px;
+}
+
+.search-btn-container {
+  background: url("../images/search-btn-container.png") no-repeat;
+  margin-left: 1px;
+  width: 54px;
+  height: 20px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 9px;
+  color: white;
+  margin-left: 7px;
+}
+.user-detail-container {
+  margin-top: 10px;
+}
+.user-name {
+  text-align: right;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.horizontal-list {
+  display: inline;
+  font-size: 12px;
+}
+
+/* .horizontal-list:nth-child(n + 2) {
+  border-left: 1px solid black;
+} */
+/* .horizontal-list:not(:first-child) li {
+  border-left: 1px solid black;
+} */
+.border-left {
+  border-left: 1px solid black;
+  padding-left: 4px;
+}
+
+/* ---------------------------------------------------Styles of Header Nav components */
+
+.nav-text {
+  font-size: 12px;
+  padding-left: 8px;
+}
+.nav-padding-left {
+  font-size: 12px;
+  padding-left: 20px;
+}
+.nav-text-left {
+  font-size: 12px;
+  padding-left: 5px;
+}
+.gray {
+  color: #a2a2a2;
+}
+.nav-image {
+  padding-top: 0px;
+  margin-left: 0px;
+}
+
+/* ---------------------------------------------------Styles of content-column bar components */
+.column-button {
+  color: white;
+  background-color: #2fc1da;
+  padding: 14px 50px 14px 12px;
+}
+
+.column-list {
+  list-style: none;
+}
+
+.column-list-item {
+  padding: 11px;
+  font-size: 12px;
+}
+
+.column-list-item:hover {
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.column-list-item:first-child {
+  color: white;
+  background-color: #2fc1da;
+  padding: 14px 50px 14px 12px;
+  font-size: 14px;
+}
+
+.column-list-item:first-child:hover {
+  cursor: default;
+}
+
+.column-list-top-left-item {
+  display: inline-block;
+  width: 98px;
+}
+
+.column-list-top-right-item {
+  margin-left: 60px;
+}
+
+.column-list-bottom-left-item {
+  display: inline-block;
+  width: 138px;
+}
+
+.column-list-bottom-right-item {
+  margin-left: 20px;
+}
+
+.column-list-right-item {
+  display: inline-block;
+  padding-right: 21px;
+}
+
+/* ------------------------------------------------------------------------------------------middle main column styles */
+
+.nav-left-img {
+  background: url("../images/main-nav-left-96.png");
+}
+
+.nav-right-img {
+  background: url("../images/main-nav-right-96.png");
+}
+
+.main-content-header-nav-text {
+  display: inline-block;
+  margin: 12px 0px;
+}
+
+.main-content-header-nav-item {
+  display: inline-block;
+  margin: 0px 5px;
+  width: 114px;
+  padding: 10px 0px 8px 0px;
+  background: url("../images/nav-inactive-bg.png") no-repeat;
+}
+
+.main-content-header-nav-item:hover {
+  cursor: pointer;
+  background: url("../images/nav-active-bg.png") no-repeat;
+  color: white;
+}
+
+.main-content-header-nav-item.active {
+  background: url("../images/nav-active-bg.png") no-repeat;
+  color: white;
+}
+.main-content-list {
+  list-style: none;
+}
+.main-content-list-item {
+  padding: 15px 0px;
+  border-bottom: 1px #727272 solid;
+}
+
+.main-content-right {
+  padding-left: 10px;
+}
+.content-title {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+.content-notification {
+  font-size: 10px;
+  font-weight: bold;
+}
+.content-desc {
+  margin-top: 2px;
+  font-size: 11px;
+  color: #727272;
+}
+
+.blue {
+  text-decoration: none;
+  color: #37a4b9;
+  font-weight: bold;
+}
+.green {
+  text-decoration: none;
+  color: #427500;
+  font-weight: bold;
+}
+.red {
+  text-decoration: none;
+  color: #d4310d;
+  font-weight: bold;
+}
+
+/* ------------------------------------------------------------------------------------------Footer styles */
+
+.footer-list-item {
+  display: inline;
+  list-style: none;
+}
+
+.footer-list-item li:before {
+  content: "\2022";
+  padding: 0px 6px;
+}
+
+.footer-list-item li:first-child:before {
+  content: "";
+  padding: 0px;
+}
