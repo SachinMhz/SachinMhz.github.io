@@ -39,31 +39,67 @@
   color: white;
   margin-left: 7px;
 }
+
+.search-btn-container:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
 .user-detail-container {
-  margin-top: 10px;
+  margin-top: 6px;
 }
 .user-name {
   text-align: right;
   font-size: 14px;
   margin-bottom: 6px;
+  letter-spacing: 1px;
 }
 .horizontal-list {
   display: inline;
+  text-align: right;
   font-size: 12px;
 }
 
-/* .horizontal-list:nth-child(n + 2) {
+.horizontal-list-item {
+  display: inline;
   border-left: 1px solid black;
-} */
-/* .horizontal-list:not(:first-child) li {
-  border-left: 1px solid black;
-} */
+  padding: 0px 5px;
+}
+.horizontal-list-item:first-child {
+  display: inline;
+  border-left: none;
+  padding: 0px;
+}
+
 .border-left {
   border-left: 1px solid black;
   padding-left: 4px;
 }
 
+.link {
+  color: black;
+  text-decoration: none;
+}
+.link:hover {
+  color: black;
+  text-decoration: underline;
+  cursor: pointer;
+}
 /* ---------------------------------------------------Styles of Header Nav components */
+
+.nav-header-list {
+  display: inline;
+  list-style: none;
+}
+.nav-header-list-item {
+  display: inline;
+  font-size: 14px;
+  padding-left: 30px;
+}
+.nav-header-list-item:first-child {
+  display: inline;
+  font-size: 14px;
+  padding-left: 8px;
+}
 
 .nav-text {
   font-size: 12px;
@@ -74,15 +110,36 @@
   padding-left: 20px;
 }
 .nav-text-left {
+  display: inline-block;
   font-size: 12px;
   padding-left: 5px;
 }
 .gray {
   color: #a2a2a2;
 }
-.nav-image {
+.nav-img {
+  display: inline-block;
   padding-top: 0px;
-  margin-left: 0px;
+  margin-top: 0px;
+}
+.nav-left-list {
+  list-style: none;
+  display: inline-block;
+  font-size: 12px;
+}
+.nav-left-list-item {
+  display: inline-block;
+  text-align: center;
+  padding-left: 32px;
+}
+.nav-left-list-item-img {
+  height: 15px;
+  width: auto;
+  vertical-align: middle;
+}
+.nav-left-list-item-text {
+  display: inline-block;
+  padding-left: 8px;
 }
 
 /* ---------------------------------------------------Styles of content-column bar components */
@@ -98,7 +155,26 @@
 
 .column-list-item {
   padding: 11px;
-  font-size: 12px;
+  font-size: 10px;
+}
+.column-list-item:nth-child(2) {
+  padding: 15px 11px 10px 11px;
+  font-size: 10px;
+}
+
+.column-bottom-list-item {
+  padding: 11px;
+  font-size: 10px;
+}
+
+.list-first-padding {
+  padding: 15px 11px 11px 11px;
+  font-size: 10px;
+}
+
+.column-bottom-list-item:hover {
+  background-color: #ffffff;
+  cursor: pointer;
 }
 
 .column-list-item:hover {
@@ -109,8 +185,8 @@
 .column-list-item:first-child {
   color: white;
   background-color: #2fc1da;
-  padding: 14px 50px 14px 12px;
-  font-size: 14px;
+  padding: 12px 50px 12px 12px;
+  font-size: 16px;
 }
 
 .column-list-item:first-child:hover {
@@ -119,7 +195,8 @@
 
 .column-list-top-left-item {
   display: inline-block;
-  width: 98px;
+  line-height: 12px;
+  width: 96px;
 }
 
 .column-list-top-right-item {
@@ -128,20 +205,26 @@
 
 .column-list-bottom-left-item {
   display: inline-block;
+  line-height: 12px;
   width: 138px;
 }
 
 .column-list-bottom-right-item {
-  margin-left: 20px;
+  margin-left: 15px;
 }
 
 .column-list-right-item {
   display: inline-block;
-  padding-right: 21px;
+  padding-right: 15px;
 }
 
 /* ------------------------------------------------------------------------------------------middle main column styles */
 
+.main-content-title {
+  padding-left: 2px;
+  margin-top: -4px;
+  font-size: 29px;
+}
 .nav-left-img {
   background: url("../images/main-nav-left-96.png");
 }
@@ -173,28 +256,37 @@
   background: url("../images/nav-active-bg.png") no-repeat;
   color: white;
 }
+
 .main-content-list {
   list-style: none;
 }
 .main-content-list-item {
   padding: 15px 0px;
-  border-bottom: 1px #727272 solid;
+  border-bottom: 1px #d8d8d8 solid;
+}
+
+.user-img {
+  display: inline-block;
+  height: 70px;
+  width: 70px;
 }
 
 .main-content-right {
   padding-left: 10px;
 }
 .content-title {
-  font-size: 15px;
+  display: inline-block;
+  font-size: 14px;
   font-weight: bold;
-  margin-bottom: 2px;
+  padding-bottom: 6px;
 }
 .content-notification {
   font-size: 10px;
   font-weight: bold;
+  padding-bottom: 5px;
 }
 .content-desc {
-  margin-top: 2px;
+  padding-bottom: 5px;
   font-size: 11px;
   color: #727272;
 }

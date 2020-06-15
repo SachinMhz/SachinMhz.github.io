@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="./css/reset.css" />
     <link rel="stylesheet" type="text/css" href="./css/layout.css" />
     <link rel="stylesheet" type="text/css" href="./css/style.css" />
-    <title>Document</title>
+    <title>TuTangle Assignment 1</title>
   </head>
   <body>
     <div class="main-container-wrapper">
@@ -28,18 +28,26 @@
                 </div>
                 <span class="float-left search-icon-container"> </span>
               </div>
-              <button class="float-left search-btn-container" type="button">
-                SEARCH
-              </button>
+              <a href="#">
+                <button class="float-left search-btn-container" type="button">
+                  SEARCH
+                </button></a
+              >
             </div>
           </div>
 
           <div class="user-detail-container float-right clearfix">
             <p class="user-name">Joe Burros</p>
-            <ul class="horizontal-list">
-              <li class="horizontal-list">Home</li>
-              <li class="horizontal-list border-left">Settings</li>
-              <li class="horizontal-list border-left">Log out</li>
+            <ul class="horizontal-list float-right clearfix">
+              <li class="horizontal-list-item">
+                <a class="link" href="#">Home</a>
+              </li>
+              <li class="horizontal-list-item">
+                <a class="link" href="#">Settings</a>
+              </li>
+              <li class="horizontal-list-item">
+                <a class="link" href="#">Log out</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -47,29 +55,57 @@
       <!-----------------------------------------------------------------------------Start of Nav Header-------------------------------------->
       <div class="header-nav-container-wrapper">
         <div class="header-nav-container clearfix">
-          <div class="float-left">
-            <span class="nav-text">Create New Entry</span>
-            <span class="nav-padding-left">My Topic Boxes</span>
-            <span class="nav-padding-left">Friends</span>
-            <span class="nav-padding-left">Invite New Members</span>
+          <div class="float-left clearfix">
+            <ul class="nav-header-list">
+              <li class="nav-header-list-item">
+                <a class="link" href="#">Create New Entry</a>
+              </li>
+              <li class="nav-header-list-item">
+                <a class="link" href="#">My Topic Boxes</a>
+              </li>
+              <li class="nav-header-list-item">
+                <a class="link" href="#">Friends</a>
+              </li>
+              <li class="nav-header-list-item">
+                <a class="link" href="#">Invite New Members</a>
+              </li>
+            </ul>
           </div>
-          <div class="float-right">
-            <div class="float-left">
-              <img
-                class="nav-img"
-                src="./images/topic-icon.png"
-                alt="topic icon"
-              />
-              <span class="nav-text-left">Topic Boxes Invites - 2</span>
+          <div class="float-right clearfix">
+            <ul class="nav-left-list">
+              <li class="nav-left-list-item">
+                <img
+                  class="nav-left-list-item-img"
+                  src="images/topic-icon.png"
+                  alt="topic icon"
+                />
+                <a class="link nav-left-list-item-text" href="#">
+                  Topic Boxes Invites - 2
+                </a>
+              </li>
+              <li class="nav-left-list-item">
+                <img
+                  class="nav-left-list-item-img"
+                  src="./images/user-icon.png"
+                  alt="user icon"
+                />
+                <a class="link nav-left-list-item-text" href="#">
+                  Friend Requests - 0
+                </a>
+              </li>
+            </ul>
+            <!-- <div class="float-left clearfix">
+              <div class="nav-img">
+                <img src="./images/topic-icon.png" alt="topic icon" />
+              </div>
+              <p class="nav-text-left">Topic Boxes Invites - 2</p>
             </div>
-            <div class="float-right nav-padding-left">
-              <img
-                class="nav-img"
-                src="./images/user-icon.png"
-                alt="user icon"
-              />
-              <span class="nav-text-left gray">Friend Request - 0</span>
-            </div>
+            <div class="float-right nav-padding-left clearfix">
+              <div class="nav-img">
+                <img src="./images/user-icon.png" alt="user icon" />
+              </div>
+              <p class="nav-text-left gray">Friend Request - 0</p>
+            </div> -->
           </div>
         </div>
       </div>
@@ -83,9 +119,9 @@
                 <ul class="column-list">
                   <li class="column-list-item">Recent Searches</li>
                   <li class="column-list-item">
-                    <span class="column-list-top-left-item"
-                      >Nick Cave and the Bad Seeds</span
-                    >
+                    <p class="column-list-top-left-item">
+                      Nick Cave and the Bad Seeds
+                    </p>
                     <img
                       class="column-list-top-right-item"
                       src="./images/download-icon.png"
@@ -93,9 +129,7 @@
                     />
                   </li>
                   <li class="column-list-item">
-                    <span class="column-list-top-left-item"
-                      >African Animals</span
-                    >
+                    <p class="column-list-top-left-item">African Animals</p>
                     <img
                       class="column-list-top-right-item"
                       src="./images/download-icon.png"
@@ -105,42 +139,41 @@
                 </ul>
                 <ul class="column-list">
                   <li class="column-list-item">Recent Searches</li>
-                  <li class="column-list-item">
-                    <span class="column-list-bottom-left-item"
-                      >Different Versions of the Tristan Und Isolde
-                      Prelude</span
-                    >
+                  <li class="list-first-padding">
+                    <p class="column-list-bottom-left-item">
+                      Different Versions of the Tristan Und Isolde Prelude
+                    </p>
                     <img
                       class="column-list-bottom-right-item"
                       src="./images/menu-icon.png"
                       alt="menu icon"
                     />
                   </li>
-                  <li class="column-list-item">
-                    <span class="column-list-bottom-left-item">Music</span>
+                  <li class="column-bottom-list-item">
+                    <p class="column-list-bottom-left-item">Music</p>
                     <img
                       class="column-list-bottom-right-item"
                       src="./images/menu-icon.png"
                       alt="menu icon"
                     />
                   </li>
-                  <li class="column-list-item">
-                    <span class="column-list-bottom-left-item">Guitar</span>
+                  <li class="column-bottom-list-item">
+                    <p class="column-list-bottom-left-item">Guitar</p>
                     <img
                       class="column-list-bottom-right-item"
                       src="./images/menu-icon.png"
                       alt="menu icon"
                     />
                   </li>
-                  <li class="column-list-item">
-                    <span class="column-list-bottom-left-item">Bob Cohen</span>
+                  <li class="column-bottom-list-item">
+                    <p class="column-list-bottom-left-item">Bob Cohen</p>
                     <img
                       class="column-list-bottom-right-item"
                       src="./images/menu-icon.png"
                       alt="menu icon"
                     />
                   </li>
-                  <li class="column-list-item">
+                  <li class="column-bottom-list-item">
                     <span class="column-list-bottom-left-item"
                       >Mark Schnack</span
                     >
@@ -150,10 +183,8 @@
                       alt="menu icon"
                     />
                   </li>
-                  <li class="column-list-item">
-                    <span class="column-list-bottom-left-item"
-                      >Jefferson Dickey</span
-                    >
+                  <li class="column-bottom-list-item">
+                    <p class="column-list-bottom-left-item">Jefferson Dickey</p>
                     <img
                       class="column-list-bottom-right-item"
                       src="./images/menu-icon.png"
@@ -165,7 +196,7 @@
             </div>
             <!-----------------------------------------------------------------------------middle main contain-------------------------------------->
             <div class="float-right middle-column clearfix">
-              <span class="main-content-title">Entries</span>
+              <p class="main-content-title">Entries</p>
               <div class="main-content-header clearfix">
                 <div class="main-content-header-nav nav-left-img float-left">
                   <span class="main-content-header-nav-text">All Entries</span>
@@ -193,17 +224,17 @@
                       alt="user1 image"
                     />
                     <div class="float-left main-content-right">
-                      <p class="content-title">
+                      <a class="link content-title" href="#">
                         Day for Night by Francois Truffaut, a ground breaking
                         film
-                      </p>
+                      </a>
                       <p class="content-desc">
-                        by<a class="blue" href="#"> Alan Coe </a>| February 10,
-                        2012 |<a class="green" href="#"> Subscribed </a>
+                        by<a class="link blue" href="#"> Alan Coe </a>| February
+                        10, 2012 |<strong class="green"> Subscribed </strong>
                       </p>
                       <p class="content-desc">
                         From Topic Box:
-                        <a class="blue" href="#">My Favorite Movies</a>
+                        <a class="link blue" href="#">My Favorite Movies</a>
                       </p>
                     </div>
                   </li>
@@ -215,16 +246,16 @@
                     />
                     <div class="float-left main-content-right">
                       <p class="content-notification blue">NEW ENTRY!</p>
-                      <p class="content-title">
+                      <a class="link content-title" href="#">
                         Blade Runner, The Director's Cut
-                      </p>
+                      </a>
                       <p class="content-desc">
-                        by <a class="blue" href="#">Mary Pilot</a> | February 8,
-                        2012
+                        by <a class="link blue" href="#">Mary Pilot</a> |
+                        February 8, 2012
                       </p>
                       <p class="content-desc">
                         From Topic Box:
-                        <a class="blue" href="#">Behind the Scene</a>
+                        <a class="link blue" href="#">Behind the Scene</a>
                       </p>
                     </div>
                   </li>
@@ -236,16 +267,18 @@
                     />
                     <div class="float-left main-content-right">
                       <p class="content-notification blue">NEW COMMENT!</p>
-                      <p class="content-title">
+                      <a class="link content-title" href="#">
                         The Best French Restaurant in Chicago?
-                      </p>
+                      </a>
                       <p class="content-desc">
-                        by<a class="blue" href="#"> Jim Roy </a>| February 7,
-                        2012
+                        by<a class="link blue" href="#"> Jim Roy </a>| February
+                        7, 2012
                       </p>
                       <p class="content-desc">
                         From Topic Box:
-                        <a class="blue" href="#">Chicago Restaurants Reviews</a>
+                        <a class="link blue" href="#"
+                          >Chicago Restaurants Reviews</a
+                        >
                       </p>
                     </div>
                   </li>
@@ -256,18 +289,20 @@
                       alt="user1 image"
                     />
                     <div class="float-left main-content-right">
-                      <p class="content-title">
+                      <a class="link content-title" href="#">
                         The Meaning of Night. Dark Book but incredibly well
                         written.
-                      </p>
+                      </a>
                       <p class="content-desc">
-                        by<a class="blue" href="#"> John-Peter Moise </a> |
+                        by<a class="link blue" href="#"> John-Peter Moise </a> |
                         February 7, 2012 |
-                        <a class="green" href="#"> Subscribed </a>
+                        <strong class="green"> Subscribed </strong>
                       </p>
                       <p class="content-desc">
                         From Topic Box:
-                        <a class="blue" href="#">Books Read & Books to Read</a>
+                        <a class="link blue" href="#"
+                          >Books Read & Books to Read</a
+                        >
                       </p>
                     </div>
                   </li>
@@ -279,16 +314,16 @@
                     />
                     <div class="float-left main-content-right">
                       <p class="content-notification red">TOPIC BOX INVITE!</p>
-                      <p class="content-title">
+                      <a class="link content-title" href="#">
                         Blade Runner, The Director's Cut
-                      </p>
+                      </a>
                       <p class="content-desc">
-                        by<a class="blue" href="#"> Marianne Gig </a> | February
-                        6, 2012
+                        by<a class="link blue" href="#"> Marianne Gig </a> |
+                        February 6, 2012
                       </p>
                       <p class="content-desc">
                         From Topic Box:
-                        <a class="blue" href="#">Favorite Recipes</a>
+                        <a class="link blue" href="#">Favorite Recipes</a>
                       </p>
                     </div>
                   </li>
