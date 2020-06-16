@@ -1,11 +1,11 @@
 .header-container-wrapper {
   background-color: #7dd9e8;
-  min-width: 600px;
+  min-width: 1002px;
 }
 .header-container {
   margin: auto;
   padding: 20px 32px 16px 32px;
-  width: 600px;
+  width: 938px;
 }
 
 .header-nav-container-wrapper {
@@ -28,30 +28,6 @@
   margin-top: 30px;
   padding: 0px 32px;
   width: 938px;
-}
-
-@media (min-width: 992px) {
-  .header-container-wrapper {
-    background-color: #7dd9e8;
-    min-width: 800px;
-  }
-  .header-container {
-    margin: auto;
-    padding: 20px 32px 16px 32px;
-    width: 800px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .header-container-wrapper {
-    background-color: #7dd9e8;
-    min-width: 1002px;
-  }
-  .header-container {
-    margin: auto;
-    padding: 20px 32px 16px 32px;
-    width: 938px;
-  }
 }
 
 /* ---------------------------------------------------Styles of content components */
