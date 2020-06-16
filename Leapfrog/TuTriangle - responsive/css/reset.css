@@ -1,0 +1,21 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+.clearfix:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.float-left{
+  float: left;
+}
+
+.float-right{
+  float: right;
+}
