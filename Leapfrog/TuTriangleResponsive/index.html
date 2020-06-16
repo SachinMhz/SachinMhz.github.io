@@ -37,7 +37,10 @@
               >
             </div>
           </div>
-
+          <div class="mobile-header float-right">
+            <span class="user-name">Joe Burros</span>
+            <span class="ham-menu"> &#9776; </span>
+          </div>
           <div class="user-detail-container float-right clearfix">
             <p class="user-name">Joe Burros</p>
             <ul class="horizontal-list float-right clearfix">
@@ -54,6 +57,53 @@
           </div>
         </div>
       </div>
+      <!-- -------------------------------------------------------------------------hidden mobile nav -->
+      <div class="mobile-nav-wrapper">
+        <div class="mobile-nav-container">
+          <div class="mobile-search clearfix">
+            <div class="float-left search-bar-container clearfix">
+              <input
+                class="search-text-input"
+                placeholder="Search by Term, Member or Entry Title"
+                type="text"
+              />
+            </div>
+            <span class="float-left search-icon-container"> </span>
+            <a href="#" class="float-left">
+              <button class="search-btn-container" type="button">
+                SEARCH
+              </button></a
+            >
+          </div>
+          <ul class="mobile-nav-list">
+            <li class="mobile-nav-list-item">
+              <a href="#" class="link">Create New Entry</a>
+            </li>
+            <li class="mobile-nav-list-item">
+              <a href="#" class="link">My Topic Boxes</a>
+            </li>
+            <li class="mobile-nav-list-item">
+              <a href="#" class="link">Friends</a>
+            </li>
+            <li class="mobile-nav-list-item">
+              <a href="#" class="link">Invite New Member</a>
+            </li>
+          </ul>
+
+          <ul class="mobile-nav-list">
+            <li class="mobile-nav-list-item">
+              <a href="#" class="link">Home</a>
+            </li>
+            <li class="mobile-nav-list-item">
+              <a href="#" class="link">Settings</a>
+            </li>
+            <li class="mobile-nav-list-item">
+              <a href="#" class="link">Log Out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- end-hidden mobile nav -->
       <!-----------------------------------------------------------------------------Start of Nav Header-------------------------------------->
       <div class="header-nav-container-wrapper">
         <div class="header-nav-container clearfix">
@@ -114,124 +164,122 @@
       <!-----------------------------------------------------------------------------Start of Content-------------------------------------->
       <div class="content-wrapper">
         <div class="content clearfix">
-          <div class="float-left clearfix">
-            <div class="float-left clearfix">
+          <div class="float-left left-floated-column clearfix">
+            <div class="float-left left-column clearfix">
               <!-----------------------------------------------------------------------------Left most column-------------------------------------->
-              <div class="float-left left-column">
-                <ul class="column-list">
-                  <li class="column-list-item">Recent Searches</li>
-                  <li class="column-list-item">
-                    <a href="#" class="link">
-                      <p class="column-list-top-left-item">
-                        Nick Cave and the Bad Seeds
-                      </p></a
-                    >
-                    <img
-                      class="column-list-top-right-item"
-                      src="./images/download-icon.png"
-                      alt="download icon"
-                    />
-                  </li>
-                  <li class="column-list-item">
-                    <a href="#" class="link">
-                      <p class="column-list-top-left-item">
-                        African Animals
-                      </p></a
-                    >
-                    <img
-                      class="column-list-top-right-item"
-                      src="./images/download-icon.png"
-                      alt="download icon"
-                    />
-                  </li>
-                </ul>
-                <ul class="column-list">
-                  <li class="column-list-item">Recent Searches</li>
-                  <li class="list-first-padding">
-                    <a href="#" class="link">
-                      <p class="column-list-bottom-left-item">
-                        Different Versions of the Tristan Und Isolde Prelude
-                      </p></a
-                    >
-                    <img
-                      class="column-list-bottom-right-item"
-                      src="./images/menu-icon.png"
-                      alt="menu icon"
-                    />
-                  </li>
-                  <li class="column-bottom-list-item">
-                    <a href="#" class="link">
-                      <p class="column-list-bottom-left-item">Music</p></a
-                    >
-                    <img
-                      class="column-list-bottom-right-item"
-                      src="./images/menu-icon.png"
-                      alt="menu icon"
-                    />
-                  </li>
-                  <li class="column-bottom-list-item">
-                    <a href="#" class="link">
-                      <p class="column-list-bottom-left-item">Guitar</p></a
-                    >
-                    <img
-                      class="column-list-bottom-right-item"
-                      src="./images/menu-icon.png"
-                      alt="menu icon"
-                    />
-                  </li>
-                  <li class="column-bottom-list-item">
-                    <a href="#" class="link">
-                      <p class="column-list-bottom-left-item">Bob Cohen</p></a
-                    >
-                    <img
-                      class="column-list-bottom-right-item"
-                      src="./images/menu-icon.png"
-                      alt="menu icon"
-                    />
-                  </li>
-                  <li class="column-bottom-list-item">
-                    <a href="#" class="link">
-                      <p class="column-list-bottom-left-item">
-                        Mark Schnack
-                      </p></a
-                    >
-                    <img
-                      class="column-list-bottom-right-item"
-                      src="./images/menu-icon.png"
-                      alt="menu icon"
-                    />
-                  </li>
-                  <li class="column-bottom-list-item">
-                    <a href="#" class="link">
-                      <p class="column-list-bottom-left-item">
-                        Jefferson Dickey
-                      </p></a
-                    >
-                    <img
-                      class="column-list-bottom-right-item"
-                      src="./images/menu-icon.png"
-                      alt="menu icon"
-                    />
-                  </li>
-                </ul>
-              </div>
+              <ul class="column-list">
+                <li class="column-list-item">Recent Searches</li>
+                <li class="column-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-top-left-item">
+                      Nick Cave and the Bad Seeds
+                    </p></a
+                  >
+                  <img
+                    class="column-list-top-right-item"
+                    src="./images/download-icon.png"
+                    alt="download icon"
+                  />
+                </li>
+                <li class="column-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-top-left-item">
+                      African Animals
+                    </p></a
+                  >
+                  <img
+                    class="column-list-top-right-item"
+                    src="./images/download-icon.png"
+                    alt="download icon"
+                  />
+                </li>
+              </ul>
+              <ul class="column-list">
+                <li class="column-list-item">Recent Searches</li>
+                <li class="list-first-padding">
+                  <a href="#" class="link">
+                    <p class="column-list-bottom-left-item">
+                      Different Versions of the Tristan Und Isolde Prelude
+                    </p></a
+                  >
+                  <img
+                    class="column-list-bottom-right-item"
+                    src="./images/menu-icon.png"
+                    alt="menu icon"
+                  />
+                </li>
+                <li class="column-bottom-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-bottom-left-item">Music</p></a
+                  >
+                  <img
+                    class="column-list-bottom-right-item"
+                    src="./images/menu-icon.png"
+                    alt="menu icon"
+                  />
+                </li>
+                <li class="column-bottom-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-bottom-left-item">Guitar</p></a
+                  >
+                  <img
+                    class="column-list-bottom-right-item"
+                    src="./images/menu-icon.png"
+                    alt="menu icon"
+                  />
+                </li>
+                <li class="column-bottom-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-bottom-left-item">Bob Cohen</p></a
+                  >
+                  <img
+                    class="column-list-bottom-right-item"
+                    src="./images/menu-icon.png"
+                    alt="menu icon"
+                  />
+                </li>
+                <li class="column-bottom-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-bottom-left-item">
+                      Mark Schnack
+                    </p></a
+                  >
+                  <img
+                    class="column-list-bottom-right-item"
+                    src="./images/menu-icon.png"
+                    alt="menu icon"
+                  />
+                </li>
+                <li class="column-bottom-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-bottom-left-item">
+                      Jefferson Dickey
+                    </p></a
+                  >
+                  <img
+                    class="column-list-bottom-right-item"
+                    src="./images/menu-icon.png"
+                    alt="menu icon"
+                  />
+                </li>
+              </ul>
             </div>
             <!-----------------------------------------------------------------------------middle main contain-------------------------------------->
-            <div class="float-right middle-column clearfix">
+            <div class="float-left middle-column clearfix">
               <p class="main-content-title">Entries</p>
               <div class="main-content-header clearfix">
-                <div class="main-content-header-nav nav-left-img float-left">
+                <div class="main-content-header-nav float-left">
                   <span class="main-content-header-nav-text">All Entries</span>
                   <ul class="main-content-header-nav-list">
                     <li class="main-content-header-nav-item active">
-                      <a href="#" class="main-nav-link"> All Members</a>
+                      <a href="#" class="main-nav-link active"> All Members</a>
                     </li>
                     <li class="main-content-header-nav-item">
                       <a href="#" class="main-nav-link">Friends</a>
                     </li>
                   </ul>
                 </div>
-                <div class="main-content-header-nav nav-right-img float-right">
+                <div class="main-content-header-nav float-right">
                   <span class="main-content-header-nav-text">Subscribed</span>
                   <ul class="main-content-header-nav-list">
                     <li class="main-content-header-nav-item">
@@ -357,66 +405,72 @@
                   </li>
                 </ul>
               </div>
+
+              <!--middle main column end-->
             </div>
-            <!--middle main column end-->
           </div>
+
           <!--left and middle column end-->
           <!----------------------------------------------------------------------------right most column-------------------------------------->
-          <div class="float-right right-column clearfix">
-            <ul class="column-list">
-              <li class="column-list-item">Video Tutorials</li>
-              <li class="column-list-item">
-                <a href="#" class="link">
-                  <p class="column-list-right-item">
-                    Overview of TuTriangle
-                  </p></a
-                >
-              </li>
-              <li class="column-list-item">
-                <a href="#" class="link">
-                  <p class="column-list-right-item">Searching the Site</p></a
-                >
-              </li>
-              <li class="column-list-item">
-                <a href="#" class="link">
-                  <p class="column-list-right-item">
-                    Previous &amp Saved Searches
-                  </p></a
-                >
-              </li>
-              <li class="column-list-item">
-                <a href="#" class="link">
-                  <p class="column-list-right-item">The Topic Box Page</p></a
-                >
-              </li>
-              <li class="column-list-item">
-                <a href="#" class="link">
-                  <p class="column-list-right-item">Creating a Topic Box</p></a
-                >
-              </li>
-              <li class="column-list-item">
-                <a href="#" class="link">
-                  <p class="column-list-right-item">
-                    View Topic Box Entries
-                  </p></a
-                >
-              </li>
-              <li class="column-list-item">
-                <a href="#" class="link">
-                  <p class="column-list-right-item">Creating an Entry</p></a
-                >
-              </li>
-              <li class="column-list-item">
-                <a href="#" class="link">
-                  <p class="column-list-right-item">Privacy Settings</p></a
-                >
-              </li>
-              <li class="column-list-item">
-                <a href="#" class="link">
-                  <p class="column-list-right-item">Co-Authoring</p></a
-                >
-              </li>
-            </ul>
+          <div class="right-floated-column float-right clearfix">
+            <div class="right-column clearfix">
+              <ul class="column-list">
+                <li class="column-list-item">Video Tutorials</li>
+                <li class="column-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-right-item">
+                      Overview of TuTriangle
+                    </p></a
+                  >
+                </li>
+                <li class="column-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-right-item">Searching the Site</p></a
+                  >
+                </li>
+                <li class="column-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-right-item">
+                      Previous &amp Saved Searches
+                    </p></a
+                  >
+                </li>
+                <li class="column-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-right-item">The Topic Box Page</p></a
+                  >
+                </li>
+                <li class="column-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-right-item">
+                      Creating a Topic Box
+                    </p></a
+                  >
+                </li>
+                <li class="column-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-right-item">
+                      View Topic Box Entries
+                    </p></a
+                  >
+                </li>
+                <li class="column-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-right-item">Creating an Entry</p></a
+                  >
+                </li>
+                <li class="column-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-right-item">Privacy Settings</p></a
+                  >
+                </li>
+                <li class="column-list-item">
+                  <a href="#" class="link">
+                    <p class="column-list-right-item">Co-Authoring</p></a
+                  >
+                </li>
+              </ul>
+            </div>
           </div>
           <!--right most column end-->
         </div>

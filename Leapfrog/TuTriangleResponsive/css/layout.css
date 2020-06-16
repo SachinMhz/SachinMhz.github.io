@@ -1,0 +1,159 @@
+.main-container-wrapper {
+  width: 100%;
+}
+
+.header-container-wrapper {
+  background-color: #7dd9e8;
+  width: 100%;
+}
+
+.header-container {
+  padding: 20px 32px 16px 32px;
+  width: 93.61%; /*938px*/
+  max-width: 938px;
+  margin: auto;
+}
+
+.header-nav-container-wrapper {
+  display: none;
+  background-color: #f5f5f5;
+  width: 100%;
+}
+
+.header-nav-container {
+  margin: auto;
+  padding: 11px 32px 11px 32px;
+  width: 93.61%;
+  max-width: 938px;
+}
+
+.mobile-nav-wrapper{
+  display: none;
+  background-color: #7dd9e8;
+  width: 100%;
+}
+.mobile-nav-container {
+  margin: auto;
+  padding: 11px 32px 11px 32px;
+  width: 93.61%;
+  max-width: 938px;
+  text-align: center;
+}
+.content-wrapper {
+  background-color: #fff;
+  width: 100%;
+}
+
+.content {
+  margin: auto;
+  margin-top: 30px;
+  padding: 0px 32px;
+  width: 93.61%;
+  max-width: 938px;
+}
+
+/* ---------------------------------------------------Styles of content components */
+.left-floated-column {
+  /*width: 738px;*/
+  width: 100%;
+}
+.right-floated-column {
+  display: none;
+}
+.left-column {
+  display: none;
+  background-color: #f5f5f5;
+  /* max-width: 194px; */
+  height: 605px;
+}
+
+.middle-column {
+  height: 605px;
+  width: 100%;
+  margin-right: 24px;
+}
+
+.right-column {
+  display: none;
+  /* width: 176px; */
+  height: 605px;
+  background-color: #f5f5f5;
+}
+
+.main-content-header {
+  height: 66px;
+  overflow: hidden;
+  margin-top: 6px;
+  border-bottom: 2px #7dd9e8 solid;
+  font-size: 12px;
+}
+
+.main-content-header-nav {
+  text-align: center;
+  width: 258px;
+}
+
+.footer-container-wrapper {
+  background-color: #727272;
+  width:100%;
+}
+.footer-container {
+  margin: auto;
+  width: 93.61%;
+  max-width: 938px;
+  padding: 18px 32px;
+  margin-top: 32px;
+  font-size: 8px;
+  color: #d4d4d4;
+}
+
+@media (min-width: 768px) {
+  .left-floated-column {
+    width: 70%;
+  }
+  .middle-column {
+    height: 605px;
+    width: 100%;
+    margin-right: 24px;
+  }
+
+  .right-floated-column {
+    display: block;
+    width: 25%;
+  }
+
+  .right-column {
+    display: block;
+    width: 100%;
+  }
+
+  .column-left {
+    width: 72.8%;
+  }
+}
+
+@media (min-width: 992px) {
+  .header-nav-container-wrapper {
+    display: block;
+  }
+  .middle-column {
+    height: 605px;
+    width: 67.5%;
+    margin: 0px 24px;
+  }
+  .left-column {
+    display: block;
+    width: 26%;
+    /* min-width: 194px; */
+  }
+
+  .right-floated-column {
+    /* width:176px; */
+    width: 18.76%;
+    /* min-width: 176px; */
+  }
+  .left-floated-column {
+    /*width: 738px;*/
+    width: 81.24%;
+  }
+}
