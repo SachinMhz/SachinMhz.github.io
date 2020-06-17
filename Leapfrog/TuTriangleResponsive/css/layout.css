@@ -8,6 +8,7 @@
 }
 
 .header-container {
+  background-color: #7dd9e8;
   padding: 20px 32px 16px 32px;
   width: 93.61%; /*938px*/
   max-width: 938px;
@@ -27,13 +28,14 @@
   max-width: 938px;
 }
 
-.mobile-nav-wrapper{
+.mobile-nav-wrapper {
   display: none;
   background-color: #7dd9e8;
   width: 100%;
 }
 .mobile-nav-container {
   margin: auto;
+  background-color: #7dd9e8;
   padding: 11px 32px 11px 32px;
   width: 93.61%;
   max-width: 938px;
@@ -45,6 +47,7 @@
 }
 
 .content {
+  background-color: #fff;
   margin: auto;
   margin-top: 30px;
   padding: 0px 32px;
@@ -95,9 +98,10 @@
 
 .footer-container-wrapper {
   background-color: #727272;
-  width:100%;
+  width: 100%;
 }
 .footer-container {
+  background-color: #727272;
   margin: auto;
   width: 93.61%;
   max-width: 938px;
