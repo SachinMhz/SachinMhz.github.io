@@ -1,0 +1,164 @@
+.header {
+  padding-top: 40px;
+}
+
+.header-img-container {
+  height: 50px;
+  width: 50px;
+}
+
+.header-img {
+  width: 100%;
+}
+
+.header-right {
+  margin-top: 6px;
+}
+
+.ham-menu-container {
+  display: inline-block;
+}
+.header-name-container {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.header-name {
+  font-size: 30px;
+  color: #6a19ac;
+}
+.header-moto {
+  font-size: 10px;
+  padding-left: 3px;
+  color: #858585;
+}
+
+.header-list {
+  display: none;
+  list-style: none;
+  font-family: Nexa-Bold, Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  color: #c7c7c7;
+  margin-right: 8px;
+}
+
+.header-list-item {
+  margin-top: 12px;
+  display: inline-block;
+  /* padding-right: 16px;
+  padding-left: 18px; */
+  padding: 0px 18px 0px 16px;
+}
+
+.header-list-item:nth-child(2) {
+  border-left: 1px solid gray;
+  color: #58159b;
+}
+
+.header-list-text {
+  display: inline-block;
+  padding-right: 10px;
+  margin-top: -12px;
+  vertical-align: middle;
+}
+
+.header-list-img {
+  height: 17px;
+  width: 11px;
+}
+
+.header-search-container {
+  display: none;
+  position: relative;
+  height: 46px;
+  width: 400px;
+  overflow: hidden;
+}
+
+.header-search-input {
+  height: 100%;
+  width: 382px; /*400-18*/
+  background-color: white;
+  padding-left: 18px;
+  border: none;
+  outline: none;
+}
+
+.header-search-img {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  height: 23px;
+  width: 23px;
+}
+
+/* --------------------------------------------------nav styles*/
+.nav-list {
+  display: none;
+  list-style: none;
+  color: #707070;
+  margin: 0px;
+}
+.nav-list-item {
+  float: left;
+  display: block;
+  padding: 18px 48px 34px 48px;
+  background-color: white;
+  border: 1px solid black;
+}
+.nav-list-img {
+  margin: auto;
+}
+.nav-list-text {
+  font-size: 10px;
+}
+.nav-list-item:hover {
+  color: #701dbb;
+  padding-top: 10px;
+}
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+  margin: auto;
+}
+.no-style {
+  text-decoration: none;
+}
+
+.banner-img-container {
+  position: relative;
+  margin: auto;
+  width: 138px;
+  height: 138px;
+  background-color: #451a4a;
+  border-radius: 69px;
+}
+
+.banner-img {
+  position: absolute;
+  top: 41px;
+  left: 41px;
+  width: 53px;
+  height: 56px;
+  background-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .header-search-container {
+    display: block;
+  }
+}
+
+@media (min-width: 992px) {
+  .header-list {
+    display: block;
+  }
+
+  .ham-menu-container {
+    display: none;
+  }
+
+  .nav-list {
+    display: block;
+  }
+}
