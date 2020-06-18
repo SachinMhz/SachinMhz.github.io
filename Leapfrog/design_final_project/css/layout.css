@@ -7,18 +7,27 @@
   margin: auto;
 }
 .header-wrapper {
-  background-color: #f0f0f0;
+  background-color: #eeeeee;
 }
 
 .banner-wrapper {
+  position: relative;
   margin: auto;
-  background: url("../images/bg1.png") no-repeat;
   width: 100%;
   max-width: 1558px;
-  height: 540px;
-  padding-top: 196px;
 }
 
+.banner2-wrapper {
+  width: 100%;
+  background-color: #2d2d2d;
+  margin: auto;
+  margin-top: -5px;
+}
+.banner2-container {
+  padding: 52px 32px 104px 32px;
+  max-width: 980px;
+  margin: auto;
+}
 
 @media (min-width: 768px) {
 }
