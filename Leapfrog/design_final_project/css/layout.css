@@ -6,13 +6,24 @@
   max-width: 940px;
   margin: auto;
 }
+
 .header-wrapper {
+  position: relative;
   background-color: #eeeeee;
+  height: 100px;
+}
+
+.nav-wrapper {
+  display: none;
+  position: absolute;
+  bottom: -22px;
+  margin-top: 38px;
+  z-index: 1;
 }
 
 .banner-wrapper {
   position: relative;
-  margin: auto;
+  margin: 0px auto;
   width: 100%;
   max-width: 1558px;
 }
@@ -23,14 +34,38 @@
   margin: auto;
   margin-top: -5px;
 }
+
 .banner2-container {
-  padding: 52px 32px 104px 32px;
+  padding: 52px 32px 102px 32px;
   max-width: 980px;
   margin: auto;
 }
 
+.section3-wrapper {
+  width: 100%;
+  background-color: #222222;
+  margin: auto;
+}
+
+.section3-container {
+  padding-top: 56px;
+  max-width: 1255px;
+  margin: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 @media (min-width: 768px) {
+  .header-wrapper {
+    height: 150px;
+  }
 }
 
 @media (min-width: 992px) {
+  .header-wrapper {
+    height: 232px;
+  }
+  .nav-wrapper {
+    display: block;
+  }
 }
