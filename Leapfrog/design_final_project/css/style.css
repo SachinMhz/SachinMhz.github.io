@@ -320,13 +320,14 @@
 }
 .team-heading-text {
   font-family: NexaBook;
-  font-size: 25px;
+  font-size: 20px;
   color: #717171;
   padding: 0px 44px;
   text-align: center;
   margin: auto;
   width: max-content;
   background-color: #ebebeb;
+  box-sizing: border-box;
 }
 .team-heading-text-tag {
   font-family: NexaBold;
@@ -339,13 +340,14 @@
 .member-row {
   list-style: none;
   max-width: 940px;
+  text-align: center;
+  margin: auto;
 }
 
 .member-col {
   margin-top: 46px;
   display: inline-block;
-  width: 50%;
-  padding: 0px 10px;
+  width: 220px;
   box-sizing: border-box;
 }
 .member-img-container {
@@ -653,7 +655,12 @@
     font-size: 36px;
   }
   .member-col {
-    width: 25%;
+    width: 220px;
+    margin-left: 15px;
+  }
+  .member-col:first-child {
+    width: 220px;
+    margin-left: 0px;
   }
   .team-content-col {
     width: 48.93%;
