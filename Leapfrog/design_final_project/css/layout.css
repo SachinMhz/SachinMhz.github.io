@@ -22,10 +22,21 @@
 }
 
 .banner-wrapper {
-  position: relative;
   margin: 0px auto;
   width: 100%;
+  background-color: #66306b;
+  /* background-image: url("../images/bg1.png");
+  background-color: #cccccc;
+  height: 538px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative; */
+}
+.banner-container {
+  position: relative;
   max-width: 1558px;
+  margin: auto;
 }
 
 .banner2-wrapper {

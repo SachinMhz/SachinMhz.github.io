@@ -145,6 +145,7 @@
   text-align: center;
   border-bottom: 5px solid #701dbb;
   box-sizing: border-box;
+  box-shadow: 0px 2px 4px black;
 }
 .nav-list li a.active {
   color: #701dbb;
