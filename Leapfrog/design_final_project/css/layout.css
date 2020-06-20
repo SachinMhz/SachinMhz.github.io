@@ -65,14 +65,17 @@
   padding-top: 80px;
 }
 
-.footer-wrapper{
+.footer-wrapper {
   width: 100%;
   background-color: #373737;
   margin: auto;
-  border-width: 4px;
-  border-color: #914dcf;
+  border-top: 4px solid #914dcf;
 }
 
+.footer-container {
+  padding-top: 25px;
+  padding-bottom: 246px;
+}
 @media (min-width: 768px) {
   .header-wrapper {
     height: 150px;
