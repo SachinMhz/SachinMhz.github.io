@@ -20,3 +20,7 @@ body{
 .float-right{
   float: right;
 }
+
+.center-hor{
+  margin:auto;
+}

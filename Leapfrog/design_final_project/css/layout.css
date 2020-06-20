@@ -55,6 +55,24 @@
   padding-right: 15px;
 }
 
+.team-section-wrapper {
+  width: 100%;
+  background-color: #ebebeb;
+  margin: auto;
+}
+
+.team-section-container {
+  padding-top: 80px;
+}
+
+.footer-wrapper{
+  width: 100%;
+  background-color: #373737;
+  margin: auto;
+  border-width: 4px;
+  border-color: #914dcf;
+}
+
 @media (min-width: 768px) {
   .header-wrapper {
     height: 150px;
