@@ -19,14 +19,13 @@
 @font-face {
   font-family: NexaBlack;
   src: url("../fonts/Nexa\ Black.ttf");
-  font-weight: 500px;
 }
 .icon-name-container {
   margin-left: 10px;
 }
 .icon-name {
   font-family: NexaBlack, Arial, Helvetica, sans-serif;
-  font-weight: 500px;
+
   margin-top: 4px;
   font-size: 20px;
   color: #6a19ac;
@@ -37,7 +36,6 @@
 @font-face {
   font-family: PT_Sans;
   src: url("../fonts/PTSans-Italic.ttf");
-  font-weight: 500px;
 }
 
 .icon-tag {
@@ -54,7 +52,6 @@
 @font-face {
   font-family: NexaBold;
   src: url("../fonts/Nexa\ Bold.ttf");
-  font-weight: 500px;
 }
 
 .header-right {
@@ -132,7 +129,6 @@
 @font-face {
   font-family: PT_Sans_Bold;
   src: url("../fonts/PTSans-Bold.ttf");
-  font-weight: 500px;
 }
 .ham-menu-container {
   margin-top: 0px;
@@ -194,6 +190,7 @@
 }
 .nav-list li a.active {
   color: #701dbb;
+  fill: #701dbb;
   /* border-bottom: 13px solid #701dbb; */
 }
 .nav-list li a:hover {
@@ -365,6 +362,8 @@
 .team-heading-container {
   background: url("../images/line_bg_11.png") no-repeat;
   width: 100%;
+  max-width: 940px;
+  margin: auto;
 }
 .team-heading-text {
   font-family: NexaBook;
@@ -399,7 +398,11 @@
   margin-top: 46px;
   display: inline-block;
   width: 220px;
+  margin-left: 20px;
   box-sizing: border-box;
+}
+.member-col:first-child {
+  margin-left: 0px;
 }
 .member-img-container {
   position: relative;
@@ -419,8 +422,6 @@
   transform: rotate(-5deg);
 }
 
-.member-img {
-}
 .twitter-container {
   position: absolute;
   bottom: 5px;
@@ -433,9 +434,11 @@
   margin: auto;
   box-sizing: border-box;
 }
+
 .member-details-container {
   margin-top: 24px;
   color: #7b7b7b;
+  text-align: left;
 }
 .member-name {
   font-family: PT_Sans_Bold;
@@ -444,7 +447,6 @@
 @font-face {
   font-family: PT_Sans_Regular;
   src: url("../fonts/PTSans-Regular.ttf");
-  font-weight: 500px;
 }
 .member-designation {
   margin-top: 12px;
@@ -737,14 +739,6 @@
   }
   .team-heading-text {
     font-size: 36px;
-  }
-  .member-col {
-    width: 220px;
-    margin-left: 15px;
-  }
-  .member-col:first-child {
-    width: 220px;
-    margin-left: 0px;
   }
   .team-content-col {
     width: 48.9%;
