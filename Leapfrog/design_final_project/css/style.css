@@ -129,11 +129,13 @@
 }
 
 .nav-list {
+  position: relative;
   display: none;
   list-style: none;
   color: #707070;
   font-family: PT_Sans_Bold, Arial, sans-serif;
   font-size: 17px;
+  width: 100%;
 }
 
 .nav-list li a {
@@ -141,34 +143,35 @@
   text-decoration: none;
   color: #707070;
   height: 112px;
-  width: 150px;
   text-align: center;
   border-bottom: 5px solid #701dbb;
   box-sizing: border-box;
-  box-shadow: 0px 2px 4px black;
+  box-shadow: inset 0px 0px 2px black;
 }
 .nav-list li a.active {
   color: #701dbb;
-  height: 123px;
-  width: 170px;
-  border-bottom: 13px solid #701dbb;
+  /* border-bottom: 13px solid #701dbb; */
 }
 .nav-list li a:hover {
   color: #701dbb;
-  width: 170px;
+  /* border-bottom: 13px solid #701dbb; */
+  box-shadow: inset 0px 0px 2px black;
 }
 
 .nav-list-item {
   float: left;
   display: block;
+  width: 16.6666%;
   background-color: white;
 }
-.nav-list-item.active {
+
+.nav-list-item:hover {
   position: relative;
-  top: -11px;
+  bottom: 8px;
   float: left;
   display: block;
   background-color: white;
+  color: #701dbb;
 }
 
 .nav-list-img {
@@ -192,9 +195,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  height: 25.7%; /*138/537*/
-  width: 8.9%; /*138-1550*/
-  border-radius: 69px;
+  height: 48px; /*25.7%; /*138/537*/
+  width: 48px; /*138-1550*/
+  border-radius: 24px;
   background-color: #451a4a;
   transform: translate(-50%, -50%);
 }
@@ -291,6 +294,7 @@
 .section3-img {
   width: 100%;
 }
+
 .section3-text-content {
   position: absolute;
   top: 66%;
@@ -335,8 +339,12 @@
   color: #717171;
   text-align: center;
   margin: auto;
+  background-color: #ebebeb;
+  padding: 0px 44px;
   width: max-content;
 }
+
+
 .member-row {
   list-style: none;
   max-width: 940px;
@@ -357,7 +365,6 @@
   background-color: white;
   padding: 5px;
   box-sizing: border-box;
-  z-index: 2;
 }
 
 .member-img-rotated-bg {
@@ -586,6 +593,12 @@
   .header-search-container {
     display: block;
   }
+
+  .circle-container {
+    height: 80px; /*25.7%; /*138/537*/
+    width: 80px; /*138-1550*/
+    border-radius: 40px;
+  }
   .banner2-heading {
     font-size: 28px;
   }
@@ -637,6 +650,11 @@
     display: block;
   }
 
+  .circle-container {
+    height: 138px; /*25.7%; /*138/537*/
+    width: 138px; /*138-1550*/
+    border-radius: 69px;
+  }
   .banner2-heading {
     font-size: 36px;
   }
@@ -663,7 +681,7 @@
     margin-left: 0px;
   }
   .team-content-col {
-    width: 48.93%;
+    width: 48.9%;
     margin-left: 20px;
   }
   .footer-left {

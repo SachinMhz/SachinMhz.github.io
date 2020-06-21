@@ -18,24 +18,25 @@
   position: absolute;
   bottom: -22px;
   margin-top: 38px;
+  background-color: #701dbb;
+  min-width: 940px;
   z-index: 1;
 }
 
 .banner-wrapper {
   margin: 0px auto;
   width: 100%;
-  background-color: #66306b;
-  /* background-image: url("../images/bg1.png");
-  background-color: #cccccc;
-  height: 538px;
+  height: 250px;
+  background-image: url("../images/bg1.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: relative; */
+  position: relative;
 }
 .banner-container {
   position: relative;
   max-width: 1558px;
+  min-height: 250px;
   margin: auto;
 }
 
@@ -91,6 +92,12 @@
   .header-wrapper {
     height: 150px;
   }
+  .banner-wrapper {
+    min-height: 375px;
+  }
+  .banner-container {
+    min-height: 375px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -100,4 +107,77 @@
   .nav-wrapper {
     display: block;
   }
+  .banner-wrapper {
+    min-height: 538px;
+  }
+  .banner-container {
+    min-height: 538px;
+  }
+}
+
+
+
+.member2-row {
+  list-style: none;
+  max-width: 940px;
+  text-align: center;
+  margin: auto;
+}
+
+.member2-col {
+  margin-top: 46px;
+  display: inline-block;
+  width: 220px;
+  box-sizing: border-box;
+}
+.member2-img-container {
+  position: relative;
+  width: 220px;
+  height: 210px;
+  background-color: white;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.member2-img-rotated-bg {
+  position: absolute;
+  width: 220px;
+  height: 210px;
+  background-color: #fdfdfd;
+  box-sizing: border-box;
+  transform: rotate(-5deg);
+}
+
+.member2-img {
+}
+.twitter2-container {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 47px;
+  height: 41px;
+  background-color: #8f33c4;
+  padding-left: 9px;
+  padding-top: 12px;
+  margin: auto;
+  box-sizing: border-box;
+}
+.member2-details-container {
+  margin-top: 24px;
+  color: #7b7b7b;
+  text-align: left;
+}
+.member2-name {
+  font-family: PT_Sans_Bold;
+  font-size: 18px;
+}
+@font-face {
+  font-family: PT_Sans_Regular;
+  src: url("../fonts/PTSans-Regular.ttf");
+  font-weight: 500px;
+}
+.member2-designation {
+  margin-top: 12px;
+  font-family: PT_Sans_Regular;
+  font-size: 14px;
 }
