@@ -10,14 +10,16 @@
 .header-wrapper {
   position: relative;
   background-color: #eeeeee;
-  height: 100px;
 }
 
+.mobile-nav-container {
+  display: block;
+  margin-top: 20px;
+}
 .nav-wrapper {
   display: none;
-  position: absolute;
+  position: relative;
   bottom: -22px;
-  margin-top: 38px;
   background-color: #701dbb;
   min-width: 940px;
   z-index: 1;
@@ -89,9 +91,6 @@
   padding-bottom: 246px;
 }
 @media (min-width: 768px) {
-  .header-wrapper {
-    height: 150px;
-  }
   .banner-wrapper {
     min-height: 375px;
   }
@@ -101,8 +100,9 @@
 }
 
 @media (min-width: 992px) {
-  .header-wrapper {
-    height: 232px;
+  .mobile-nav-container {
+    display: none;
+    margin-top: 0px;
   }
   .nav-wrapper {
     display: block;
@@ -114,8 +114,6 @@
     min-height: 538px;
   }
 }
-
-
 
 .member2-row {
   list-style: none;
