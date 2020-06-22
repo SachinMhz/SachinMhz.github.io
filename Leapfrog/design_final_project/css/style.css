@@ -527,12 +527,14 @@
   font-family: NexaBold;
   font-size: 14px;
   color: #6017a3;
+  line-height: 20px;
 }
 .team-content-desc2 {
   margin-top: 44px;
   font-family: NexaBold;
   font-size: 12px;
   color: #949494;
+  line-height: 20px;
 }
 
 .team-content2 {
