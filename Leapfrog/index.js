@@ -7,6 +7,7 @@ class TableRow {
     this.path = path;
     this.element = this.createElement();
     this.parentElement = parentElement;
+    this.render(this.parentElement);
   }
 
   createElement() {
@@ -47,60 +48,52 @@ class TableRow {
   }
 }
 
-var tr1 = new TableRow(
-  "JS-Exercise: 9 - using OOP",
-  "JS_assignment/JS_Exercise_using_OOP/JS_Exercise_9/",
-  table
-);
-tr1.render();
 
 var tr2 = new TableRow("Git Assignment 1", "", table);
-tr2.render();
 
 var tr3 = new TableRow(
   "Design Assignment 1 A-home-search.jpg",
   "TuTriangle/",
   table
 );
-tr3.render();
 
 var tr4 = new TableRow(
   "Design Assignment 2 A-home-search-responsive.jpg",
   "TuTriangleResponsive/",
   table
 );
-tr4.render();
 
 var tr5 = new TableRow(
   "Design Final Project: Responsive",
   "design_final_project/",
   table
 );
-tr5.render();
 
 var tr6 = new TableRow(
   "JS-Exercises: 2-7",
   "JS_assignment/JS_Exercises_2-7/",
   table
 );
-tr6.render();
 
 var tr7 = new TableRow("JS-Exercise: 8", "JS_assignment/JS_Exercise_8/", table);
-tr7.render();
 
 var tr7 = new TableRow("JS-Exercise: 9", "JS_assignment/JS_Exercise_9/", table);
-tr7.render();
 
 var tr8 = new TableRow(
   "JS-Exercise: 8 - using OOP",
   "JS_assignment/JS_Exercise_using_OOP/JS_Exercise_8/",
   table
 );
-tr8.render();
 
 var tr9 = new TableRow(
   "JS-Exercise: 9 - using OOP",
   "JS_assignment/JS_Exercise_using_OOP/JS_Exercise_9/",
   table
 );
-tr9.render();
+
+var tr10 = new TableRow(
+  "JS Assignment 1:  Image Slider",
+  "js-carousel/",
+  table
+);
+
