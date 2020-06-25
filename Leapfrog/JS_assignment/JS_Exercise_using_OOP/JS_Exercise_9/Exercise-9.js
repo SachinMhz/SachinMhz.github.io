@@ -78,7 +78,7 @@ first_boundary.render();
 var first_ball = new Ball(50, 50, "red", 5, first_boundary.element);
 first_ball.render();
 
-var second_boundary = new Boundary(800, 800, main_wrapper);
+var second_boundary = new Boundary(550, 550, main_wrapper);
 second_boundary.render();
 var second_ball = new Ball(80, 80, "green", 15, second_boundary.element);
 second_ball.render();
@@ -88,7 +88,7 @@ third_boundary.render();
 var third_ball = new Ball(80, 80, "blue", 20, third_boundary.element);
 third_ball.render();
 
-var fourth_boundary = new Boundary(1000, 300, main_wrapper);
+var fourth_boundary = new Boundary(400, 250, main_wrapper);
 fourth_boundary.render();
 var fourth_ball = new Ball(50, 50, "black", 2, fourth_boundary.element);
 fourth_ball.render();

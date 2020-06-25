@@ -28,7 +28,7 @@ function createPointsAndBoundaries(size, initialColor, touchColor) {
   };
 
   this.points = (size) => {
-    let pointSize = 48;
+    let pointSize = 30;
     let max = size - pointSize;
     let min = pointSize;
     return Array(15)
@@ -52,9 +52,9 @@ function createPointsAndBoundaries(size, initialColor, touchColor) {
       point.style.position = "absolute";
       point.style.top = coordinates.x + "px";
       point.style.left = coordinates.y + "px";
-      point.style.width = "48px";
-      point.style.height = "48px";
-      point.style.borderRadius = 24 + "px";
+      point.style.width = "30px";
+      point.style.height = "30px";
+      point.style.borderRadius = 15 + "px";
       point.style.backgroundColor = backgroundColor;
       point.addEventListener("mousedown", () => {
         point.style.backgroundColor = touchColor;
@@ -64,17 +64,17 @@ function createPointsAndBoundaries(size, initialColor, touchColor) {
 }
 
 //parameter 1 - boundarySize, 2-initialColorOfPoint, 3-colorOnMouseClick
-var box1 = new createPointsAndBoundaries(800, "red", "black");
+var box1 = new createPointsAndBoundaries(500, "red", "black");
 box1.addPointsToBoundary();
 
-var box2 = new createPointsAndBoundaries(1000, "blue", "green");
+var box2 = new createPointsAndBoundaries(550, "blue", "green");
 box2.addPointsToBoundary();
 
-var box3 = new createPointsAndBoundaries(1200, "green", "blue");
+var box3 = new createPointsAndBoundaries(400, "green", "blue");
 box3.addPointsToBoundary();
 
-var box4 = new createPointsAndBoundaries(1400, "black", "red");
+var box4 = new createPointsAndBoundaries(600, "black", "red");
 box4.addPointsToBoundary();
 
-var box5 = new createPointsAndBoundaries(1600, "pink", "crimson");
+var box5 = new createPointsAndBoundaries(300, "pink", "crimson");
 box5.addPointsToBoundary();
