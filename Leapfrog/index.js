@@ -93,7 +93,7 @@ var tr9 = new TableRow(
 
 var tr10 = new TableRow(
   "JS Assignment 1:  Image Slider",
-  "js-carousel/",
+  "js-image-slider/",
   table
 );
 
