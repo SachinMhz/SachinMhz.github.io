@@ -1,99 +1,75 @@
-/*
-Render a circle that moves vertically and bounces back into another direction
-*/
+const IMAGE_WIDTH = 600;
 
-class Boundary {
-  constructor(width, height, parentElement = document.body) {
-    var self = this;
-    this.width = width;
-    this.height = height;
-    this.parentElement = parentElement;
-    this.element = this.createElement();
-  }
+var carouselContainer = document.querySelector(".carousel-container");
+var carouselImageContainer = document.querySelector(".carousel-image-wrapper");
+var imageArray = carouselImageContainer.getElementsByTagName("img");
 
-  createElement() {
-    let element = document.createElement("div");
-    element.style.position = "relative";
-    element.style.margin = "50px";
-    element.style.float = "left";
-    element.style.height = this.height + "px";
-    element.style.width = this.width + "px";
-    element.style.border = "1px solid black";
-    return element;
-  }
+var maxIndex = imageArray.length - 1;
+carouselContainer.style.width = IMAGE_WIDTH + "px";
+carouselImageContainer.style.width = IMAGE_WIDTH * imageArray.length + "px";
+carouselImageContainer.style.left = 0 + "px";
+var currentIndex = 0;
 
-  render() {
-    this.parentElement.appendChild(this.element);
-  }
+function slideImage(dir) {
+  timer = 0;
+  currentIndex = currentIndex + dir * 1;
+  if (currentIndex < 0) currentIndex = maxIndex;
+  if (currentIndex > maxIndex) currentIndex = 0;
+  startAnimation(currentIndex);
+  changeActiveDotIndicator();
 }
 
-class Ball {
-  constructor(width, height, color, speed, parentElement = document.body) {
-    console.log(parentElement.style);
-    console.log("ball class");
-    var self = this;
-    this.width = width;
-    this.height = height;
-    this.color = color;
-    this.speed = speed;
-    this.parentElement = parentElement;
-    this.element = this.createElement();
-    this.bounceLimit = parseInt(this.parentElement.style.height) - this.height;
-    this.direction = 1;
-    this.y = 0;
-    this.bounce = this.bounce.bind(this);
-    this.bounce();
-  }
-  createElement() {
-    let element = document.createElement("div");
-    element.style.position = "absolute";
-    element.style.margin = "auto";
-    element.style.height = this.height + "px";
-    element.style.width = this.width + "px";
-    element.style.borderRadius = Math.max(this.width, this.height) / 2 + "px";
-    element.style.left = "50%";
-    element.style.transform = "translateX(-50%)";
-    element.style.backgroundColor = this.color;
-    return element;
-  }
-
-  bounce() {
-    if (parseInt(this.y) < 0 || parseInt(this.y) >= this.bounceLimit) {
-      this.direction *= -1;
-    }
-    this.y += this.speed * this.direction;
-    this.element.style.top = this.y + "px";
-    window.requestAnimationFrame(this.bounce);
-  }
-  
-  render() {
-    this.parentElement.appendChild(this.element);
-  }
+function startAnimation(index) {
+  var targetPosition = index * -IMAGE_WIDTH;
+  var currentPosition = parseInt(carouselImageContainer.style.left);
+  var framesPerIteration = (targetPosition - currentPosition) / 10;
+  var animationID = setInterval(function () {
+    timer++;
+    if (timer >= 10) clearInterval(animationID);
+    carouselImageContainer.style.left =
+      parseInt(carouselImageContainer.style.left) + framesPerIteration + "px";
+  }, 1000 / 60);
 }
 
-var main_wrapper = document.getElementById("main-wrapper");
+function changeActiveDotIndicator() {
+  dotIndicatorListItems.forEach(function (value, index) {
+    index === currentIndex
+      ? value.classList.add("active")
+      : value.classList.remove("active");
+  });
+}
 
-var first_boundary = new Boundary(500, 500, main_wrapper);
-first_boundary.render();
-var first_ball = new Ball(50, 50, "red", 5, first_boundary.element);
-first_ball.render();
+var leftArrow = document.createElement("div");
+leftArrow.innerHTML = " < ";
+leftArrow.className += "side-arrow left-arrow";
+carouselContainer.appendChild(leftArrow);
+leftArrow.onclick = function () {
+  slideImage(-1);
+};
 
-var second_boundary = new Boundary(550, 550, main_wrapper);
-second_boundary.render();
-var second_ball = new Ball(80, 80, "green", 15, second_boundary.element);
-second_ball.render();
+var rightArrow = document.createElement("div");
+rightArrow.innerHTML = " > ";
+rightArrow.className += "side-arrow right-arrow";
+carouselContainer.appendChild(rightArrow);
+rightArrow.onclick = function () {
+  slideImage(1);
+};
 
-var third_boundary = new Boundary(300, 1000, main_wrapper);
-third_boundary.render();
-var third_ball = new Ball(80, 80, "blue", 20, third_boundary.element);
-third_ball.render();
+var dotIndicatorList = document.createElement("ul");
+dotIndicatorList.className += "dot-indicator-list";
+carouselContainer.appendChild(dotIndicatorList);
+var dotIndicatorListItems = [];
+for (let i = 0; i < imageArray.length; i++) {
+  let dotIndicatorListItem = document.createElement("li");
+  dotIndicatorListItem.className += "dot-indicator-list-item";
+  dotIndicatorList.appendChild(dotIndicatorListItem);
+  dotIndicatorListItem.onclick = function () {
+    timer = 0;
+    currentIndex = i;
+    startAnimation(currentIndex);
+    changeActiveDotIndicator();
+  };
+  dotIndicatorListItems.push(dotIndicatorListItem);
+}
 
-var fourth_boundary = new Boundary(400, 250, main_wrapper);
-fourth_boundary.render();
-var fourth_ball = new Ball(50, 50, "black", 2, fourth_boundary.element);
-fourth_ball.render();
-
-var fifth_boundary = new Boundary(100, 100, main_wrapper);
-fifth_boundary.render();
-var fifth_ball = new Ball(15, 15, "green", 15, fifth_boundary.element);
-fifth_ball.render();
+dotIndicatorListItems[0].classList.add("active");
