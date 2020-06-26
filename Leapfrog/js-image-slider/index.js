@@ -1,15 +1,20 @@
 const IMAGE_WIDTH = 600;
 
+//initialize variable using DOM element
 var carouselContainer = document.querySelector(".carousel-container");
 var carouselImageContainer = document.querySelector(".carousel-image-wrapper");
 var imageArray = carouselImageContainer.getElementsByTagName("img");
 
-var maxIndex = imageArray.length - 1;
+//setting styles to DOM element
 carouselContainer.style.width = IMAGE_WIDTH + "px";
 carouselImageContainer.style.width = IMAGE_WIDTH * imageArray.length + "px";
 carouselImageContainer.style.left = 0 + "px";
+
+//defining variables
+var maxIndex = imageArray.length - 1;
 var currentIndex = 0;
 
+//changes current index based on the arrow-button clicked and update the current index for animation
 function slideImage(dir) {
   timer = 0;
   currentIndex = currentIndex + dir * 1;
@@ -19,6 +24,7 @@ function slideImage(dir) {
   changeActiveDotIndicator();
 }
 
+//change "left-position" of current-index-position to targeted-index-position frame by frame
 function startAnimation(index) {
   var targetPosition = index * -IMAGE_WIDTH;
   var currentPosition = parseInt(carouselImageContainer.style.left);
@@ -31,6 +37,7 @@ function startAnimation(index) {
   }, 1000 / 60);
 }
 
+//add or remove "active" from class of dot-indicator-item
 function changeActiveDotIndicator() {
   dotIndicatorListItems.forEach(function (value, index) {
     index === currentIndex
@@ -39,6 +46,7 @@ function changeActiveDotIndicator() {
   });
 }
 
+//decrease current index by 1 and show respective animation when left-arrow-button is pressed
 var leftArrow = document.createElement("div");
 leftArrow.innerHTML = " < ";
 leftArrow.className += "side-arrow left-arrow";
@@ -47,6 +55,7 @@ leftArrow.onclick = function () {
   slideImage(-1);
 };
 
+//increases current index by 1 and show respective animation when right-arrow-button is pressed
 var rightArrow = document.createElement("div");
 rightArrow.innerHTML = " > ";
 rightArrow.className += "side-arrow right-arrow";
@@ -55,9 +64,11 @@ rightArrow.onclick = function () {
   slideImage(1);
 };
 
+//create list element for dot-indicators
 var dotIndicatorList = document.createElement("ul");
 dotIndicatorList.className += "dot-indicator-list";
 carouselContainer.appendChild(dotIndicatorList);
+//create list-item element and set onClick on every items to change current index to target index and show respective animation
 var dotIndicatorListItems = [];
 for (let i = 0; i < imageArray.length; i++) {
   let dotIndicatorListItem = document.createElement("li");
@@ -71,5 +82,5 @@ for (let i = 0; i < imageArray.length; i++) {
   };
   dotIndicatorListItems.push(dotIndicatorListItem);
 }
-
+//initialize first item with active class
 dotIndicatorListItems[0].classList.add("active");
