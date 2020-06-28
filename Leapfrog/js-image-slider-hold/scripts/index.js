@@ -1,39 +1,50 @@
 class Carousel {
   constructor(carouselClass, holdTime, animationTime) {
     var self = this;
+    //initialing class variable
     this.IMAGE_WIDTH = 600;
+    this.holdTime = holdTime * 1000;
+    this.animationTime = animationTime * 1000;
+    this.timer = 0;
+    this.isAnimationComplete = true;
+
+    //creating DOM elements
+    //
     this.carouselContainer = document.querySelector("." + carouselClass);
+    //handling incase given className doesn't exits
     if (!this.carouselContainer)
       return console.log(carouselClass + " not found");
+
     this.carouselContainer.classList.add("carousel-container");
     this.carouselImageContainer = this.carouselContainer.getElementsByTagName(
       "div"
     )[0];
     this.carouselImageContainer.classList.add("carousel-image-wrapper");
     this.carouselImageContainer.classList.add("clearfix");
+    this.carouselContainer.style.width = this.IMAGE_WIDTH + "px";
     this.carouselImageContainer.style.left = "0px";
+
     this.imageArray = this.carouselImageContainer.getElementsByTagName("img");
+    //handling incase there is no image provided in image container
     if (this.imageArray.length === 0)
       return console.log("No images found in " + carouselClass);
-    this.carouselContainer.style.width = this.IMAGE_WIDTH + "px";
+
     this.carouselImageContainer.style.width =
       this.IMAGE_WIDTH * this.imageArray.length + "px";
-    this.carouselImageContainer.style.left = 0 + "px";
     this.maxIndex = this.imageArray.length - 1;
     this.currentIndex = 0;
-    this.timer = 0;
-    this.holdTime = holdTime * 1000;
-    this.animationTime = animationTime * 1000;
-    this.isAnimationComplete = true;
+
     this.leftArrow = this.createLeftArrow();
     this.rightArrow = this.createRightArrow();
     this.dotIndicatorList = this.createDotIndicator();
+
+    //starting initial auto-slider animation
     this.autoAnimationID = setTimeout(function () {
-      self.currentIndex += 1;
-      self.startAnimation(self.currentIndex);
+      self.startAnimation(1);
     }, self.holdTime);
   }
 
+  //changes current index based on the arrow-button clicked and update the current index for animation
   slideImage(dir) {
     this.currentIndex = this.currentIndex + dir * 1;
     if (this.currentIndex < 0) this.currentIndex = this.maxIndex;
@@ -41,8 +52,8 @@ class Carousel {
     this.startAnimation(this.currentIndex);
   }
 
-  startAnimation(index) {
-    var self = this;
+  //clear some variables, animation and disables button actions
+  clearValue() {
     clearTimeout(this.autoAnimationID);
     this.isAnimationComplete = false;
     this.leftArrow.style.pointerEvents = "none";
@@ -50,25 +61,41 @@ class Carousel {
     this.dotIndicatorListItems.forEach(function (item) {
       item.style.pointerEvents = "none";
     });
+  }
+
+  //resets some variables, starts animation and enables button actions
+  resetValue() {
+    var self = this;
+    clearInterval(self.animationID);
+    self.timer = 0;
+    self.isAnimationComplete = true;
+    self.leftArrow.style.pointerEvents = "auto";
+    self.rightArrow.style.pointerEvents = "auto";
+    self.dotIndicatorListItems.forEach(function (item) {
+      item.style.pointerEvents = "auto";
+    });
+
+    //starts slider animation again
+    self.autoAnimationID = setTimeout(function () {
+      self.currentIndex += 1;
+      if (self.currentIndex > self.maxIndex) self.currentIndex = 0;
+      self.startAnimation(self.currentIndex);
+    }, self.holdTime);
+  }
+
+  //stops slider animations and starts transition animation based on the index value provided
+  //and again start slider animationF
+  startAnimation(index) {
+    var self = this;
+    this.clearValue();
     var targetPosition = index * -this.IMAGE_WIDTH;
     var currentPosition = parseInt(this.carouselImageContainer.style.left);
     var framesPerIteration = (targetPosition - currentPosition) / 50;
+
     this.animationID = setInterval(function () {
       self.timer++;
       if (self.timer >= 50) {
-        clearInterval(self.animationID);
-        self.timer = 0;
-        self.isAnimationComplete = true;
-        self.leftArrow.style.pointerEvents = "auto";
-        self.rightArrow.style.pointerEvents = "auto";
-        self.dotIndicatorListItems.forEach(function (item) {
-          item.style.pointerEvents = "auto";
-        });
-        self.autoAnimationID = setTimeout(function () {
-          self.currentIndex += 1;
-          if (self.currentIndex > self.maxIndex) self.currentIndex = 0;
-          self.startAnimation(self.currentIndex);
-        }, self.holdTime);
+        self.resetValue();
       }
       self.carouselImageContainer.style.left =
         parseInt(self.carouselImageContainer.style.left) +
@@ -79,6 +106,7 @@ class Carousel {
     self.changeActiveDotIndicator();
   }
 
+  //add or remove "active" from class of dot-indicator-item
   changeActiveDotIndicator() {
     var self = this;
     this.dotIndicatorListItems.forEach(function (value, index) {
@@ -88,6 +116,8 @@ class Carousel {
     });
   }
 
+  //create leftArrow button on DOM
+  //and decrease current index by 1 and show respective animation when left-arrow-button is pressed
   createLeftArrow() {
     var self = this;
     var leftArrow = document.createElement("div");
@@ -100,6 +130,8 @@ class Carousel {
     return leftArrow;
   }
 
+  //create rightArrow button on DOM
+  //and increase current index by 1 and show respective animation when right-arrow-button is pressed
   createRightArrow() {
     var self = this;
     var rightArrow = document.createElement("div");
@@ -112,6 +144,7 @@ class Carousel {
     return rightArrow;
   }
 
+  //create list element with items for dot-indicators on DOM
   createDotIndicator() {
     var self = this;
     var dotIndicatorList = document.createElement("ul");
@@ -127,7 +160,6 @@ class Carousel {
         self.timer = 0;
         self.currentIndex = i;
         if (self.isAnimationComplete) self.startAnimation(self.currentIndex);
-        //self.changeActiveDotIndicator();
       };
       this.dotIndicatorListItems.push(dotIndicatorListItem);
     }
