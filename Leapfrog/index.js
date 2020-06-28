@@ -97,3 +97,9 @@ var tr10 = new TableRow(
   table
 );
 
+var tr11 = new TableRow(
+  "JS Assignment 2:  Image Slider with Hold Times",
+  "js-image-slider-hold/",
+  table
+);
+

@@ -1,8 +1,10 @@
 class Carousel {
   constructor(carouselClass) {
-    self = this;
+    var self = this;
     this.IMAGE_WIDTH = 600;
     this.carouselContainer = document.querySelector("." + carouselClass);
+    if (!this.carouselContainer)
+      return console.log(carouselClass + " not found");
     this.carouselContainer.classList.add("carousel-container");
     this.carouselImageContainer = this.carouselContainer.getElementsByTagName(
       "div"
@@ -18,16 +20,13 @@ class Carousel {
     this.maxIndex = this.imageArray.length - 1;
     this.currentIndex = 0;
     this.timer = 0;
+    this.isAnimationComplete = true;
     this.leftArrow = this.createLeftArrow();
     this.rightArrow = this.createRightArrow();
     this.dotIndicatorList = this.createDotIndicator();
-    setInterval(function () {
-      console.log("interval");
+    this.autoAnimationID = setTimeout(function () {
       self.currentIndex += 1;
-      if (self.currentIndex < 0) self.currentIndex = self.maxIndex;
-      if (self.currentIndex > self.maxIndex) self.currentIndex = 0;
       self.startAnimation(self.currentIndex);
-      self.changeActiveDotIndicator()
     }, 2000);
   }
 
@@ -36,25 +35,48 @@ class Carousel {
     if (this.currentIndex < 0) this.currentIndex = this.maxIndex;
     if (this.currentIndex > this.maxIndex) this.currentIndex = 0;
     this.startAnimation(this.currentIndex);
-    this.changeActiveDotIndicator();
   }
+
   startAnimation(index) {
+    var self = this;
+    clearTimeout(this.autoAnimationID);
+    this.isAnimationComplete = false;
+    this.leftArrow.style.pointerEvents = "none";
+    this.rightArrow.style.pointerEvents = "none";
+    this.dotIndicatorListItems.forEach(function (item) {
+      item.style.pointerEvents = "none";
+    });
     var targetPosition = index * -this.IMAGE_WIDTH;
     var currentPosition = parseInt(this.carouselImageContainer.style.left);
-    var framesPerIteration = (targetPosition - currentPosition) / 10;
+    var framesPerIteration = (targetPosition - currentPosition) / 50;
     this.animationID = setInterval(function () {
       self.timer++;
-      if (self.timer >= 10) {
+      if (self.timer >= 50) {
         clearInterval(self.animationID);
         self.timer = 0;
+        self.isAnimationComplete = true;
+        self.leftArrow.style.pointerEvents = "auto";
+        self.rightArrow.style.pointerEvents = "auto";
+        self.dotIndicatorListItems.forEach(function (item) {
+          item.style.pointerEvents = "auto";
+        });
+        self.autoAnimationID = setTimeout(function () {
+          self.currentIndex += 1;
+          if (self.currentIndex > self.maxIndex) self.currentIndex = 0;
+          self.startAnimation(self.currentIndex);
+        }, 2000);
       }
       self.carouselImageContainer.style.left =
         parseInt(self.carouselImageContainer.style.left) +
         framesPerIteration +
         "px";
     }, 1000 / 60);
+
+    self.changeActiveDotIndicator();
   }
+
   changeActiveDotIndicator() {
+    var self = this;
     this.dotIndicatorListItems.forEach(function (value, index) {
       index === self.currentIndex
         ? value.classList.add("active")
@@ -63,36 +85,31 @@ class Carousel {
   }
 
   createLeftArrow() {
+    var self = this;
     var leftArrow = document.createElement("div");
     leftArrow.innerHTML = " < ";
     leftArrow.className += "side-arrow left-arrow";
     this.carouselContainer.appendChild(leftArrow);
     leftArrow.onclick = function () {
-      self.slideImage(-1);
-      leftArrow.style.pointerEvents = "none";
-      setTimeout(function () {
-        leftArrow.style.pointerEvents = "auto";
-      }, 500);
+      if (self.isAnimationComplete) self.slideImage(-1);
     };
     return leftArrow;
   }
 
   createRightArrow() {
+    var self = this;
     var rightArrow = document.createElement("div");
     rightArrow.innerHTML = " > ";
     rightArrow.className += "side-arrow right-arrow";
     this.carouselContainer.appendChild(rightArrow);
     rightArrow.onclick = function () {
-      self.slideImage(1);
-      rightArrow.style.pointerEvents = "none";
-      setTimeout(function () {
-        rightArrow.style.pointerEvents = "auto";
-      }, 500);
+      if (self.isAnimationComplete) self.slideImage(1);
     };
     return rightArrow;
   }
 
   createDotIndicator() {
+    var self = this;
     var dotIndicatorList = document.createElement("ul");
     dotIndicatorList.className += "dot-indicator-list";
     this.carouselContainer.appendChild(dotIndicatorList);
@@ -105,8 +122,8 @@ class Carousel {
       dotIndicatorListItem.onclick = function () {
         self.timer = 0;
         self.currentIndex = i;
-        self.startAnimation(self.currentIndex);
-        self.changeActiveDotIndicator();
+        if (self.isAnimationComplete) self.startAnimation(self.currentIndex);
+        //self.changeActiveDotIndicator();
       };
       this.dotIndicatorListItems.push(dotIndicatorListItem);
     }
@@ -115,3 +132,7 @@ class Carousel {
 }
 
 var obj1 = new Carousel("carousel-container1");
+
+var obj2 = new Carousel("carousel-container2");
+
+var obj2 = new Carousel("carousel-container3");
