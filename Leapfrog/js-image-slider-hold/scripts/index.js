@@ -1,5 +1,5 @@
 class Carousel {
-  constructor(carouselClass) {
+  constructor(carouselClass, holdTime, animationTime) {
     var self = this;
     this.IMAGE_WIDTH = 600;
     this.carouselContainer = document.querySelector("." + carouselClass);
@@ -13,6 +13,8 @@ class Carousel {
     this.carouselImageContainer.classList.add("clearfix");
     this.carouselImageContainer.style.left = "0px";
     this.imageArray = this.carouselImageContainer.getElementsByTagName("img");
+    if (this.imageArray.length === 0)
+      return console.log("No images found in " + carouselClass);
     this.carouselContainer.style.width = this.IMAGE_WIDTH + "px";
     this.carouselImageContainer.style.width =
       this.IMAGE_WIDTH * this.imageArray.length + "px";
@@ -20,6 +22,8 @@ class Carousel {
     this.maxIndex = this.imageArray.length - 1;
     this.currentIndex = 0;
     this.timer = 0;
+    this.holdTime = holdTime * 1000;
+    this.animationTime = animationTime * 1000;
     this.isAnimationComplete = true;
     this.leftArrow = this.createLeftArrow();
     this.rightArrow = this.createRightArrow();
@@ -27,7 +31,7 @@ class Carousel {
     this.autoAnimationID = setTimeout(function () {
       self.currentIndex += 1;
       self.startAnimation(self.currentIndex);
-    }, 2000);
+    }, self.holdTime);
   }
 
   slideImage(dir) {
@@ -64,13 +68,13 @@ class Carousel {
           self.currentIndex += 1;
           if (self.currentIndex > self.maxIndex) self.currentIndex = 0;
           self.startAnimation(self.currentIndex);
-        }, 2000);
+        }, self.holdTime);
       }
       self.carouselImageContainer.style.left =
         parseInt(self.carouselImageContainer.style.left) +
         framesPerIteration +
         "px";
-    }, 1000 / 60);
+    }, self.animationTime / 60);
 
     self.changeActiveDotIndicator();
   }
@@ -131,8 +135,10 @@ class Carousel {
   }
 }
 
-var obj1 = new Carousel("carousel-container1");
+var obj1 = new Carousel("carousel-container1", 2, 1);
 
-var obj2 = new Carousel("carousel-container2");
+var obj2 = new Carousel("carousel-container2", 4, 1.5);
 
-var obj2 = new Carousel("carousel-container3");
+var obj2 = new Carousel("carousel-container3", 2, 1);
+
+var obj2 = new Carousel("carousel-container4", 2, 1);
