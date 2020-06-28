@@ -7,7 +7,13 @@ class Carousel {
     this.animationTime = animationTime * 1000;
     this.timer = 0;
     this.isAnimationComplete = true;
+    this.currentIndex = 0;
 
+    this.init(carouselClass);
+  }
+
+  init(carouselClass) {
+    var self = this;
     //creating DOM elements
     //
     this.carouselContainer = document.querySelector("." + carouselClass);
@@ -26,13 +32,19 @@ class Carousel {
 
     this.imageArray = this.carouselImageContainer.getElementsByTagName("img");
     //handling incase there is no image provided in image container
-    if (this.imageArray.length === 0)
+    if (this.imageArray.length === 0) {
+      this.carouselImageContainer.innerHTML = "Add an Image to this section";
       return console.log("No images found in " + carouselClass);
+    }
 
     this.carouselImageContainer.style.width =
       this.IMAGE_WIDTH * this.imageArray.length + "px";
+
+    for (let i = 0; i < this.imageArray.length; i++) {
+      this.imageArray[i].classList.add("carousel-img");
+    }
+
     this.maxIndex = this.imageArray.length - 1;
-    this.currentIndex = 0;
 
     this.leftArrow = this.createLeftArrow();
     this.rightArrow = this.createRightArrow();
@@ -42,8 +54,34 @@ class Carousel {
     this.autoAnimationID = setTimeout(function () {
       self.startAnimation(1);
     }, self.holdTime);
+
+    //checking media query for tab responsiveness
+    var tabMedia = window.matchMedia("(min-width: 778px)");
+    this.tabResponsive(tabMedia); // Call listener function at run time
+    tabMedia.addListener(
+      function () {
+        this.tabResponsive(tabMedia);
+      }.bind(this)
+    ); // Attach listener function on state changes
   }
 
+
+  tabResponsive(tabMedia) {
+    if (this.imageArray && this.carouselContainer) {
+      if (tabMedia.matches) {
+        this.IMAGE_WIDTH = "600";
+      } else {
+        this.IMAGE_WIDTH = "350";
+      }
+      //re-initializing the variables for changing width in DOM
+      this.carouselContainer.style.width = this.IMAGE_WIDTH + "px";
+      this.carouselImageContainer.style.width =
+        this.IMAGE_WIDTH * this.imageArray.length + "px";
+      for (let i = 0; i < this.imageArray.length; i++) {
+        this.imageArray[i].style.width = this.IMAGE_WIDTH + "px";
+      }
+    }
+  }
   //changes current index based on the arrow-button clicked and update the current index for animation
   slideImage(dir) {
     this.currentIndex = this.currentIndex + dir * 1;
