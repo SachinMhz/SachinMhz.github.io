@@ -1,0 +1,14 @@
+.container {
+  position: relative;
+  width: 100%;
+  margin: auto;
+}
+
+#canvas {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: auto;
+  border: 1px solid black;
+}
