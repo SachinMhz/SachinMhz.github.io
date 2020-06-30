@@ -22,8 +22,6 @@ function Ball(x, y, radius, speed, color) {
   this.y = y;
   this.radius = radius;
   this.speed = speed;
-  this.xDirection = 1;
-  this.yDirection = 1;
   this.color = color;
   this.dx = 1;
   this.dy = 1;
@@ -91,13 +89,10 @@ function init() {
     let radius = randomInt(5, 20);
     let x = randomInt(radius, CANVAS.width);
     let y = randomInt(radius, CANVAS.height);
-    let speed = randomInt(2, 10);
+    let speed = randomInt(2, 6);
     let color = getRandomColor();
     var ball = new Ball(x, y, radius, speed, color);
     ballsArray.push(ball);
-    ball.onclick = function () {
-      console.log("pressed");
-    };
   }
 }
 
