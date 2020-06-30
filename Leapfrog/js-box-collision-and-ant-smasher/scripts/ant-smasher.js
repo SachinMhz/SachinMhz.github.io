@@ -1,17 +1,21 @@
+//creating canvas
 const CANVAS = document.getElementById("canvas");
 CANVAS.height = window.innerHeight - 20;
 CANVAS.width = window.innerWidth - 20;
 const CTX = CANVAS.getContext("2d");
 
+//defining some variables
 var antsArray = [];
 const ANT_COUNT = 8;
 antImage = new Image();
 antImage.src = "../images/ant-gif.gif";
 
+//return value between min and max value
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+//responsible for drawing, moving and check collision
 function Ant(x, y, size, speed) {
   this.x = x;
   this.y = y;
@@ -20,6 +24,7 @@ function Ant(x, y, size, speed) {
   this.dx = 1;
   this.dy = 1;
 
+  //draw an ant image to the canvas
   this.draw = () => {
     CTX.beginPath();
     CTX.drawImage(
@@ -33,11 +38,13 @@ function Ant(x, y, size, speed) {
     CTX.closePath();
   };
 
+  //moves ant with respect to the direction changed
   this.move = () => {
     this.x += this.dx * this.speed;
     this.y += this.dy * this.speed;
   };
 
+  //check boundary collision
   this.checkWallCollision = () => {
     if (this.x - this.size <= 0) {
       this.x = this.size;
@@ -57,6 +64,7 @@ function Ant(x, y, size, speed) {
     }
   };
 
+  //check collision between other ants
   this.checkAntCollision = () => {
     antsArray.forEach((ant) => {
       if (this !== ant) {
@@ -66,6 +74,8 @@ function Ant(x, y, size, speed) {
         let totalRadius = this.size + ant.size;
 
         if (distance <= totalRadius) {
+          //collision exists - also overlap may exists
+          //eliminating overlaps
           xOverlap = totalRadius - Math.abs(xCord);
           yOverlap = totalRadius - Math.abs(yCord);
           if (xOverlap > yOverlap) {
@@ -73,6 +83,7 @@ function Ant(x, y, size, speed) {
           } else {
             this.x += xCord > 0 ? xOverlap : -xOverlap;
           }
+          //changing direction after collision
           this.dx = -this.dx;
           this.dy = -this.dy;
           ant.dx = -this.dx;
@@ -83,6 +94,7 @@ function Ant(x, y, size, speed) {
   };
 }
 
+//creating new ant objects
 function init() {
   for (let i = 0; i < ANT_COUNT; i++) {
     let size = randomInt(30, 50);
@@ -94,6 +106,7 @@ function init() {
   }
 }
 
+//responsible for drawing and moving ants frame by frame
 function draw() {
   CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
   antsArray.forEach((ant) => {
@@ -108,10 +121,12 @@ function draw() {
 init();
 draw();
 
+
 CANVAS.addEventListener("click", function (event) {
   let x = event.offsetX;
   let y = event.offsetY;
   antsArray.forEach((ant) => {
+    //responsible for adding onclick listener to each ant objects
     if (
       x < ant.x + ant.size &&
       x > ant.x - ant.size &&
@@ -119,6 +134,7 @@ CANVAS.addEventListener("click", function (event) {
       y > ant.y - ant.size
     ) {
       antsArray = antsArray.filter((val) => {
+        //remove the ant object after clicked
         return val != ant;
       });
     }
