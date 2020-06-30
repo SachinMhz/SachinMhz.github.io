@@ -103,3 +103,10 @@ var tr11 = new TableRow(
   table
 );
 
+
+var tr12 = new TableRow(
+  "JS Assignment 3:  Ball Collision and Ant Smasher",
+  "js-box-collision-and-ant-smasher/",
+  table
+);
+
