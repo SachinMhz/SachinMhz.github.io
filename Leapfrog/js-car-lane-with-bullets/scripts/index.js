@@ -12,6 +12,9 @@ const CAR_HEIGHT = CAR_WIDTH * 2;
 const BOTTOM_OFFSET = CANVAS.height * 0.05;
 var player;
 var powerUp;
+var background;
+var GAME_SPEED = 5;
+var isPlaying = true;
 
 //defining some variables
 var bulletList = [];
@@ -33,6 +36,12 @@ imagesArray = [
   "./images/pink.png",
   "./images/yellow.png",
 ];
+leftSideIMG = new Image();
+leftSideIMG.src = "./images/leftSide.png";
+rightSideIMG = new Image();
+rightSideIMG.src = "./images/rightSide.png";
+midRoadIMG = new Image();
+midRoadIMG.src = "./images/road.jpg";
 //return value between min and max value
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -51,25 +60,60 @@ function checkBottom(obj1, obj2) {
   return obj1.y + obj1.height > obj2.y;
 }
 
-function DrawBackground() {
+function drawImageContext(img, x, y, width, height) {
+  CTX.beginPath();
+  CTX.drawImage(img, x, y, width, height);
+  CTX.stroke();
+  CTX.closePath();
+}
+
+function Background() {
+  this.y1 = 0;
+  this.y2 = -CANVAS.height;
+  this.speed = GAME_SPEED + 10;
+  this.height = CANVAS.height;
   //Left-road-side
-  CTX.beginPath();
-  CTX.rect(0, 0, SIDE_WIDTH, CANVAS.height);
-  CTX.fillStyle = "green";
-  CTX.fill();
-  CTX.closePath();
-  //road
-  CTX.beginPath();
-  CTX.rect(CANVAS.width - SIDE_WIDTH, 0, SIDE_WIDTH, CANVAS.height);
-  CTX.fillStyle = "green";
-  CTX.fill();
-  CTX.closePath();
-  //right-road-side
-  CTX.beginPath();
-  CTX.rect(SIDE_WIDTH, 0, ROAD_WIDTH, CANVAS.height);
-  CTX.fillStyle = "gray";
-  CTX.fill();
-  CTX.closePath();
+  this.draw = () => {
+    this.y1 += this.speed;
+    this.y2 += this.speed;
+    CTX.beginPath();
+    drawImageContext(
+      leftSideIMG,
+      0,
+      this.y1,
+      SIDE_WIDTH,
+      this.height + BOTTOM_OFFSET
+    );
+    drawImageContext(
+      leftSideIMG,
+      0,
+      this.y2,
+      SIDE_WIDTH,
+      this.height + BOTTOM_OFFSET
+    );
+    drawImageContext(
+      rightSideIMG,
+      CANVAS.width - SIDE_WIDTH,
+      this.y1,
+      SIDE_WIDTH,
+      this.height
+    );
+    drawImageContext(
+      rightSideIMG,
+      CANVAS.width - SIDE_WIDTH,
+      this.y2,
+      SIDE_WIDTH,
+      this.height
+    );
+
+    drawImageContext(midRoadIMG, SIDE_WIDTH, this.y1, ROAD_WIDTH, this.height);
+    drawImageContext(midRoadIMG, SIDE_WIDTH, this.y2, ROAD_WIDTH, this.height);
+  };
+
+  this.checkBoundary = () => {
+    if (this.y1 >= CANVAS.height) this.y1 = -CANVAS.height;
+    if (this.y2 >= CANVAS.height) this.y2 = -CANVAS.height;
+  };
 }
 
 //responsible for drawing, moving and check collision
@@ -128,9 +172,11 @@ function Obstacle() {
   this.x =
     SIDE_WIDTH + randomInt(-1, 2) * LANE_WIDTH + ROAD_WIDTH / 2 - CAR_WIDTH / 2;
   this.y = (randomInt(-3, 0) * CANVAS.height) / 3;
-  this.speed = 3;
+  this.speed = GAME_SPEED;
   this.image = new Image();
   this.image.src = imagesArray[randomInt(0, imagesArray.length)];
+  this.isIncreaseScore = true;
+
   //draw an ant image to the canvas
   this.draw = () => {
     CTX.beginPath();
@@ -152,6 +198,24 @@ function Obstacle() {
         return this != obstacle;
       });
     }
+  };
+
+  this.checkCollision = () => {
+    obstacleList.forEach((obstacle) => {
+      if (
+        this !== obstacle &&
+        checkTop(this, obstacle) &&
+        checkRight(this, obstacle) &&
+        checkLeft(this, obstacle) &&
+        checkBottom(this, obstacle)
+      ) {
+        let newObstacle = new Obstacle();
+        obstacleList.push(newObstacle);
+        obstacleList = obstacleList.filter((unwantedObstacle) => {
+          return this != unwantedObstacle;
+        });
+      }
+    });
   };
 
   this.validateObstacle = () => {
@@ -178,8 +242,8 @@ function PowerUp() {
     randomInt(-1, 2) * LANE_WIDTH +
     ROAD_WIDTH / 2 -
     this.width / 2;
-  this.y = 200; //randomInt(-4, -2) * CANVAS.height;
-  this.speed = 3;
+  this.y = randomInt(-4, -2) * CANVAS.height;
+  this.speed = GAME_SPEED + 10;
   //draw an ant image to the canvas
   this.draw = () => {
     CTX.beginPath();
@@ -253,8 +317,8 @@ function Player() {
   this.checkCollision = () => {
     obstacleList.forEach((obstacle) => {
       if (this.y + this.height > obstacle.y) {
-        this.score += 1;
-        console.log("score---------", this.score);
+        if (obstacle.isIncreaseScore) this.score += 1;
+        obstacle.isIncreaseScore = false;
       }
       if (
         checkTop(this, obstacle) &&
@@ -263,6 +327,9 @@ function Player() {
         checkBottom(this, obstacle)
       ) {
         this.image = playerDestroyIMG;
+        setTimeout(() => {
+          isPlaying = false;
+        }, 10);
       }
     });
   };
@@ -286,15 +353,23 @@ function Player() {
     });
   };
 
-  this.showScore = () => {
+  this.showText = () => {
     CTX.font = "60px Arial";
-    CTX.fillStyle = "black";
-    CTX.fillText("Score: " + this.score, CANVAS.width / 2, 50);
+    CTX.fillStyle = "red";
+    CTX.fillText("speed: " + GAME_SPEED.toFixed(2), CANVAS.width / 2, 75);
+    CTX.fillText("bullet left : " + this.bulletCount, CANVAS.width / 2, 150);
+    CTX.fillText("Score: " + this.score, CANVAS.width / 2 + LANE_WIDTH, 75);
+    CTX.fillText(
+      "HighScore: " + this.score,
+      CANVAS.width / 2 + LANE_WIDTH,
+      150
+    );
   };
 }
 
 //creating new ant objects
 function init() {
+  background = new Background();
   player = new Player();
   powerUpList.push(new PowerUp());
   for (let i = 0; i < 3; i++) {
@@ -305,12 +380,14 @@ function init() {
 
 //responsible for drawing and moving ants frame by frame
 function draw() {
+  if (GAME_SPEED < 30) GAME_SPEED += 0.005;
   CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
-  DrawBackground();
+  background.draw();
+  background.checkBoundary();
   player.draw();
   player.checkCollision();
   player.checkPowerUpCollision();
-  player.showScore();
+  player.showText();
   bulletList.forEach((bullet) => {
     bullet.draw();
     bullet.moveUp();
@@ -324,11 +401,12 @@ function draw() {
   obstacleList.forEach((obstacle) => {
     obstacle.draw();
     obstacle.moveDown();
+    obstacle.checkCollision();
     obstacle.checkBoundary();
     obstacle.validateObstacle();
   });
   //DrawObstacle();
-  requestAnimationFrame(draw);
+  if (isPlaying) requestAnimationFrame(draw);
 }
 
 init();
