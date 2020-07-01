@@ -2,19 +2,6 @@ export function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-export function checkLeft(obj1, obj2) {
-  return obj1.x < obj2.x + obj2.width;
-}
-export function checkRight(obj1, obj2) {
-  return obj1.x + obj1.width > obj2.x;
-}
-export function checkTop(obj1, obj2) {
-  return obj1.y < obj2.y + obj2.height;
-}
-export function checkBottom(obj1, obj2) {
-  return obj1.y + obj1.height > obj2.y;
-}
-
 export function drawImageContext(ctx, img, x, y, width, height) {
   ctx.beginPath();
   ctx.drawImage(img, x, y, width, height);
@@ -65,4 +52,10 @@ export function isCollided(bird, rect) {
   } else {
     return false;
   }
+}
+
+export function getImage(path) {
+  let image = new Image();
+  image.src = path;
+  return image;
 }
