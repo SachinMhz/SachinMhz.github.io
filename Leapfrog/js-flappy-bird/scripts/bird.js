@@ -1,4 +1,4 @@
-import { drawRectContext, isCollided, drawImageContext } from "./helperFunc.js";
+import { isCollided, drawImageContext } from "./helperFunc.js";
 import {
   CTX,
   BIRD_RADIUS,
