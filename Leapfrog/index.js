@@ -40,14 +40,13 @@ class TableRow {
   }
 
   addClass(className) {
-      this.element.classList += className;
+    this.element.classList += className;
   }
 
   render() {
     this.parentElement.appendChild(this.element);
   }
 }
-
 
 var tr2 = new TableRow("Git Assignment 1", "", table);
 
@@ -103,10 +102,14 @@ var tr11 = new TableRow(
   table
 );
 
-
 var tr12 = new TableRow(
   "JS Assignment 3:  Ball Collision and Ant Smasher",
   "js-box-collision-and-ant-smasher/",
   table
 );
 
+var tr13 = new TableRow(
+  "JS Assignment 4:  Car Lane Game with Bullets",
+  "js-car-lane-with-bullets/",
+  table
+);
