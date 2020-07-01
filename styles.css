@@ -9,13 +9,35 @@
   align-items: center;
 }
 
-.main-container {
-  padding: 50px;
-  width: 100%;
-  margin: auto;
+.title {
+  text-align: center;
+  margin-top: 10px;
 }
 
-.container {
-  width: 50%;
-  margin: auto;
+.table-container {
+  margin-top: 40px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+table {
+  border: 1px solid black;
+  text-align: center;
+}
+
+th,
+td {
+  border: 1px solid black;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.table-row:hover {
+  background-color: gray;
+}
+.table-row:first-child:hover {
+  background-color: white;
 }
