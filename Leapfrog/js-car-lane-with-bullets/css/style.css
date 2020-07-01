@@ -1,4 +1,8 @@
-/* .container a {
+.button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: block;
   text-decoration: none;
   text-align: center;
@@ -9,6 +13,33 @@
   font-size: 25px;
 }
 
-.container a:hover {
+.button:hover {
   background-color: green;
-} */
+}
+
+.heading-text {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  color: blue;
+  text-align: center;
+  font-size: 64px;
+}
+
+.play-again {
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -75%);
+}
+
+.game-over-score {
+  top: 450%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+}
+.game-over-high-score {
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+}

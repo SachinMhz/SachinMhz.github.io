@@ -10,11 +10,12 @@ const LANE_WIDTH = ROAD_WIDTH / NO_OF_LANES;
 const CAR_WIDTH = CANVAS.width * 0.05;
 const CAR_HEIGHT = CAR_WIDTH * 2;
 const BOTTOM_OFFSET = CANVAS.height * 0.05;
+var HIGH_SCORE = localStorage.getItem("highScore");
 var player;
 var powerUp;
 var background;
 var GAME_SPEED = 5;
-var isPlaying = true;
+var isPlaying = false;
 
 //defining some variables
 var bulletList = [];
@@ -235,15 +236,15 @@ function Obstacle() {
 }
 
 function PowerUp() {
-  this.width = CAR_WIDTH * 0.4;
-  this.height = CAR_HEIGHT * 0.4;
+  this.width = CAR_WIDTH * 0.6;
+  this.height = CAR_HEIGHT * 0.6;
   this.x =
     SIDE_WIDTH +
     randomInt(-1, 2) * LANE_WIDTH +
     ROAD_WIDTH / 2 -
     this.width / 2;
   this.y = randomInt(-4, -2) * CANVAS.height;
-  this.speed = GAME_SPEED + 10;
+  this.speed = GAME_SPEED;
   //draw an ant image to the canvas
   this.draw = () => {
     CTX.beginPath();
@@ -316,7 +317,7 @@ function Player() {
   //check boundary collision
   this.checkCollision = () => {
     obstacleList.forEach((obstacle) => {
-      if (this.y + this.height > obstacle.y) {
+      if (this.y + this.height < obstacle.y && obstacle.y > BOTTOM_OFFSET) {
         if (obstacle.isIncreaseScore) this.score += 1;
         obstacle.isIncreaseScore = false;
       }
@@ -327,9 +328,30 @@ function Player() {
         checkBottom(this, obstacle)
       ) {
         this.image = playerDestroyIMG;
+
+        CTX.font = "60px Arial";
+        CTX.fillStyle = "blue";
+        CTX.fillText(
+          "Your Score : " + this.score,
+          CANVAS.width / 2 - LANE_WIDTH / 2,
+          CANVAS.height / 2
+        );
+        CTX.fillText(
+          "High Score : " + HIGH_SCORE,
+          CANVAS.width / 2 - LANE_WIDTH / 2,
+          CANVAS.height / 2 + CAR_HEIGHT / 2
+        );
         setTimeout(() => {
           isPlaying = false;
-        }, 10);
+          gameOverContainer.style.display = "block";
+
+          if (this.score > HIGH_SCORE) {
+            HIGH_SCORE = this.score;
+            localStorage.setItem("highScore", HIGH_SCORE);
+          }
+          // overScore = document.getElementById("over-score");
+          // overScore.innerText = "Your Score : " + this.score;
+        }, 20);
       }
     });
   };
@@ -354,13 +376,13 @@ function Player() {
   };
 
   this.showText = () => {
-    CTX.font = "60px Arial";
+    CTX.font = "40px Arial";
     CTX.fillStyle = "red";
     CTX.fillText("speed: " + GAME_SPEED.toFixed(2), CANVAS.width / 2, 75);
     CTX.fillText("bullet left : " + this.bulletCount, CANVAS.width / 2, 150);
     CTX.fillText("Score: " + this.score, CANVAS.width / 2 + LANE_WIDTH, 75);
     CTX.fillText(
-      "HighScore: " + this.score,
+      "HighScore: " + HIGH_SCORE,
       CANVAS.width / 2 + LANE_WIDTH,
       150
     );
@@ -409,9 +431,6 @@ function draw() {
   if (isPlaying) requestAnimationFrame(draw);
 }
 
-init();
-draw();
-
 document.addEventListener("keydown", function (event) {
   //console.log(event.key);
   if (event.key === "a") {
@@ -424,3 +443,31 @@ document.addEventListener("keydown", function (event) {
     player.shootBullet();
   }
 });
+
+var menuContainer = document.getElementById("main-menu-container");
+menuContainer.style.width = window.innerWidth + "px";
+menuContainer.style.height = window.innerHeight + "px";
+
+var startBtn = document.getElementById("start-btn");
+startBtn.onclick = () => {
+  menuContainer.style.display = "none";
+  isPlaying = true;
+  init();
+  draw();
+};
+
+var gameOverContainer = document.getElementById("game-over-container");
+gameOverContainer.style.width = window.innerWidth + "px";
+gameOverContainer.style.height = window.innerHeight + "px";
+
+var playAgainBtn = document.getElementById("play-again-btn");
+playAgainBtn.onclick = () => {
+  gameOverContainer.style.display = "none";
+  isPlaying = true;
+  GAME_SPEED = 5;
+  bulletList = [];
+  obstacleList = [];
+  powerUpList = [];
+  init();
+  draw();
+};
