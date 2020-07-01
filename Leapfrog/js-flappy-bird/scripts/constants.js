@@ -1,3 +1,5 @@
+import { getImage } from "./helperFunc.js";
+
 export const CANVAS = document.getElementById("canvas");
 CANVAS.height = 600;
 CANVAS.width = 400;
@@ -17,26 +19,29 @@ export const BIRD_WIDTH = 70;
 export const BIRD_HEIGHT = 50;
 export const ANIMATION_RATE = 5;
 
-export const bird1_IMG = new Image();
-bird1_IMG.src = "./images/bird1.png";
+export const bird1_IMG = getImage("./images/bird1.png");
+export const bird2_IMG = getImage("./images/bird2.png");
+export const upFacedPipeIMG = getImage("./images/upFaced.png");
+export const downFacedPipeIMG = getImage("./images/downFaced.png");
+export const bgIMG = getImage("./images/bg.png");
+export var upFacedWallIMG = getImage("./images/upFacedWall.png");
+export var downFacedWallIMG = getImage("./images/downFacedWall.png");
+export var logoIMG = getImage("./images/logo.png");
+export var readyIMG = getImage("./images/getReady.png");
+export var startIMG = getImage("./images/start.png");
+export var gameOverIMG = getImage("./images/gameOver.png");
+export var scoreBoardIMG = getImage("./images/scoreBoard.png");
+export var playBtnIMG = getImage("./images/playBtn.png");
 
-export const bird2_IMG = new Image();
-bird2_IMG.src = "./images/bird2.png";
-
-export const upFacedPipeIMG = new Image();
-upFacedPipeIMG.src = "./images/upFaced.png";
-export const downFacedPipeIMG = new Image();
-downFacedPipeIMG.src = "./images/downFaced.png";
-
-export const bgIMG = new Image();
-bgIMG.src = "./images/bg.png";
-export var upFacedWallIMG = new Image();
-upFacedWallIMG.src = "./images/upFacedWall.png";
-export var downFacedWallIMG = new Image();
-downFacedWallIMG.src = "./images/downFacedWall.png";
-
-var isPlaying = true;
 var pipeList = [];
+var backgroundList = [];
+var wallList = [];
+
+var isPlaying = false;
+var isGameOver = false;
+var isFrameRunning = true;
+var isStartGame = true;
+
 
 export function addPipe(pipe) {
   pipeList.push(pipe);
@@ -44,14 +49,15 @@ export function addPipe(pipe) {
 export function getPipeList() {
   return pipeList;
 }
-
 export function removePipe(unwantedPipe) {
   pipeList = pipeList.filter((pipe) => {
     return pipe != unwantedPipe;
   });
 }
+export function clearPipes() {
+  pipeList = [];
+}
 
-var wallList = [];
 
 export function addWall(wall) {
   wallList.push(wall);
@@ -59,14 +65,15 @@ export function addWall(wall) {
 export function getWallList() {
   return wallList;
 }
-
+export function clearWalls() {
+  wallList = [];
+}
 export function removeWall(unwantedWall) {
   wallList = wallList.filter((wall) => {
     return wall != unwantedWall;
   });
 }
 
-var backgroundList = [];
 
 export function addBackground(background) {
   backgroundList.push(background);
@@ -74,20 +81,55 @@ export function addBackground(background) {
 export function getBackgroundList() {
   return backgroundList;
 }
-
 export function removeBackground(unwantedBackground) {
   backgroundList = backgroundList.filter((background) => {
     return background != unwantedBackground;
   });
 }
 
-export function getGameState() {
+export function gameOver() {
+  isPlaying = false;
+  isFrameRunning = false;
+  isStartGame = false;
+  isGameOver = true;
+}
+
+export function isPlayingState() {
   return isPlaying;
 }
-export function startGame() {
+export function setPlaying() {
   isPlaying = true;
 }
-export function gameOver() {
-  console.log("gave over");
+export function resetPlaying() {
   isPlaying = false;
+}
+
+export function isFrameState() {
+  return isFrameRunning;
+}
+export function setFrame() {
+  isFrameRunning = true;
+}
+export function resetFrame() {
+  isFrameRunning = false;
+}
+
+export function isStartState() {
+  return isStartGame;
+}
+export function setStartState() {
+  isStartGame = true;
+}
+export function resetStartState() {
+  isStartGame = false;
+}
+
+export function isGameOverState() {
+  return isGameOver;
+}
+export function setGameOverState() {
+  isGameOver = true;
+}
+export function resetGameOverState() {
+  isGameOver = false;
 }
