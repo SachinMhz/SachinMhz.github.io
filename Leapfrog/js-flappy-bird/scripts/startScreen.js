@@ -1,4 +1,4 @@
-import { randomInt, drawRectContext, drawImageContext } from "./helperFunc.js";
+import { drawImageContext } from "./helperFunc.js";
 import {
   CANVAS,
   CTX,
@@ -7,13 +7,13 @@ import {
   logoIMG,
   downFacedWallIMG,
   upFacedWallIMG,
+  bgIMG,
   readyIMG,
   startIMG,
 } from "./constants.js";
 
-var bgIMG = new Image();
-bgIMG.src = "./images/bg.png";
-
+/** Declares StartScreen to draw startMenu objects on canvas
+ */
 export default function StartScreen() {
   this.draw = () => {
     drawImageContext(CTX, bgIMG, 0, 0, CANVAS.width, CANVAS.height);

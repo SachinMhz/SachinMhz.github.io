@@ -18,9 +18,11 @@ export function drawRectContext(ctx, x, y, width, height) {
 }
 
 // return true if the rectangle and bird are colliding
-export function isCollided2(bird, rect) {
-  var distX = Math.abs(bird.x - rect.x - rect.width / 2);
-  var distY = Math.abs(bird.y - rect.y - rect.height / 2);
+export function isCollided(bird, rect) {
+  let birdX = bird.x + bird.width / 2;
+  let birdY = bird.y + bird.height / 2;
+  var distX = Math.abs(birdX - rect.x - rect.width / 2);
+  var distY = Math.abs(birdY - rect.y - rect.height / 2);
 
   if (distX > rect.width / 2 + bird.radius) {
     return false;
@@ -41,7 +43,8 @@ export function isCollided2(bird, rect) {
   return dx * dx + dy * dy <= bird.radius * bird.radius;
 }
 
-export function isCollided(bird, rect) {
+// rectangular collision //
+export function isCollided2(bird, rect) {
   if (
     bird.x < rect.x + rect.width &&
     bird.x + bird.width > rect.x &&

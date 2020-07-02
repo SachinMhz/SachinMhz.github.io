@@ -1,4 +1,4 @@
-import { randomInt, drawRectContext, drawImageContext } from "./helperFunc.js";
+import { randomInt, drawImageContext } from "./helperFunc.js";
 import {
   CANVAS,
   CTX,
@@ -12,6 +12,11 @@ import {
   removePipe,
 } from "./constants.js";
 
+/** Declares Pipe to draw and move the pipe objects
+ * @param x x coordinate in canvas space
+ * @param y y coordinate in canvas space
+ * @param direction direction of the pipe to be faced
+ */
 export default function Pipe(x, y, direction) {
   this.x = x;
   this.y = y;
@@ -21,8 +26,9 @@ export default function Pipe(x, y, direction) {
   this.speed = 5;
   this.increaseScore = true;
 
-  if (this.direction === "upFaced") {
-    this.draw = () => {
+  //draw pipe object to the canvas
+  this.draw = () => {
+    if (this.direction === "upFaced") {
       drawImageContext(
         CTX,
         upFacedPipeIMG,
@@ -31,9 +37,7 @@ export default function Pipe(x, y, direction) {
         this.width,
         this.height
       );
-    };
-  } else {
-    this.draw = () => {
+    } else {
       drawImageContext(
         CTX,
         downFacedPipeIMG,
@@ -42,12 +46,15 @@ export default function Pipe(x, y, direction) {
         this.width,
         this.height
       );
-    };
-  }
+    }
+  };
+
+  //to move pipes in x direction
   this.move = () => {
     this.x -= this.speed;
   };
 
+  //to reset the position of pipes after pipe is over he canvas
   this.checkBoundary = () => {
     let pipeList = getPipeList();
     for (let i = 0; i < pipeList.length; i = i + 2) {
