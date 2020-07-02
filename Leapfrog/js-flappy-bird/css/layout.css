@@ -9,17 +9,3 @@
 #canvas {
   position: absolute;
 }
-
-.main-menu-container {
-  position: absolute;
-  background-image: url("../images/mainBG.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.game-over-container {
-  display: none;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
-}
