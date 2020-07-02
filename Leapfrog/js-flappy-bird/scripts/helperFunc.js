@@ -1,7 +1,9 @@
+//returns random integer excluding max value
 export function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+//draw an image to context
 export function drawImageContext(ctx, img, x, y, width, height) {
   ctx.beginPath();
   ctx.drawImage(img, x, y, width, height);
@@ -9,6 +11,7 @@ export function drawImageContext(ctx, img, x, y, width, height) {
   ctx.closePath();
 }
 
+//draw rect to the context
 export function drawRectContext(ctx, x, y, width, height) {
   ctx.beginPath();
   ctx.rect(x, y, width, height);
@@ -17,7 +20,8 @@ export function drawRectContext(ctx, x, y, width, height) {
   ctx.closePath();
 }
 
-// return true if the rectangle and bird are colliding
+// check collision between circle and rectangle
+//return true if the rectangle and bird are colliding
 export function isCollided(bird, rect) {
   let birdX = bird.x + bird.width / 2;
   let birdY = bird.y + bird.height / 2;
@@ -43,7 +47,7 @@ export function isCollided(bird, rect) {
   return dx * dx + dy * dy <= bird.radius * bird.radius;
 }
 
-// rectangular collision //
+// checks rectangular collision between two rectangular objects//
 export function isCollided2(bird, rect) {
   if (
     bird.x < rect.x + rect.width &&
@@ -57,8 +61,22 @@ export function isCollided2(bird, rect) {
   }
 }
 
+// responsible to get Image from path
 export function getImage(path) {
   let image = new Image();
   image.src = path;
   return image;
+}
+
+// responsible to get audio from path
+export function getAudio(path) {
+  let audio = new Audio();
+  audio.src = path;
+  return audio;
+}
+// responsible to play audio
+export function playAudio(audio) {
+  audio.pause();
+  audio.currentTime = 0;
+  audio.play();
 }

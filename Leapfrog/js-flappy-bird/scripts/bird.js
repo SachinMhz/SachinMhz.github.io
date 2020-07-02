@@ -1,4 +1,4 @@
-import { isCollided, drawImageContext } from "./helperFunc.js";
+import { isCollided, drawImageContext, playAudio } from "./helperFunc.js";
 import {
   CTX,
   BIRD_RADIUS,
@@ -12,6 +12,9 @@ import {
   bird1_IMG,
   bird2_IMG,
   getWallList,
+  pointAudio,
+  collideAudio,
+  flapAudio,
 } from "./constants.js";
 
 /** Declares bird to draw and move and
@@ -43,6 +46,7 @@ export default function Bird() {
 
   //to move bird object up when mouse is clicked
   this.moveUp = () => {
+    playAudio(flapAudio);
     this.gravity = 0;
     this.y -= this.jumpForce;
   };
@@ -64,6 +68,7 @@ export default function Bird() {
     pipeList.forEach((pipe) => {
       //increasing score when bird passes the pipe
       if (this.x > pipe.x + pipe.width && pipe.increaseScore) {
+        playAudio(pointAudio);
         pipe.increaseScore = false;
         this.score += 0.5; //two pipes so increment by 1/2
         if (this.score > localStorage.getItem("highScore")) {
@@ -72,6 +77,7 @@ export default function Bird() {
       }
       //when bird collide with pipe
       if (isCollided(this, pipe)) {
+        playAudio(collideAudio);
         gameOver();
       }
     });

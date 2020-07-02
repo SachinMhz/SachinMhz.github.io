@@ -1,4 +1,4 @@
-import { getImage } from "./helperFunc.js";
+import { getImage, getAudio } from "./helperFunc.js";
 
 //creating canvas
 export const CANVAS = document.getElementById("canvas");
@@ -35,6 +35,11 @@ export const startIMG = getImage("./images/start.png");
 export const gameOverIMG = getImage("./images/gameOver.png");
 export const scoreBoardIMG = getImage("./images/scoreBoard.png");
 export const playBtnIMG = getImage("./images/playBtn.png");
+
+//get audio files
+export const pointAudio = getAudio("./audios/point.mp3");
+export const collideAudio = getAudio("./audios/collide.mp3");
+export const flapAudio = getAudio("./audios/flap.mp3");
 
 //setting up list variables
 var pipeList = [];
