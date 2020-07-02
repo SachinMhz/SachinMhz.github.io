@@ -113,3 +113,9 @@ var tr13 = new TableRow(
   "js-car-lane-with-bullets/",
   table
 );
+
+var tr14 = new TableRow(
+  "JS Assignment 5:  Flappy Bird",
+  "js-flappy-bird/",
+  table
+);
