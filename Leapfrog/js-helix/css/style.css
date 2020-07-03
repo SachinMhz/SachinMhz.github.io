@@ -1,0 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.helixCanvas {
+  display: inline-block;
+  background-color: rgba(4, 58, 47, 1);
+  margin: 10px;
+}
