@@ -119,3 +119,5 @@ var tr14 = new TableRow(
   "js-flappy-bird/",
   table
 );
+
+var tr15 = new TableRow("JS Assignment 6: Helix Animation", "js-helix/", table);
