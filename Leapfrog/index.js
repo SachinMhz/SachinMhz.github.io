@@ -121,3 +121,9 @@ var tr14 = new TableRow(
 );
 
 var tr15 = new TableRow("JS Assignment 6: Helix Animation", "js-helix/", table);
+
+var tr16 = new TableRow(
+  "JS Final Project: Candy Crush Clone",
+  "js-final-project-candy-crush-clone/",
+  table
+);

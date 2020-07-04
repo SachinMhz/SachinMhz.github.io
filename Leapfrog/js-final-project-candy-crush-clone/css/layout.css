@@ -1,0 +1,11 @@
+.container {
+  position: relative;
+  padding-left: 100px;
+  width: 100%;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+#canvas {
+  position: absolute;
+}
