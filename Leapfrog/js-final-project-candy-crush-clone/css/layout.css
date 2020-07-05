@@ -1,11 +1,30 @@
-.container {
-  position: relative;
-  padding-left: 100px;
+.main-wrapper {
   width: 100%;
   margin: auto;
-  box-sizing: border-box;
+}
+
+.container {
+  position: relative;
+  padding-top: 20px;
+  width: 900px;
+  margin: auto;
+}
+
+.left-container {
+  /* width: 30%; */
+  width: 300px;
+  height: 600px;
+  border: 1px solid black;
+}
+
+.right-container {
+  position: relative;
+  /* width: 70%; */
+  width: 600px;
+  height: 600px;
+  border: 1px solid red;
 }
 
 #canvas {
-  position: absolute;
+  /* position: absolute; */
 }

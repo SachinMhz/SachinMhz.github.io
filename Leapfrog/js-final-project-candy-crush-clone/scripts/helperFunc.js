@@ -3,6 +3,14 @@ export function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+//return random color value
+export function getRandomColor() {
+  let red = randomInt(0, 240);
+  let green = randomInt(0, 240);
+  let blue = randomInt(0, 240);
+  return `rgba(${red}, ${green}, ${blue}, 1)`;
+}
+
 //draw an image to context
 export function drawImageContext(ctx, img, x, y, width, height) {
   ctx.beginPath();
@@ -11,11 +19,12 @@ export function drawImageContext(ctx, img, x, y, width, height) {
   ctx.closePath();
 }
 
+let candiesColor = ["red", "blue", "green", "purple", "yellow", "orange"];
 //draw rect to the context
 export function drawRectContext(ctx, x, y, width, height) {
   ctx.beginPath();
   ctx.rect(x, y, width, height);
-  ctx.fillStyle = "black";
+  ctx.fillStyle = candiesColor[randomInt(0, candiesColor.length)];
   ctx.fill();
   ctx.closePath();
 }
