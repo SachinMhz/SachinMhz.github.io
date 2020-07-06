@@ -8,6 +8,8 @@ CANVAS.width = 600;
 
 // constants used in the game
 export const CTX = CANVAS.getContext("2d");
+export const CANDY_WIDTH = 60;
+export const CANDY_HEIGHT = 60;
 
 //declaring image constants
 //export const bird1_IMG = getImage("./images/bird1.png");

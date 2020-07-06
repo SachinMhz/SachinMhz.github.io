@@ -5,10 +5,8 @@ export function randomInt(min, max) {
 
 //return random color value
 export function getRandomColor() {
-  let red = randomInt(0, 240);
-  let green = randomInt(0, 240);
-  let blue = randomInt(0, 240);
-  return `rgba(${red}, ${green}, ${blue}, 1)`;
+  let candiesColor = ["red", "blue", "green", "purple", "yellow", "orange"];
+  return candiesColor[randomInt(0, candiesColor.length)];
 }
 
 //draw an image to context
@@ -19,55 +17,50 @@ export function drawImageContext(ctx, img, x, y, width, height) {
   ctx.closePath();
 }
 
-let candiesColor = ["red", "blue", "green", "purple", "yellow", "orange"];
 //draw rect to the context
-export function drawRectContext(ctx, x, y, width, height) {
+export function drawRectContext(ctx, x, y, width, height, color) {
   ctx.beginPath();
   ctx.rect(x, y, width, height);
-  ctx.fillStyle = candiesColor[randomInt(0, candiesColor.length)];
+  ctx.fillStyle = color;
   ctx.fill();
   ctx.closePath();
 }
 
-// check collision between circle and rectangle
-//return true if the rectangle and bird are colliding
-export function isCollided(bird, rect) {
-  let birdX = bird.x + bird.width / 2;
-  let birdY = bird.y + bird.height / 2;
-  var distX = Math.abs(birdX - rect.x - rect.width / 2);
-  var distY = Math.abs(birdY - rect.y - rect.height / 2);
-
-  if (distX > rect.width / 2 + bird.radius) {
-    return false;
-  }
-  if (distY > rect.height / 2 + bird.radius) {
-    return false;
-  }
-
-  if (distX <= rect.width / 2) {
-    return true;
-  }
-  if (distY <= rect.height / 2) {
-    return true;
-  }
-
-  var dx = distX - rect.width / 2;
-  var dy = distY - rect.height / 2;
-  return dx * dx + dy * dy <= bird.radius * bird.radius;
+export function sortCandies(array) {
+  var result = array.sort(function (a, b) {
+    if (a.zIndex < b.zIndex) {
+      return -1;
+    }
+    if (a.zIndex > b.zIndex) {
+      return 1;
+    }
+    return 0;
+  });
+  return result;
 }
 
-// checks rectangular collision between two rectangular objects//
-export function isCollided2(bird, rect) {
+export function isDragLimit(mouse, candy) {
   if (
-    bird.x < rect.x + rect.width &&
-    bird.x + bird.width > rect.x &&
-    bird.y < rect.y + rect.height &&
-    bird.y + bird.height > rect.y
+    mouse.x > candy.realX - candy.width / 2 - 10 &&
+    mouse.x < candy.realX + candy.width * 1.5 + 10 &&
+    mouse.y > candy.realY - candy.height / 2 - 10 &&
+    mouse.y < candy.realY + candy.height * 1.5 + 10
   ) {
     return true;
-  } else {
-    return false;
   }
+  return false;
+}
+export function isPointInsideRect(point, rect) {
+  //console.log(point, rect.x, rect.y);
+  if (
+    point.x > rect.x &&
+    point.x < rect.x + rect.width &&
+    point.y > rect.y &&
+    point.y < rect.y + rect.height
+  ) {
+    return true;
+  }
+  return false;
 }
 
 // responsible to get Image from path
