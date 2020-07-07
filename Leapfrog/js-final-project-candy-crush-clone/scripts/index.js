@@ -9,9 +9,11 @@ import {
   swapArray,
 } from "./helperFunc.js";
 import { randomInt } from "./helperFunc.js";
+import Background from "./candyBG.js";
 
 var game = new Game();
 var map = [];
+var candyBackground = [];
 for (let i = 0; i < 10; i++) {
   let row = [];
   for (let j = 0; j < 10; j++) {
@@ -19,6 +21,7 @@ for (let i = 0; i < 10; i++) {
   }
   map.push(row);
 }
+
 function changeCandiesList() {
   game.candies = [];
   let id = 0;
@@ -54,9 +57,19 @@ function changeCandiesList() {
   }
 }
 changeCandiesList();
-
+function init() {
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      candyBackground.push(new Background(j, i, "bg1"));
+    }
+  }
+}
+init();
 function draw() {
   CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
+  candyBackground.forEach((bg) => {
+    bg.draw();
+  });
   checkThreeRow();
   checkThreeColumn();
   moveDown();
