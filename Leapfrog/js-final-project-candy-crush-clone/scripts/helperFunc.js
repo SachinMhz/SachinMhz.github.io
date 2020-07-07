@@ -40,6 +40,7 @@ export function sortCandies(array) {
 }
 
 export function isDragLimit(mouse, candy) {
+  //mouse inside the selected candy boundary
   if (
     mouse.x >= candy.realX &&
     mouse.x <= candy.realX + candy.width &&
@@ -47,28 +48,36 @@ export function isDragLimit(mouse, candy) {
     mouse.y <= candy.realY + candy.height
   ) {
     return "center";
-  } else if (
+  }
+  //mouse outside the self boundary to the right side
+  else if (
     mouse.x > candy.realX + candy.width &&
     mouse.x < candy.realX + candy.width * 2 &&
     mouse.y > candy.realY &&
     mouse.y < candy.realY + candy.height
   ) {
     return "right";
-  } else if (
+  }
+  //mouse outside the self boundary to the left side
+  else if (
     mouse.x < candy.realX &&
     mouse.x > candy.realX - candy.width &&
     mouse.y > candy.realY &&
     mouse.y < candy.realY + candy.height
   ) {
     return "left";
-  } else if (
+  }
+  //mouse outside the self boundary to the above
+  else if (
     mouse.x > candy.realX &&
     mouse.x < candy.realX + candy.width &&
     mouse.y > candy.realY - candy.height &&
     mouse.y < candy.realY
   ) {
     return "up";
-  } else if (
+  }
+  //mouse outside the self boundary to the below
+  else if (
     mouse.x > candy.realX &&
     mouse.x <= candy.realX + candy.width &&
     mouse.y > candy.realY + candy.height &&
@@ -80,7 +89,7 @@ export function isDragLimit(mouse, candy) {
 }
 
 export function isPointInsideRect(point, rect) {
-  //console.log(point, rect.x, rect.y);
+  //mouse position inside the selected candy
   if (
     point.x > rect.x &&
     point.x < rect.x + rect.width &&
@@ -107,6 +116,7 @@ export function swapArray(array, idx, idx2) {
 
   [array[idx].id, array[idx2].id] = [array[idx2].id, array[idx].id];
 
+  //swapping whole array
   [array[idx], array[idx2]] = [array[idx2], array[idx]];
 }
 
