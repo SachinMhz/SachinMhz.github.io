@@ -41,15 +41,44 @@ export function sortCandies(array) {
 
 export function isDragLimit(mouse, candy) {
   if (
-    mouse.x > candy.realX - candy.width / 2 - 10 &&
-    mouse.x < candy.realX + candy.width * 1.5 + 10 &&
-    mouse.y > candy.realY - candy.height / 2 - 10 &&
-    mouse.y < candy.realY + candy.height * 1.5 + 10
+    mouse.x >= candy.realX &&
+    mouse.x <= candy.realX + candy.width &&
+    mouse.y >= candy.realY &&
+    mouse.y <= candy.realY + candy.height
   ) {
-    return true;
+    return "center";
+  } else if (
+    mouse.x > candy.realX + candy.width &&
+    mouse.x < candy.realX + candy.width * 2 &&
+    mouse.y > candy.realY &&
+    mouse.y < candy.realY + candy.height
+  ) {
+    return "right";
+  } else if (
+    mouse.x < candy.realX &&
+    mouse.x > candy.realX - candy.width &&
+    mouse.y > candy.realY &&
+    mouse.y < candy.realY + candy.height
+  ) {
+    return "left";
+  } else if (
+    mouse.x > candy.realX &&
+    mouse.x < candy.realX + candy.width &&
+    mouse.y > candy.realY - candy.height &&
+    mouse.y < candy.realY
+  ) {
+    return "up";
+  } else if (
+    mouse.x > candy.realX &&
+    mouse.x <= candy.realX + candy.width &&
+    mouse.y > candy.realY + candy.height &&
+    mouse.y < candy.realY + candy.height * 2
+  ) {
+    return "down";
   }
   return false;
 }
+
 export function isPointInsideRect(point, rect) {
   //console.log(point, rect.x, rect.y);
   if (
@@ -61,6 +90,24 @@ export function isPointInsideRect(point, rect) {
     return true;
   }
   return false;
+}
+
+export function swapArray(array, idx, idx2) {
+  array[idx].dragDirection = "center";
+  // swapping two values
+  [array[idx].realX, array[idx2].realX] = [array[idx2].realX, array[idx].realX];
+
+  array[idx2].x = array[idx].realX;
+  array[idx].x = array[idx2].realX;
+
+  [array[idx].realY, array[idx2].realY] = [array[idx2].realY, array[idx].realY];
+
+  array[idx2].y = array[idx].realY;
+  array[idx].y = array[idx2].realY;
+
+  [array[idx].id, array[idx2].id] = [array[idx2].id, array[idx].id];
+
+  [array[idx], array[idx2]] = [array[idx2], array[idx]];
 }
 
 // responsible to get Image from path

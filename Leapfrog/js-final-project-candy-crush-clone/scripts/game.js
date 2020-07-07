@@ -5,3 +5,5 @@ export default function Game() {
   this.candies = [];
   this.isDragging = false;
 }
+
+
