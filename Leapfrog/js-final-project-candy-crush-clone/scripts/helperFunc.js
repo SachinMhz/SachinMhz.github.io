@@ -101,23 +101,10 @@ export function isPointInsideRect(point, rect) {
   return false;
 }
 
-export function swapArray(array, idx, idx2) {
-  array[idx].dragDirection = "center";
-  // swapping two values
-  [array[idx].realX, array[idx2].realX] = [array[idx2].realX, array[idx].realX];
-
-  array[idx2].x = array[idx].realX;
-  array[idx].x = array[idx2].realX;
-
-  [array[idx].realY, array[idx2].realY] = [array[idx2].realY, array[idx].realY];
-
-  array[idx2].y = array[idx].realY;
-  array[idx].y = array[idx2].realY;
-
-  [array[idx].id, array[idx2].id] = [array[idx2].id, array[idx].id];
-
-  //swapping whole array
-  [array[idx], array[idx2]] = [array[idx2], array[idx]];
+export function swapArray(array, row1, col1, row2, col2) {
+  let temp = array[row1][col1];
+  array[row1][col1] = array[row2][col2];
+  array[row2][col2] = temp;
 }
 
 // responsible to get Image from path
