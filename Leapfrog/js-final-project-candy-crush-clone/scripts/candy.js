@@ -9,6 +9,30 @@ import {
   YELLOW,
   ORANGE,
   PURPLE,
+  ORANGE_ROW,
+  ORANGE_COL,
+  RED_SELECTED,
+  RED_ROW,
+  RED_COL,
+  RED_PACKET,
+  BLUE_SELECTED,
+  BLUE_ROW,
+  BLUE_COL,
+  BLUE_PACKET,
+  GREEN_SELECTED,
+  GREEN_ROW,
+  GREEN_COL,
+  GREEN_PACKET,
+  YELLOW_SELECTED,
+  YELLOW_ROW,
+  YELLOW_COL,
+  YELLOW_PACKET,
+  PURPLE_SELECTED,
+  PURPLE_ROW,
+  PURPLE_COL,
+  PURPLE_PACKET,
+  ORANGE_SELECTED,
+  ORANGE_PACKET,
 } from "./constants.js";
 import {
   drawRectContext,
@@ -34,23 +58,259 @@ export default function Candy(game, x, y, color, id) {
 
   this.draw = () => {
     switch (this.color) {
-      case "red":
+      //for red candies
+      case "r":
         drawImageContext(CTX, RED, this.x, this.y, this.width, this.height);
         break;
-      case "blue":
+      case "rs":
+        drawImageContext(
+          CTX,
+          RED_SELECTED,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "rr":
+        drawImageContext(CTX, RED_ROW, this.x, this.y, this.width, this.height);
+        break;
+      case "rc":
+        drawImageContext(CTX, RED_COL, this.x, this.y, this.width, this.height);
+        break;
+      case "rp":
+        drawImageContext(
+          CTX,
+          RED_PACKET,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+
+      //for blue candies
+      case "b":
         drawImageContext(CTX, BLUE, this.x, this.y, this.width, this.height);
         break;
-      case "green":
+      case "bs":
+        drawImageContext(
+          CTX,
+          BLUE_SELECTED,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "br":
+        drawImageContext(
+          CTX,
+          BLUE_ROW,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "bc":
+        drawImageContext(
+          CTX,
+          BLUE_COL,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "bp":
+        drawImageContext(
+          CTX,
+          BLUE_PACKET,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+
+      //for green color
+      case "g":
         drawImageContext(CTX, GREEN, this.x, this.y, this.width, this.height);
         break;
-      case "yellow":
+      case "gs":
+        drawImageContext(
+          CTX,
+          GREEN_SELECTED,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "gr":
+        drawImageContext(
+          CTX,
+          GREEN_ROW,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "gc":
+        drawImageContext(
+          CTX,
+          GREEN_COL,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "gp":
+        drawImageContext(
+          CTX,
+          GREEN_PACKET,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+
+      //for yellow color
+      case "y":
         drawImageContext(CTX, YELLOW, this.x, this.y, this.width, this.height);
         break;
-      case "orange":
+      case "ys":
+        drawImageContext(
+          CTX,
+          YELLOW_SELECTED,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "yr":
+        drawImageContext(
+          CTX,
+          YELLOW_ROW,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "yc":
+        drawImageContext(
+          CTX,
+          YELLOW_COL,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "yp":
+        drawImageContext(
+          CTX,
+          YELLOW_PACKET,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+
+      //for orange
+      case "o":
         drawImageContext(CTX, ORANGE, this.x, this.y, this.width, this.height);
         break;
-      case "purple":
+      case "os":
+        drawImageContext(
+          CTX,
+          ORANGE_SELECTED,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "or":
+        drawImageContext(
+          CTX,
+          ORANGE_ROW,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "op":
+        drawImageContext(
+          CTX,
+          ORANGE_PACKET,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "oc":
+        drawImageContext(
+          CTX,
+          ORANGE_COL,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      //for purple color
+      case "p":
         drawImageContext(CTX, PURPLE, this.x, this.y, this.width, this.height);
+        break;
+      case "ps":
+        drawImageContext(
+          CTX,
+          PURPLE_SELECTED,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "pr":
+        drawImageContext(
+          CTX,
+          PURPLE_ROW,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "pc":
+        drawImageContext(
+          CTX,
+          PURPLE_COL,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+      case "pp":
+        drawImageContext(
+          CTX,
+          PURPLE_PACKET,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
         break;
       default:
         drawImageContext(CTX, PURPLE, this.x, this.y, this.width, this.height);
