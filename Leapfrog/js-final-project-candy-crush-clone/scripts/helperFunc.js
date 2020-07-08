@@ -5,7 +5,7 @@ export function randomInt(min, max) {
 
 //return random color value
 export function getRandomColor() {
-  let candiesColor = ["red", "blue", "green", "purple", "yellow", "orange"];
+  let candiesColor = ["r", "b", "g", "p", "y", "o"];
   return candiesColor[randomInt(0, candiesColor.length)];
 }
 

@@ -1,4 +1,4 @@
-import { swapArray, randomInt } from "./helperFunc.js";
+import { swapArray, randomInt, getRandomColor } from "./helperFunc.js";
 
 export default function Rules(game) {
   this.game = game;
@@ -6,13 +6,13 @@ export default function Rules(game) {
   this.checkThreeRow = () => {
     for (let i = 0; i < this.game.row; i++) {
       for (let j = 0; j < this.game.col - 2; j++) {
-        let rowOfThree = [j, j + 1, j + 2];
+        let checkIdx = [j, j + 1, j + 2];
         let value = this.game.board[i][j];
-        if (rowOfThree.every((index) => this.game.board[i][index] === value)) {
-          rowOfThree.forEach((index) => {
+        if (checkIdx.every((index) => this.game.board[i][index] === value)) {
+          checkIdx.forEach((index) => {
             this.game.board[i][index] = 0;
-            this.game.changeCandiesList();
           });
+          this.game.changeCandiesList();
         }
       }
     }
@@ -21,15 +21,13 @@ export default function Rules(game) {
   this.checkThreeColumn = () => {
     for (let i = 0; i < this.game.row - 2; i++) {
       for (let j = 0; j < this.game.col; j++) {
-        let columnOfThree = [i, i + 1, i + 2];
+        let checkIdx = [i, i + 1, i + 2];
         let value = this.game.board[i][j];
-        if (
-          columnOfThree.every((index) => this.game.board[index][j] === value)
-        ) {
-          columnOfThree.forEach((index) => {
+        if (checkIdx.every((index) => this.game.board[index][j] === value)) {
+          checkIdx.forEach((index) => {
             this.game.board[index][j] = 0;
-            this.game.changeCandiesList();
           });
+          this.game.changeCandiesList();
         }
       }
     }
@@ -38,13 +36,32 @@ export default function Rules(game) {
   this.checkFourRow = () => {
     for (let i = 0; i < this.game.row; i++) {
       for (let j = 0; j < this.game.col - 3; j++) {
-        let rowOfThree = [j, j + 1, j + 2, j + 3];
+        let checkIdx = [j, j + 1, j + 2, j + 3];
         let value = this.game.board[i][j];
-        if (rowOfThree.every((index) => this.game.board[i][index] === value)) {
-          rowOfThree.forEach((index) => {
+
+        let dragRow = this.game.draggedCandy.row;
+        let dragCol = this.game.draggedCandy.col;
+        let replRow = this.game.replacedCandy.row;
+        let replCol = this.game.replacedCandy.col;
+
+        let isReasonDrag = false;
+        if (checkIdx.every((index) => this.game.board[i][index] === value)) {
+          checkIdx.forEach((index) => {
             this.game.board[i][index] = 0;
-            this.game.changeCandiesList();
+            if (dragRow === i && dragCol === index) {
+              isReasonDrag = true;
+              this.game.board[dragRow][dragCol] =
+                game.candies[dragRow][dragCol].color + "c";
+            }
+            if (replRow === i && replCol === index) {
+              isReasonDrag = true;
+              this.game.board[replRow][replCol] =
+                game.candies[replRow][replCol].color + "c";
+            }
           });
+          if (!isReasonDrag)
+            this.game.board[i][j] = game.candies[i][j].color + "c";
+          this.game.changeCandiesList();
         }
       }
     }
@@ -53,15 +70,32 @@ export default function Rules(game) {
   this.checkFourColumn = () => {
     for (let i = 0; i < this.game.row - 3; i++) {
       for (let j = 0; j < this.game.col; j++) {
-        let columnOfThree = [i, i + 1, i + 2, i + 3];
+        let checkIdx = [i, i + 1, i + 2, i + 3];
         let value = this.game.board[i][j];
-        if (
-          columnOfThree.every((index) => this.game.board[index][j] === value)
-        ) {
-          columnOfThree.forEach((index) => {
+
+        let dragRow = this.game.draggedCandy.row;
+        let dragCol = this.game.draggedCandy.col;
+        let replRow = this.game.replacedCandy.row;
+        let replCol = this.game.replacedCandy.col;
+
+        let isReasonDrag = false;
+        if (checkIdx.every((index) => this.game.board[index][j] === value)) {
+          checkIdx.forEach((index) => {
             this.game.board[index][j] = 0;
-            this.game.changeCandiesList();
+            if (dragRow === index && dragCol === j) {
+              isReasonDrag = true;
+              this.game.board[dragRow][dragCol] =
+                game.candies[dragRow][dragCol].color + "r";
+            }
+            if (replRow === index && replCol === j) {
+              isReasonDrag = true;
+              this.game.board[replRow][replCol] =
+                game.candies[replRow][replCol].color + "r";
+            }
           });
+          if (!isReasonDrag)
+            this.game.board[i][j] = game.candies[i][j].color + "r";
+          this.game.changeCandiesList();
         }
       }
     }
@@ -75,7 +109,7 @@ export default function Rules(game) {
           this.game.changeCandiesList();
         }
         if (game.board[0][col] === 0) {
-          this.game.board[row][col] = randomInt(1, 6);
+          this.game.board[row][col] = getRandomColor();
           this.game.changeCandiesList();
         }
       }

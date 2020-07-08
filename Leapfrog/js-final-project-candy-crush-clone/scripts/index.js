@@ -1,5 +1,10 @@
 import { CANVAS, CTX } from "./constants.js";
-import { isPointInsideRect, isDragLimit, swapArray } from "./helperFunc.js";
+import {
+  isPointInsideRect,
+  isDragLimit,
+  swapArray,
+  sortCandies,
+} from "./helperFunc.js";
 import Game from "./game.js";
 import Rules from "./rules.js";
 
@@ -15,6 +20,7 @@ init();
 
 function draw() {
   CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
+  game.candies = sortCandies(game.candies);
   game.candyBackground.forEach((bg) => {
     bg.draw();
   });
@@ -41,6 +47,9 @@ CANVAS.addEventListener("mousedown", (e) => {
     candyList.forEach((candy) => {
       if (isPointInsideRect(mouse, candy)) {
         candy.isDraggable = true;
+        candy.zIndex = 1;
+        game.draggedCandy.row = Math.floor(candy.id / game.col);
+        game.draggedCandy.col = candy.id % game.row;
       }
     });
   });
@@ -59,20 +68,28 @@ CANVAS.addEventListener("mousemove", (e) => {
         candy.y = mouse.y - candy.height / 2;
 
         let direction = isDragLimit(mouse, candy);
-        let row = Math.floor(candy.id / 10);
-        let col = candy.id % 10;
+        let row = Math.floor(candy.id / game.row);
+        let col = candy.id % game.col;
 
         if (direction === "right") {
           swapArray(game.board, row, col, row, col + 1);
+          game.replacedCandy.row = row;
+          game.replacedCandy.col = col + 1;
           game.changeCandiesList();
         } else if (direction === "left") {
           swapArray(game.board, row, col, row, col - 1);
+          game.replacedCandy.row = row;
+          game.replacedCandy.col = col - 1;
           game.changeCandiesList();
         } else if (direction === "up") {
           swapArray(game.board, row, col, row - 1, col);
+          game.replacedCandy.row = row - 1;
+          game.replacedCandy.col = col;
           game.changeCandiesList();
         } else if (direction === "down") {
           swapArray(game.board, row, col, row + 1, col);
+          game.replacedCandy.row = row + 1;
+          game.replacedCandy.col = col;
           game.changeCandiesList();
         }
       } else {
@@ -91,6 +108,7 @@ CANVAS.addEventListener("mouseup", (e) => {
   game.candies.forEach((candyList) => {
     candyList.forEach((candy) => {
       candy.isDraggable = false;
+      candy.zIndex = 0;
     });
   });
 });
