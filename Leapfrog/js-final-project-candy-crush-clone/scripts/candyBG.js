@@ -17,7 +17,6 @@ export default function Background(x, y, bg) {
   this.bg = bg;
 
   this.draw = () => {
-    console.log("draw");
     switch (this.bg) {
       case "bg1":
         drawImageContext(CTX, BG_1, this.x, this.y, this.width, this.height);
