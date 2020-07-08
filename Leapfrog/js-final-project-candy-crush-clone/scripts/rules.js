@@ -101,6 +101,68 @@ export default function Rules(game) {
     }
   };
 
+  this.checkFiveRow = () => {
+    for (let i = 0; i < this.game.row; i++) {
+      for (let j = 0; j < this.game.col - 4; j++) {
+        let checkIdx = [j, j + 1, j + 2, j + 3, j + 4];
+        let value = this.game.board[i][j];
+
+        let dragRow = this.game.draggedCandy.row;
+        let dragCol = this.game.draggedCandy.col;
+        let replRow = this.game.replacedCandy.row;
+        let replCol = this.game.replacedCandy.col;
+
+        let isReasonDrag = false;
+        if (checkIdx.every((index) => this.game.board[i][index] === value)) {
+          checkIdx.forEach((index) => {
+            this.game.board[i][index] = 0;
+            if (dragRow === i && dragCol === index) {
+              isReasonDrag = true;
+              this.game.board[dragRow][dragCol] = "cb";
+            }
+            if (replRow === i && replCol === index) {
+              isReasonDrag = true;
+              this.game.board[replRow][replCol] = "cb";
+            }
+          });
+          if (!isReasonDrag) this.game.board[i][j] = "cb";
+          this.game.changeCandiesList();
+        }
+      }
+    }
+  };
+
+  this.checkFiveColumn = () => {
+    for (let i = 0; i < this.game.row - 4; i++) {
+      for (let j = 0; j < this.game.col; j++) {
+        let checkIdx = [i, i + 1, i + 2, i + 3, i + 4];
+        let value = this.game.board[i][j];
+
+        let dragRow = this.game.draggedCandy.row;
+        let dragCol = this.game.draggedCandy.col;
+        let replRow = this.game.replacedCandy.row;
+        let replCol = this.game.replacedCandy.col;
+
+        let isReasonDrag = false;
+        if (checkIdx.every((index) => this.game.board[index][j] === value)) {
+          checkIdx.forEach((index) => {
+            this.game.board[index][j] = 0;
+            if (dragRow === index && dragCol === j) {
+              isReasonDrag = true;
+              this.game.board[dragRow][dragCol] = "cb";
+            }
+            if (replRow === index && replCol === j) {
+              isReasonDrag = true;
+              this.game.board[replRow][replCol] = "cb";
+            }
+          });
+          if (!isReasonDrag) this.game.board[i][j] = "cb";
+          this.game.changeCandiesList();
+        }
+      }
+    }
+  };
+
   this.moveDown = () => {
     for (let row = this.game.row - 2; row >= 0; row--) {
       for (let col = this.game.col; col >= 0; col--) {

@@ -33,6 +33,7 @@ import {
   PURPLE_PACKET,
   ORANGE_SELECTED,
   ORANGE_PACKET,
+  COLOR_BOMB,
 } from "./constants.js";
 import {
   drawRectContext,
@@ -306,6 +307,18 @@ export default function Candy(game, x, y, color, id) {
         drawImageContext(
           CTX,
           PURPLE_PACKET,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
+
+      //color bomb
+      case "cb":
+        drawImageContext(
+          CTX,
+          COLOR_BOMB,
           this.x,
           this.y,
           this.width,

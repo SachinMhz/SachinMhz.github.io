@@ -24,6 +24,8 @@ function draw() {
   game.candyBackground.forEach((bg) => {
     bg.draw();
   });
+  rules.checkFiveRow();
+  rules.checkFiveColumn();
   rules.checkFourRow();
   rules.checkFourColumn();
   rules.checkThreeRow();
