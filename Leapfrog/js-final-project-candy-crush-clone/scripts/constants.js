@@ -10,6 +10,7 @@ CANVAS.width = 600;
 export const CTX = CANVAS.getContext("2d");
 export const CANDY_WIDTH = 60;
 export const CANDY_HEIGHT = 60;
+export const CANDY_POINT = 10;
 
 //declaring image constants
 export const BLUE = getImage("./images/blue-candy.png");
@@ -48,9 +49,12 @@ export const ORANGE_COL = getImage("./images/orange-col.png");
 export const ORANGE_PACKET = getImage("./images/orange-packet.png");
 export const ORANGE_SELECTED = getImage("./images/orange-selected.png");
 
+export const NO_CANDY = getImage("./images/noBG.png");
+
 export const COLOR_BOMB = getImage("./images/color-bomb.png");
 
 export const BG_1 = getImage("./images/bg1.png");
+export const BG_SELECTED = getImage("./images/bg1-selected.png");
 export const BG_2 = getImage("./images/bg2.png");
 export const BG_3 = getImage("./images/bg3.png");
 export const BG_4 = getImage("./images/bg4.png");

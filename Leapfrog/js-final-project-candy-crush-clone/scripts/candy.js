@@ -34,11 +34,9 @@ import {
   ORANGE_SELECTED,
   ORANGE_PACKET,
   COLOR_BOMB,
+  NO_CANDY,
 } from "./constants.js";
 import {
-  drawRectContext,
-  getRandomColor,
-  swapArray,
   drawImageContext,
 } from "./helperFunc.js";
 
@@ -56,6 +54,7 @@ export default function Candy(game, x, y, color, id) {
   this.zIndex = 0;
   this.dragDirection = "center";
   this.moveAboveCandy = false;
+  this.animationTime = CANDY_HEIGHT;
 
   this.draw = () => {
     switch (this.color) {
@@ -326,7 +325,14 @@ export default function Candy(game, x, y, color, id) {
         );
         break;
       default:
-        drawImageContext(CTX, PURPLE, this.x, this.y, this.width, this.height);
+        drawImageContext(
+          CTX,
+          NO_CANDY,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
     }
     //drawRectContext(CTX, this.x, this.y, this.width, this.height, this.color);
   };

@@ -6,6 +6,7 @@ import {
   BG_2,
   BG_3,
   BG_4,
+  BG_SELECTED,
 } from "./constants.js";
 import { drawImageContext } from "./helperFunc.js";
 
@@ -21,6 +22,16 @@ export default function Background(x, y, bg) {
       case "bg1":
         drawImageContext(CTX, BG_1, this.x, this.y, this.width, this.height);
         break;
+      case "bg1-selected":
+        drawImageContext(
+          CTX,
+          BG_SELECTED,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+        break;
       case "bg2":
         drawImageContext(CTX, BG_2, this.x, this.y, this.width, this.height);
         break;
@@ -31,7 +42,7 @@ export default function Background(x, y, bg) {
         drawImageContext(CTX, BG_4, this.x, this.y, this.width, this.height);
         break;
       default:
-        drawImageContext(CTX, BG1, this.x, this.y, this.width, this.height);
+        drawImageContext(CTX, BG2, this.x, this.y, this.width, this.height);
     }
     //drawRectContext(CTX, this.x, this.y, this.width, this.height, this.color);
   };
