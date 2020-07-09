@@ -88,6 +88,19 @@ export function isDragLimit(mouse, candy) {
   return false;
 }
 
+export function isMouseInside(mouse, rect) {
+  //mouse inside the selected rect boundary
+  if (
+    mouse.x >= rect.x &&
+    mouse.x <= rect.x + rect.width &&
+    mouse.y >= rect.y &&
+    mouse.y <= rect.y + rect.height
+  ) {
+    return true;
+  }
+  return false;
+}
+
 export function isPointInsideRect(point, rect) {
   //mouse position inside the selected candy
   if (
