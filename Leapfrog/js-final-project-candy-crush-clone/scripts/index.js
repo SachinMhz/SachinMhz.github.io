@@ -27,26 +27,19 @@ function draw() {
   game.candyBackground.forEach((bg) => {
     bg.draw();
   });
-  // if (!game.isAnimating) {
-  //   rules.checkThreeRow();
-  //   rules.checkThreeColumn();
-  // }
+  rules.checkZero();
   rules.checkFiveRow();
-  rules.checkFiveColumn();
   rules.checkFourRow();
-  rules.checkFourColumn();
+  //rules.checkFourColumn();
   rules.checkThreeRow();
   rules.checkThreeColumn();
-  rules.moveDown();
 
-  // game.replaceZero();
-  // if (game.isAnimating) {
-  //   game.frame += 1;
-  //   //if (game.frame === 59) game.checkCondition = true;
-  //   game.animatingMoveDown();
-  //   //game.swapAnimation();
-  // }
-  // game.testingMoveDown();
+  game.replaceZero();
+  if (game.isAnimating) {
+    game.frame += 1;
+    game.animatingMoveDown();
+    //game.swapAnimation();
+  }
 
   score.draw();
   game.candies.forEach((candiesRow) => {
@@ -59,7 +52,8 @@ function draw() {
 draw();
 
 CANVAS.addEventListener("mousedown", (e) => {
-  console.log(game.board);
+  console.log("board", game.board);
+  console.log("candies", game.draggedCandy, game.replacedCandy);
   var mouse = {
     x: e.offsetX,
     y: e.offsetY,
@@ -70,7 +64,7 @@ CANVAS.addEventListener("mousedown", (e) => {
       if (isPointInsideRect(mouse, candy)) {
         candy.isDraggable = true;
         candy.zIndex = 1;
-        game.draggedCandy.row = Math.floor(candy.id / game.col);
+        game.draggedCandy.row = Math.floor(candy.id / game.col) + game.row;
         game.draggedCandy.col = candy.id % game.row;
       }
     });
@@ -94,7 +88,7 @@ CANVAS.addEventListener("mousemove", (e) => {
         candy.y = mouse.y - candy.height / 2;
 
         let direction = isDragLimit(mouse, candy);
-        let row = Math.floor(candy.id / game.row);
+        let row = Math.floor(candy.id / game.row) + game.row;
         let col = candy.id % game.col;
         if (direction !== "center") {
           if (direction === "right") {
