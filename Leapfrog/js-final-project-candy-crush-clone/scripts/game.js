@@ -15,6 +15,7 @@ export default function Game() {
   this.isAnimating = false;
   this.animationTime = CANDY_HEIGHT;
   this.frame = 0;
+  this.swapFrame = 0;
   this.checkCondition = true;
   this.shouldSwap = false;
 
@@ -77,9 +78,9 @@ export default function Game() {
       for (let col = this.col; col >= 0; col--) {
         if (this.board[row + 1][col] === 0) {
           for (let dropRow = row; dropRow >= 0; dropRow--) {
-            if (this.frame <= 60 && this.isAnimating) {
-              this.candies[dropRow][col].y += 1;
-              this.candies[dropRow][col].realY += 1;
+            if (this.frame <= 30 && this.isAnimating) {
+              this.candies[dropRow][col].y += 2;
+              this.candies[dropRow][col].realY += 2;
             } else {
               let zeroCount = 0;
               for (let k = dropRow; k < this.row * 2; k++) {
@@ -120,46 +121,51 @@ export default function Game() {
   };
 
   this.swapAnimation = () => {
+    let speed = 2;
+    let dRow = this.draggedCandy.row;
+    let dCol = this.draggedCandy.col;
+    let rRow = this.replacedCandy.row;
+    let rCol = this.replacedCandy.col;
+
     if (this.shouldSwap) {
-      if (this.frame < 60) {
+      if (this.swapFrame <= 30) {
         if (this.swapDirection === "right") {
-          this.candies[this.draggedCandy.row][this.draggedCandy.col].x += 1;
-          this.candies[this.draggedCandy.row][this.draggedCandy.col].realX += 1;
+          this.candies[dRow][dCol].x += speed;
+          this.candies[dRow][dCol].realX += speed;
 
-          this.candies[this.replacedCandy.row][this.replacedCandy.col].x -= 1;
-          this.candies[this.replacedCandy.row][
-            this.replacedCandy.col
-          ].realX -= 1;
+          this.candies[rRow][rCol].x -= speed;
+          this.candies[rRow][rCol].realX -= speed;
         } else if (this.swapDirection === "left") {
-          this.candies[this.draggedCandy.row][this.draggedCandy.col].x -= 1;
-          this.candies[this.draggedCandy.row][this.draggedCandy.col].realX -= 1;
+          this.candies[dRow][dCol].x -= speed;
+          this.candies[dRow][dCol].realX -= speed;
 
-          this.candies[this.replacedCandy.row][this.replacedCandy.col].x += 1;
-          this.candies[this.replacedCandy.row][
-            this.replacedCandy.col
-          ].realX += 1;
+          this.candies[rRow][rCol].x += speed;
+          this.candies[rRow][rCol].realX += speed;
         } else if (this.swapDirection === "down") {
-          this.candies[this.draggedCandy.row][this.draggedCandy.col].y += 1;
-          this.candies[this.draggedCandy.row][this.draggedCandy.col].realY += 1;
+          this.candies[dRow][dCol].y += speed;
+          this.candies[dRow][dCol].realY += speed;
 
-          this.candies[this.replacedCandy.row][this.replacedCandy.col].y -= 1;
-          this.candies[this.replacedCandy.row][
-            this.replacedCandy.col
-          ].realY -= 1;
+          this.candies[rRow][rCol].y -= speed;
+          this.candies[rRow][rCol].realY -= speed;
         } else if (this.swapDirection === "up") {
-          this.candies[this.draggedCandy.row][this.draggedCandy.col].y -= 1;
-          this.candies[this.draggedCandy.row][this.draggedCandy.col].realY -= 1;
+          this.candies[dRow][dCol].y -= speed;
+          this.candies[dRow][dCol].realY -= speed;
 
-          this.candies[this.replacedCandy.row][this.replacedCandy.col].y += 1;
-          this.candies[this.replacedCandy.row][
-            this.replacedCandy.col
-          ].realY += 1;
+          this.candies[rRow][rCol].y += speed;
+          this.candies[rRow][rCol].realY += speed;
         }
       } else {
-        this.frame = 0;
-        this.isAnimating = false;
-        this.checkCondition = false;
+        this.isSwapping = false;
         this.shouldSwap = false;
+        this.swapFrame = 0;
+        swapArray(
+          this.board,
+          this.draggedCandy.row,
+          this.draggedCandy.col,
+          this.replacedCandy.row,
+          this.replacedCandy.col
+        );
+        this.changeCandiesList();
       }
     }
   };

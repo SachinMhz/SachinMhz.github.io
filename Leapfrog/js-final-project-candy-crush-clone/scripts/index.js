@@ -40,7 +40,10 @@ function draw() {
     game.animatingMoveDown();
     //game.swapAnimation();
   }
-
+  if (game.isSwapping) {
+    game.swapFrame += 1;
+    game.swapAnimation();
+  }
   score.draw();
   game.candies.forEach((candiesRow) => {
     candiesRow.forEach((candy) => {
@@ -52,8 +55,6 @@ function draw() {
 draw();
 
 CANVAS.addEventListener("mousedown", (e) => {
-  console.log("board", game.board);
-  console.log("candies", game.draggedCandy, game.replacedCandy);
   var mouse = {
     x: e.offsetX,
     y: e.offsetY,
@@ -83,7 +84,7 @@ CANVAS.addEventListener("mousemove", (e) => {
 
   game.candies.forEach((candyList) => {
     candyList.forEach((candy) => {
-      if (candy.isDraggable && isDragLimit(mouse, candy)) {
+      if (candy.isDraggable && isDragLimit(mouse, candy) && !game.isAnimating) {
         candy.x = mouse.x - candy.width / 2;
         candy.y = mouse.y - candy.height / 2;
 
@@ -92,22 +93,24 @@ CANVAS.addEventListener("mousemove", (e) => {
         let col = candy.id % game.col;
         if (direction !== "center") {
           if (direction === "right") {
-            swapArray(game.board, row, col, row, col + 1);
             game.replacedCandy.row = row;
             game.replacedCandy.col = col + 1;
+
+            //swapArray(game.board, row, col, row, col + 1);
+
             game.swapDirection = "right";
           } else if (direction === "left") {
-            swapArray(game.board, row, col, row, col - 1);
+            //swapArray(game.board, row, col, row, col - 1);
             game.replacedCandy.row = row;
             game.replacedCandy.col = col - 1;
             game.swapDirection = "left";
           } else if (direction === "up") {
-            swapArray(game.board, row, col, row - 1, col);
+            //swapArray(game.board, row, col, row - 1, col);
             game.replacedCandy.row = row - 1;
             game.replacedCandy.col = col;
             game.swapDirection = "up";
           } else if (direction === "down") {
-            swapArray(game.board, row, col, row + 1, col);
+            //swapArray(game.board, row, col, row + 1, col);
             game.replacedCandy.row = row + 1;
             game.replacedCandy.col = col;
             game.swapDirection = "down";
@@ -115,9 +118,11 @@ CANVAS.addEventListener("mousemove", (e) => {
           //if player swaps the candies :
           game.checkCondition = true;
           game.shouldSwap = true;
+          game.isSwapping = true;
           score.moves -= 1;
+          //game.startSwapAnimation();
           //game.frame = 0;
-          game.changeCandiesList();
+          //game.changeCandiesList();
         }
       } else {
         candy.x = candy.realX;
@@ -128,6 +133,9 @@ CANVAS.addEventListener("mousemove", (e) => {
 });
 
 CANVAS.addEventListener("mouseup", (e) => {
+  console.log("board", game.board);
+  console.log("candies", game.draggedCandy, game.replacedCandy);
+  console.log(game.draggedCandy, game.replacedCandy);
   var mouse = {
     x: e.offsetX,
     y: e.offsetY,
