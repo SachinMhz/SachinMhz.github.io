@@ -1,11 +1,5 @@
 import { CANVAS, CTX } from "./constants.js";
-import {
-  isPointInsideRect,
-  isDragLimit,
-  swapArray,
-  sortCandies,
-  isMouseInside,
-} from "./helperFunc.js";
+import { isPointInsideRect, isDragLimit, isMouseInside } from "./helperFunc.js";
 import Game from "./game.js";
 import Rules from "./rules.js";
 import Score from "./score.js";
@@ -29,8 +23,9 @@ function draw() {
   });
   rules.checkZero();
   rules.checkFiveRow();
+  rules.checkFiveColumn();
   rules.checkFourRow();
-  //rules.checkFourColumn();
+  rules.checkFourColumn();
   rules.checkThreeRow();
   rules.checkThreeColumn();
 
@@ -38,7 +33,6 @@ function draw() {
   if (game.isAnimating) {
     game.frame += 1;
     game.animatingMoveDown();
-    //game.swapAnimation();
   }
   if (game.isSwapping) {
     game.swapFrame += 1;
@@ -89,40 +83,34 @@ CANVAS.addEventListener("mousemove", (e) => {
         candy.y = mouse.y - candy.height / 2;
 
         let direction = isDragLimit(mouse, candy);
+
         let row = Math.floor(candy.id / game.row) + game.row;
         let col = candy.id % game.col;
         if (direction !== "center") {
           if (direction === "right") {
             game.replacedCandy.row = row;
             game.replacedCandy.col = col + 1;
-
-            //swapArray(game.board, row, col, row, col + 1);
-
             game.swapDirection = "right";
           } else if (direction === "left") {
-            //swapArray(game.board, row, col, row, col - 1);
             game.replacedCandy.row = row;
             game.replacedCandy.col = col - 1;
             game.swapDirection = "left";
           } else if (direction === "up") {
-            //swapArray(game.board, row, col, row - 1, col);
             game.replacedCandy.row = row - 1;
             game.replacedCandy.col = col;
             game.swapDirection = "up";
           } else if (direction === "down") {
-            //swapArray(game.board, row, col, row + 1, col);
             game.replacedCandy.row = row + 1;
             game.replacedCandy.col = col;
             game.swapDirection = "down";
           }
           //if player swaps the candies :
-          game.checkCondition = true;
-          game.shouldSwap = true;
-          game.isSwapping = true;
-          score.moves -= 1;
-          //game.startSwapAnimation();
-          //game.frame = 0;
-          //game.changeCandiesList();
+          candy.isDraggable = false;
+          if (rules.checkValidMove()) {
+            game.shouldSwap = true;
+            game.isSwapping = true;
+            score.moves -= 1;
+          }
         }
       } else {
         candy.x = candy.realX;
@@ -133,14 +121,13 @@ CANVAS.addEventListener("mousemove", (e) => {
 });
 
 CANVAS.addEventListener("mouseup", (e) => {
-  console.log("board", game.board);
-  console.log("candies", game.draggedCandy, game.replacedCandy);
-  console.log(game.draggedCandy, game.replacedCandy);
+  console.log("board", game.board.slice(game.row, game.row * 2));
+  //console.log("candies", game.draggedCandy, game.replacedCandy);
+
   var mouse = {
     x: e.offsetX,
     y: e.offsetY,
   };
-  //rules.checkThreeRow();
   game.candies.forEach((candyList) => {
     candyList.forEach((candy) => {
       candy.isDraggable = false;
