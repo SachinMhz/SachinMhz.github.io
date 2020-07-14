@@ -104,31 +104,17 @@ export default function Game() {
         }
       }
     }
-
-    // //checking the column we are in
-    // for (let row = this.row - 2; row >= 0; row--) {
-    //   for (let col = this.col; col >= 0; col--) {
-    //     if (this.board[row + 1][col] === "nothing")
-    //       for (let shift = 0; shift < this.row; shift++) {
-    //         let checkRow = row - shift;
-    //         if (checkRow >= 0 && this.board[checkRow][col] !== "nothing") {
-    //           swapArray(this.board, row + 1, col, row - shift, col);
-    //           break;
-    //         }
-    //       }
-    //   }
-    // }
   };
 
   this.swapAnimation = () => {
-    let speed = 2;
+    let speed = 3;
     let dRow = this.draggedCandy.row;
     let dCol = this.draggedCandy.col;
     let rRow = this.replacedCandy.row;
     let rCol = this.replacedCandy.col;
 
     if (this.shouldSwap) {
-      if (this.swapFrame <= 30) {
+      if (this.swapFrame <= 20) {
         if (this.swapDirection === "right") {
           this.candies[dRow][dCol].x += speed;
           this.candies[dRow][dCol].realX += speed;
