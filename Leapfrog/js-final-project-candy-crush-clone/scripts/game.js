@@ -17,7 +17,7 @@ export default function Game() {
   this.frame = 0;
   this.swapFrame = 0;
   this.checkCondition = true;
-  this.shouldSwap = false;
+  this.isSwapping = false;
 
   this.createBoard = () => {
     for (let i = 0; i < this.row * 2; i++) {
@@ -113,7 +113,7 @@ export default function Game() {
     let rRow = this.replacedCandy.row;
     let rCol = this.replacedCandy.col;
 
-    if (this.shouldSwap) {
+    if (this.isSwapping) {
       if (this.swapFrame <= 20) {
         if (this.swapDirection === "right") {
           this.candies[dRow][dCol].x += speed;
@@ -142,7 +142,6 @@ export default function Game() {
         }
       } else {
         this.isSwapping = false;
-        this.shouldSwap = false;
         this.swapFrame = 0;
         swapArray(
           this.board,
@@ -151,6 +150,7 @@ export default function Game() {
           this.replacedCandy.row,
           this.replacedCandy.col
         );
+
         this.changeCandiesList();
       }
     }

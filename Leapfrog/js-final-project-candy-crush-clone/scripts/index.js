@@ -1,14 +1,18 @@
 import { CANVAS, CTX } from "./constants.js";
 import { isPointInsideRect, isDragLimit, isMouseInside } from "./helperFunc.js";
 import Game from "./game.js";
-import Rules from "./rules.js";
+import Power from "./power.js";
 import Score from "./score.js";
+import Rules from "./rules.js";
+import { Audio } from "./audio.js";
 
 var game = new Game();
 var score = new Score(game);
-var rules = new Rules(game, score);
+var power = new Power(game);
+var rules = new Rules(game, power, score);
 
 function init() {
+  Audio.level_bg();
   game.createBoard();
   game.changeCandiesList();
   game.createCandiesBackground();
@@ -22,8 +26,10 @@ function draw() {
     bg.draw();
   });
   rules.checkZero();
+
   rules.checkFiveRow();
   rules.checkFiveColumn();
+  rules.checkPacket();
   rules.checkFourRow();
   rules.checkFourColumn();
   rules.checkThreeRow();
@@ -106,11 +112,15 @@ CANVAS.addEventListener("mousemove", (e) => {
           }
           //if player swaps the candies :
           candy.isDraggable = false;
-          if (rules.checkValidMove()) {
-            game.shouldSwap = true;
-            game.isSwapping = true;
-            score.moves -= 1;
-          }
+          //if (rules.checkValidMove()) {
+          game.isSwapping = true;
+          Audio.swap();
+          power.colorBombPower();
+          power.twoStripedCandies();
+          power.stripAndPacket();
+          power.packetAndPacket();
+          score.moves -= 1;
+          //}
         }
       } else {
         candy.x = candy.realX;
