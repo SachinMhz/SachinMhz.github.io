@@ -11,6 +11,7 @@ export const CTX = CANVAS.getContext("2d");
 export const CANDY_WIDTH = 60;
 export const CANDY_HEIGHT = 60;
 export const CANDY_POINT = 10;
+export const CANDY_COLOR = ["r", "b", "g", "p", "y", "o"];
 
 //declaring image constants
 export const BLUE = getImage("./images/blue-candy.png");
@@ -59,5 +60,3 @@ export const BG_2 = getImage("./images/bg2.png");
 export const BG_3 = getImage("./images/bg3.png");
 export const BG_4 = getImage("./images/bg4.png");
 
-//get audio files
-// export const pointAudio = getAudio("./audios/point.mp3");
