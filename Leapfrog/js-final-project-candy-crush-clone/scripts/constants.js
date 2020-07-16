@@ -11,7 +11,7 @@ export const CTX = CANVAS.getContext("2d");
 export const CANDY_WIDTH = 60;
 export const CANDY_HEIGHT = 60;
 export const CANDY_POINT = 10;
-export const CANDY_COLOR = ["r", "b", "g", "p", "y", "o"];
+export const CANDY_COLOR = ["r", "b", "g", "p", "y","o"];
 
 //declaring image constants
 export const BLUE = getImage("./images/blue-candy.png");

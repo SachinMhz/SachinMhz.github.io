@@ -4,7 +4,7 @@ import Game from "./game.js";
 import Power from "./power.js";
 import Score from "./score.js";
 import Rules from "./rules.js";
-import { Audio } from "./audio.js";
+import { audio } from "./audio.js";
 
 var game = new Game();
 var score = new Score(game);
@@ -12,7 +12,7 @@ var power = new Power(game);
 var rules = new Rules(game, power, score);
 
 function init() {
-  Audio.level_bg();
+  audio.level_bg();
   game.createBoard();
   game.changeCandiesList();
   game.createCandiesBackground();
@@ -26,7 +26,7 @@ function draw() {
     bg.draw();
   });
   rules.checkZero();
-
+  //console.log(game.isAnimating, game.frame);
   rules.checkFiveRow();
   rules.checkFiveColumn();
   rules.checkPacket();
@@ -34,17 +34,35 @@ function draw() {
   rules.checkFourColumn();
   rules.checkThreeRow();
   rules.checkThreeColumn();
+  if (game.isDragged) {
+    power.colorBombPower();
+    power.twoStripedCandies();
+    power.stripAndPacket();
+    power.packetAndPacket();
+    game.isDragged = false;
+  }
 
   game.replaceZero();
   if (game.isAnimating) {
     game.frame += 1;
     game.animatingMoveDown();
   }
+
   if (game.isSwapping) {
     game.swapFrame += 1;
     game.swapAnimation();
   }
+
+  if (!game.isAnimating && game.willExplodePacket) {
+    setTimeout(() => {
+      if (game.isAnimating === false) {
+        power.packetSecondExplosion()
+        game.willExplodePacket = false;
+      }
+    }, 100);
+  }
   score.draw();
+
   game.candies.forEach((candiesRow) => {
     candiesRow.forEach((candy) => {
       candy.draw();
@@ -64,9 +82,10 @@ CANVAS.addEventListener("mousedown", (e) => {
     candyList.forEach((candy) => {
       if (isPointInsideRect(mouse, candy)) {
         candy.isDraggable = true;
-        candy.zIndex = 1;
         game.draggedCandy.row = Math.floor(candy.id / game.col) + game.row;
         game.draggedCandy.col = candy.id % game.row;
+        game.draggedCandy.color =
+          game.board[game.draggedCandy.row][game.draggedCandy.col];
       }
     });
   });
@@ -96,31 +115,31 @@ CANVAS.addEventListener("mousemove", (e) => {
           if (direction === "right") {
             game.replacedCandy.row = row;
             game.replacedCandy.col = col + 1;
+            game.replacedCandy.color = game.board[row][col + 1];
             game.swapDirection = "right";
           } else if (direction === "left") {
             game.replacedCandy.row = row;
             game.replacedCandy.col = col - 1;
+            game.replacedCandy.color = game.board[row][col - 1];
             game.swapDirection = "left";
           } else if (direction === "up") {
             game.replacedCandy.row = row - 1;
             game.replacedCandy.col = col;
+            game.replacedCandy.color = game.board[row - 1][col];
             game.swapDirection = "up";
           } else if (direction === "down") {
             game.replacedCandy.row = row + 1;
             game.replacedCandy.col = col;
+            game.replacedCandy.color = game.board[row + 1][col];
             game.swapDirection = "down";
           }
           //if player swaps the candies :
           candy.isDraggable = false;
-          //if (rules.checkValidMove()) {
+          //  if (rules.checkValidMove()) {
           game.isSwapping = true;
-          Audio.swap();
-          power.colorBombPower();
-          power.twoStripedCandies();
-          power.stripAndPacket();
-          power.packetAndPacket();
+          audio.swap();
           score.moves -= 1;
-          //}
+          //  }
         }
       } else {
         candy.x = candy.realX;
@@ -132,7 +151,7 @@ CANVAS.addEventListener("mousemove", (e) => {
 
 CANVAS.addEventListener("mouseup", (e) => {
   console.log("board", game.board.slice(game.row, game.row * 2));
-  //console.log("candies", game.draggedCandy, game.replacedCandy);
+  console.log(game.isAnimating, game.frame);
 
   var mouse = {
     x: e.offsetX,

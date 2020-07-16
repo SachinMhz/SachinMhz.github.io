@@ -1,11 +1,6 @@
-import {
-  swapArray,
-  randomInt,
-  getRandomColor,
-  playAudio,
-} from "./helperFunc.js";
+import { swapArray, randomInt, getRandomColor } from "./helperFunc.js";
 import { CANDY_POINT } from "./constants.js";
-import {Audio} from "./audio.js";
+import { audio } from "./audio.js";
 
 export default function Rules(game, power, score) {
   this.game = game;
@@ -40,12 +35,11 @@ export default function Rules(game, power, score) {
         let value = game.board[i][j];
         if (value === 0) continue;
         if (checkIdx.every((index) => game.board[i][index][0] === value[0])) {
-          Audio.match();
+          audio.match();
           score.score += 3 * CANDY_POINT;
           checkIdx.forEach((index) => {
             //console.log(i,index)
             power.checkForPower(i, index);
-            game.board[i][index] = 0;
           });
         }
       }
@@ -59,11 +53,10 @@ export default function Rules(game, power, score) {
         let value = game.board[i][j];
         if (value === 0) continue;
         if (checkIdx.every((index) => game.board[index][j][0] === value[0])) {
-          Audio.match();
+          audio.match();
           score.score += 3 * CANDY_POINT;
           checkIdx.forEach((index) => {
-            if (game.board[index][j] !== 0) power.checkForPower(index, j);
-            game.board[index][j] = 0;
+            power.checkForPower(index, j);
           });
         }
       }
@@ -84,11 +77,10 @@ export default function Rules(game, power, score) {
 
         let isReasonDrag = false;
         if (checkIdx.every((index) => game.board[i][index][0] === value[0])) {
-          Audio.stripCreated()
+          audio.stripCreated();
           score.score += 4 * CANDY_POINT;
           checkIdx.forEach((index) => {
             power.checkForPower(i, index);
-            game.board[i][index] = 0;
             if (
               (dragRow === i && dragCol === index) ||
               (replRow === i && replCol === index)
@@ -129,11 +121,10 @@ export default function Rules(game, power, score) {
 
         let isReasonDrag = false;
         if (checkIdx.every((index) => game.board[index][j][0] === value[0])) {
-          Audio.stripCreated()
+          audio.stripCreated();
           score.score += 4 * CANDY_POINT;
           checkIdx.forEach((index) => {
             power.checkForPower(index, j);
-            game.board[index][j] = 0;
             if (
               (dragRow === index && dragCol === j) ||
               (replRow === index && replCol === j)
@@ -175,11 +166,10 @@ export default function Rules(game, power, score) {
 
         let isReasonDrag = false;
         if (checkIdx.every((index) => game.board[i][index][0] === value[0])) {
-          Audio.colorBombCreated()
+          audio.colorBombCreated();
           score.score += 5 * CANDY_POINT;
           checkIdx.forEach((index) => {
             power.checkForPower(i, index);
-            game.board[i][index] = 0;
             if (
               (dragRow === i && dragCol === index) ||
               (replRow === i && replCol === index)
@@ -212,11 +202,10 @@ export default function Rules(game, power, score) {
 
         let isReasonDrag = false;
         if (checkIdx.every((index) => game.board[index][j][0] === value[0])) {
-          Audio.colorBombCreated()
+          audio.colorBombCreated();
           score.score += 5 * CANDY_POINT;
           checkIdx.forEach((index) => {
             power.checkForPower(index, j);
-            game.board[index][j] = 0;
             if (
               (dragRow === index && dragCol === j) ||
               (replRow === index && replCol === j)
@@ -256,11 +245,9 @@ export default function Rules(game, power, score) {
             if (checkColIdx.every((idx) => board[rIdx][idx][0] === value[0])) {
               checkColIdx.forEach((idx) => {
                 power.checkForPower(rIdx, idx);
-                game.board[rIdx][idx] = 0;
               });
               checkRowIdx.forEach((idx) => {
                 power.checkForPower(idx, col);
-                game.board[idx][col] = 0;
               });
               if (
                 (dragRow === rIdx && dragCol === col) ||
@@ -269,12 +256,12 @@ export default function Rules(game, power, score) {
                 game.board[rIdx][col] = game.candies[rIdx][col].color[0] + "p";
                 game.candies[rIdx][col].color =
                   game.candies[rIdx][col].color[0] + "p";
-                  Audio.packetCreated()
+                audio.packetCreated();
               } else {
                 game.board[row][col] = game.candies[rIdx][col].color[0] + "p";
                 game.candies[row][col].color =
                   game.candies[rIdx][col].color[0] + "p";
-                  Audio.packetCreated()
+                audio.packetCreated();
               }
             }
           });
@@ -296,11 +283,9 @@ export default function Rules(game, power, score) {
             if (checkColIdx.every((idx) => board[rIdx][idx][0] === value[0])) {
               checkColIdx.forEach((idx) => {
                 power.checkForPower(rIdx, idx);
-                game.board[rIdx][idx] = 0;
               });
               checkRowIdx.forEach((idx) => {
                 power.checkForPower(idx, col);
-                game.board[idx][col] = 0;
               });
               if (
                 (dragRow === rIdx && dragCol === col) ||
@@ -309,12 +294,12 @@ export default function Rules(game, power, score) {
                 game.board[rIdx][col] = game.candies[rIdx][col].color[0] + "p";
                 game.candies[rIdx][col].color =
                   game.candies[rIdx][col].color[0] + "p";
-                  Audio.packetCreated()
+                audio.packetCreated();
               } else {
                 game.board[row][col] = game.candies[rIdx][col].color[0] + "p";
                 game.candies[row][col].color =
                   game.candies[rIdx][col].color[0] + "p";
-                  Audio.packetCreated()
+                audio.packetCreated();
               }
             }
           });
@@ -336,11 +321,9 @@ export default function Rules(game, power, score) {
             if (checkColIdx.every((idx) => board[rIdx][idx][0] === value[0])) {
               checkColIdx.forEach((idx) => {
                 power.checkForPower(rIdx, idx);
-                game.board[rIdx][idx] = 0;
               });
               checkRowIdx.forEach((idx) => {
                 power.checkForPower(idx, col);
-                game.board[idx][col] = 0;
               });
               if (
                 (dragRow === rIdx && dragCol === col) ||
@@ -349,12 +332,12 @@ export default function Rules(game, power, score) {
                 game.board[rIdx][col] = game.candies[rIdx][col].color[0] + "p";
                 game.candies[rIdx][col].color =
                   game.candies[rIdx][col].color[0] + "p";
-                  Audio.packetCreated()
+                audio.packetCreated();
               } else {
                 game.board[row][col] = game.candies[rIdx][col].color[0] + "p";
                 game.candies[row][col].color =
                   game.candies[rIdx][col].color[0] + "p";
-                  Audio.packetCreated()
+                audio.packetCreated();
               }
             }
           });
@@ -368,6 +351,8 @@ export default function Rules(game, power, score) {
     let dCol = game.draggedCandy.col;
     let rRow = game.replacedCandy.row;
     let rCol = game.replacedCandy.col;
+    let dCandy = game.draggedCandy.color;
+    let rCandy = game.replacedCandy.color;
 
     let isValid = false;
 
@@ -400,6 +385,30 @@ export default function Rules(game, power, score) {
         }
       }
     }
+
+    //checking for powers swaps
+    //two stripes
+    if (
+      (dCandy[1] == "r" || dCandy[1] == "c") &&
+      (rCandy[1] == "r" || rCandy[1] == "c")
+    ) {
+      isValid = true;
+    }
+
+    //strip and packet
+    else if (
+      ((dCandy[1] === "c" || dCandy[1] === "r") && rCandy[1] === "p") ||
+      ((rCandy[1] === "c" || rCandy[1] === "r") && dCandy[1] === "p")
+    ) {
+      isValid = true;
+    }
+
+    //packet and packet
+    else if (rCandy[1] === "p" && dCandy[1] === "p") isValid = true
+
+    //colorBomb
+    else if (rCandy === "cb" || dCandy === "cb") isValid = true;
+
     return isValid;
   };
 }

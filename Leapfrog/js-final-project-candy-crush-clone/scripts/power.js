@@ -1,27 +1,29 @@
 import { CANDY_POINT, CANDY_COLOR } from "./constants.js";
-import { Audio } from "./audio.js";
+import { audio } from "./audio.js";
 
 export default function Power(game) {
   this.game = game;
 
   this.checkForPower = (row, col) => {
-    if (game.board[row][col].length !== 2) return;
-
-    if (game.board[row][col][1] === "c") {
-      Audio.stripBlast();
+    if (game.board[row][col].length === 1) {
+      game.board[row][col] = 0;
+      return;
+    } else if (game.board[row][col][1] === "c") {
+      audio.stripBlast();
       this.destroyEntireCol(row, col);
-    }
-    if (game.board[row][col][1] === "r") {
-      Audio.stripBlast();
+    } else if (game.board[row][col][1] === "r") {
+      audio.stripBlast();
       this.destroyEntireRow(row, col);
-    }
-    if (game.board[row][col][1] === "p") {
-      Audio.packetBlast();
+    } else if (game.board[row][col][1] === "p") {
+      audio.packetBlast();
+      game.willExplodePacket = true;
       this.packetPower(row, col);
-    }
-    if (game.board[row][col] === "cb") {
-      Audio.colorBombBlast();
+      game.board[row][col] = "explode";
+    } else if (game.board[row][col] === "cb") {
+      audio.colorBombBlast();
       this.colorBombPowerAuto();
+    } else if (game.board[row][col] === "explode") {
+      this.packetPower(row, col);
     }
   };
 
@@ -61,46 +63,56 @@ export default function Power(game) {
     rowArray.forEach((_row) => {
       colArray.forEach((_col) => {
         this.checkForPower(_row, _col);
-        game.board[_row][_col] = 0;
       });
     });
   };
 
+  this.packetSecondExplosion = () => {
+    for (let row = game.row; row < game.row * 2; row++) {
+      for (let col = 0; col < game.col; col++) {
+        if (game.board[row][col] === "explode") {
+          this.checkForPower(row, col);
+        }
+      }
+    }
+  };
+
   this.colorBombPower = () => {
     let board = game.board;
-    let candies = game.candies;
     let dRow = game.draggedCandy.row;
     let dCol = game.draggedCandy.col;
     let rRow = game.replacedCandy.row;
     let rCol = game.replacedCandy.col;
+    let dCandy = game.draggedCandy.color;
+    let rCandy = game.replacedCandy.color;
 
-    let dCandy = board[dRow][dCol];
-    let rCandy = board[rRow][rCol];
     if (dCandy === "cb" && rCandy === "cb") {
       for (let row = game.row; row < game.row * 2; row++) {
         for (let col = 0; col < game.col; col++) {
-          candies[row][col].color = 0;
+          board[row][col] = 0;
         }
       }
     } else if (dCandy === "cb") {
-      //board[dRow][dCol] = 0;
+      board[dRow][dCol] = 0;
+      board[rRow][rCol] = 0;
       for (let row = game.row; row < game.row * 2; row++) {
         for (let col = 0; col < game.col; col++) {
           if (board[row][col][0] === rCandy[0]) {
-            candies[row][col].color = rCandy;
+            if (rCandy.length === 2) board[row][col] = rCandy;
             this.checkForPower(row, col);
-            candies[row][col].color = 0;
+            board[row][col] = 0;
           }
         }
       }
     } else if (rCandy === "cb") {
-      //board[rRow][rCol] = 0;
+      board[dRow][dCol] = 0;
+      board[rRow][rCol] = 0;
       for (let row = game.row; row < game.row * 2; row++) {
         for (let col = 0; col < game.col; col++) {
           if (board[row][col][0] === dCandy[0]) {
-            candies[row][col].color = dCandy;
+            if (dCandy.length === 2) board[row][col] = dCandy;
             this.checkForPower(row, col);
-            candies[row][col].color = 0;
+            board[row][col] = 0;
           }
         }
       }
@@ -140,34 +152,30 @@ export default function Power(game) {
   };
 
   this.twoStripedCandies = () => {
-    let board = game.board;
     let dRow = game.draggedCandy.row;
     let dCol = game.draggedCandy.col;
     let rRow = game.replacedCandy.row;
     let rCol = game.replacedCandy.col;
+    let dCandy = game.draggedCandy.color;
+    let rCandy = game.replacedCandy.color;
 
-    let dCandy = board[dRow][dCol];
-    let rCandy = board[rRow][rCol];
     if (dCandy.length !== 2 && rCandy.length !== 2) return;
     if (
       (dCandy[1] === "c" || dCandy[1] === "r") &&
       (rCandy[1] === "c" || rCandy[1] === "r")
     ) {
       game.board[rRow][rCol] = 0;
+      game.board[dRow][dCol] = 0;
       this.destroyEntireCol(rRow, rCol);
       this.destroyEntireRow(rRow, rCol);
     }
   };
 
   this.stripAndPacket = () => {
-    let board = game.board;
-    let dRow = game.draggedCandy.row;
-    let dCol = game.draggedCandy.col;
+    let dCandy = game.draggedCandy.color;
+    let rCandy = game.replacedCandy.color;
     let rRow = game.replacedCandy.row;
     let rCol = game.replacedCandy.col;
-
-    let dCandy = board[dRow][dCol];
-    let rCandy = board[rRow][rCol];
 
     if (dCandy.length !== 2 && rCandy.length !== 2) return;
 
@@ -199,14 +207,10 @@ export default function Power(game) {
   };
 
   this.packetAndPacket = () => {
-    let board = game.board;
-    let dRow = game.draggedCandy.row;
-    let dCol = game.draggedCandy.col;
+    let dCandy = game.draggedCandy.color;
+    let rCandy = game.replacedCandy.color;
     let rRow = game.replacedCandy.row;
     let rCol = game.replacedCandy.col;
-
-    let dCandy = board[dRow][dCol];
-    let rCandy = board[rRow][rCol];
 
     if (dCandy.length !== 2 && rCandy.length !== 2) return;
 

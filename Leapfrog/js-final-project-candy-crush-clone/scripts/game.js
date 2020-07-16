@@ -9,15 +9,18 @@ export default function Game() {
   this.board = [];
   this.row = 10;
   this.col = 10;
-  this.draggedCandy = { row: 0, col: 0 };
-  this.replacedCandy = { row: 0, col: 1 };
+  this.draggedCandy = { row: 0, col: 0, color: "a" };
+  this.replacedCandy = { row: 0, col: 1, color: "a" };
   this.swapDirection = null;
   this.isAnimating = false;
   this.animationTime = CANDY_HEIGHT;
   this.frame = 0;
   this.swapFrame = 0;
+  this.dragFrame = 0;
   this.checkCondition = true;
   this.isSwapping = false;
+  this.isDragged = false;
+  this.willExplodePacket = false
 
   this.createBoard = () => {
     for (let i = 0; i < this.row * 2; i++) {
@@ -58,7 +61,7 @@ export default function Game() {
     for (let row = this.row; row < this.row * 2; row++) {
       for (let col = 0; col < this.col; col++) {
         if (this.board[row][col] === 0) {
-          this.candies[row][col].color = 0; //this.candies[row - 1][col].color;
+          this.candies[row][col].color = 0;
         }
       }
     }
@@ -143,6 +146,15 @@ export default function Game() {
       } else {
         this.isSwapping = false;
         this.swapFrame = 0;
+
+        // for (let row = this.row; row < this.row * 2; row++) {
+        //   for (let col = 0; col < this.col; col++) {
+        //     if (this.candies[row][col] === 0) {
+        //       this.board[row][col] = 0;
+        //     }
+        //   }
+        // }
+
         swapArray(
           this.board,
           this.draggedCandy.row,
@@ -152,6 +164,7 @@ export default function Game() {
         );
 
         this.changeCandiesList();
+        this.isDragged = true;
       }
     }
   };

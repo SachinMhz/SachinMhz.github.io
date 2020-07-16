@@ -1,6 +1,6 @@
 import { getAudio, playAudio } from "./helperFunc.js";
 
-export const Audio = {
+export const audio = {
   match: () => {
     playAudio(getAudio("./audios/combo_sound.mp3"));
   },
