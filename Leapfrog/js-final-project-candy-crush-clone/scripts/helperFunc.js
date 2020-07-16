@@ -1,3 +1,5 @@
+import { CANDY_COLOR } from "./constants.js";
+
 //returns random integer excluding max value
 export function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -5,7 +7,7 @@ export function randomInt(min, max) {
 
 //return random color value
 export function getRandomColor() {
-  let candiesColor = ["r", "b", "g", "p", "y", "o"];
+  let candiesColor = CANDY_COLOR;
   return candiesColor[randomInt(0, candiesColor.length)];
 }
 
