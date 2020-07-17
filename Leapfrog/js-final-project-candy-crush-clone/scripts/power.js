@@ -1,10 +1,13 @@
 import { CANDY_POINT, CANDY_COLOR } from "./constants.js";
 import { audio } from "./audio.js";
 
-export default function Power(game) {
+export default function Power(game, objective) {
   this.game = game;
 
   this.checkForPower = (row, col) => {
+    let color = game.board[row][col];
+    objective.candiesCount[color] = (objective.candiesCount[color] || 0) + 1;
+
     if (game.board[row][col].length === 1) {
       game.board[row][col] = 0;
       return;
@@ -235,8 +238,8 @@ export default function Power(game) {
       } else if (rCol === game.col - 2) {
         colArray = colArray.splice(0, 3);
       }
-      
-      console.log(rowArray,colArray)
+
+      console.log(rowArray, colArray);
       game.board[rRow][rCol] = 0;
       game.board[dRow][dCol] = 0;
       rowArray.forEach((_row) => {
@@ -251,7 +254,7 @@ export default function Power(game) {
       }
     }
   };
-  
+
   this.doublePacketSecondExplosion = () => {
     for (let row = game.row; row < game.row * 2; row++) {
       for (let col = 0; col < game.col; col++) {
@@ -278,8 +281,7 @@ export default function Power(game) {
             colArray = colArray.splice(0, 3);
           }
 
-          
-      console.log(rowArray,colArray)
+          console.log(rowArray, colArray);
           game.board[row][col] = 0;
           rowArray.forEach((_row) => {
             colArray.forEach((_col) => {
