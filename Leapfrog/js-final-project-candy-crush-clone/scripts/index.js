@@ -57,6 +57,7 @@ function draw() {
     setTimeout(() => {
       if (game.isAnimating === false) {
         power.packetSecondExplosion()
+        power.doublePacketSecondExplosion();
         game.willExplodePacket = false;
       }
     }, 100);

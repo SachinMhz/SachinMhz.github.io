@@ -19,9 +19,11 @@ export default function Power(game) {
       game.willExplodePacket = true;
       this.packetPower(row, col);
       game.board[row][col] = "explode";
+      game.candies[row][col].color = "explode";
     } else if (game.board[row][col] === "cb") {
       audio.colorBombBlast();
       this.colorBombPowerAuto();
+      game.board[row][col] = 0;
     } else if (game.board[row][col] === "explode") {
       this.packetPower(row, col);
     }
@@ -31,8 +33,7 @@ export default function Power(game) {
     game.board[_row][col] = 0;
     score.score += game.col * CANDY_POINT;
     for (let row = game.row; row < game.row * 2; row++) {
-      if (game.board[row][col].length === 2) this.checkForPower(row, col);
-      game.board[row][col] = 0;
+      this.checkForPower(row, col);
     }
   };
 
@@ -40,8 +41,7 @@ export default function Power(game) {
     game.board[row][_col] = 0;
     score.score += game.row * CANDY_POINT;
     for (let col = 0; col < game.col; col++) {
-      if (game.board[row][col].length === 2) this.checkForPower(row, col);
-      game.board[row][col] = 0;
+      this.checkForPower(row, col);
     }
   };
 
@@ -139,13 +139,11 @@ export default function Power(game) {
         maxColor = colorPair[0];
       }
     });
-
     //after finding highest candies of same color explodes it
     for (let row = game.row; row < game.row * 2; row++) {
       for (let col = 0; col < game.col; col++) {
         if (game.board[row][col][0] === maxColor) {
           this.checkForPower(row, col);
-          game.board[row][col] = 0;
         }
       }
     }
@@ -209,6 +207,8 @@ export default function Power(game) {
   this.packetAndPacket = () => {
     let dCandy = game.draggedCandy.color;
     let rCandy = game.replacedCandy.color;
+    let dRow = game.draggedCandy.row;
+    let dCol = game.draggedCandy.col;
     let rRow = game.replacedCandy.row;
     let rCol = game.replacedCandy.col;
 
@@ -226,7 +226,6 @@ export default function Power(game) {
       } else if (rRow === game.row * 2 - 2) {
         rowArray = rowArray.splice(0, 3);
       }
-
       if (rCol === 0) {
         colArray = colArray.splice(2, 5); //remove first two element
       } else if (rCol === 1) {
@@ -236,12 +235,59 @@ export default function Power(game) {
       } else if (rCol === game.col - 2) {
         colArray = colArray.splice(0, 3);
       }
+      
+      console.log(rowArray,colArray)
+      game.board[rRow][rCol] = 0;
+      game.board[dRow][dCol] = 0;
       rowArray.forEach((_row) => {
         colArray.forEach((_col) => {
           this.checkForPower(_row, _col);
-          game.board[_row][_col] = 0;
         });
       });
+      if (!game.willExplodePacket) {
+        game.willExplodePacket = true;
+        game.board[rRow][rCol] = "doubleExplode";
+        game.candies[rRow][rCol].color = "doubleExplode";
+      }
+    }
+  };
+  
+  this.doublePacketSecondExplosion = () => {
+    for (let row = game.row; row < game.row * 2; row++) {
+      for (let col = 0; col < game.col; col++) {
+        if (game.board[row][col] === "doubleExplode") {
+          let rowArray = [row - 2, row - 1, row, row + 1, row + 2];
+          let colArray = [col - 2, col - 1, col, col + 1, col + 2];
+          if (row === game.row) {
+            rowArray = rowArray.splice(2, 5); //remove first  two element
+          } else if (row === game.row + 1) {
+            rowArray = rowArray.splice(1, 5);
+          } else if (row === game.row * 2 - 1) {
+            rowArray = rowArray.splice(0, 4);
+          } else if (row === game.row * 2 - 2) {
+            rowArray = rowArray.splice(0, 3);
+          }
+
+          if (col === 0) {
+            colArray = colArray.splice(2, 5); //remove first two element
+          } else if (col === 1) {
+            colArray = colArray.splice(1, 5);
+          } else if (col === game.col - 1) {
+            colArray = colArray.splice(0, 4);
+          } else if (col === game.col - 2) {
+            colArray = colArray.splice(0, 3);
+          }
+
+          
+      console.log(rowArray,colArray)
+          game.board[row][col] = 0;
+          rowArray.forEach((_row) => {
+            colArray.forEach((_col) => {
+              this.checkForPower(_row, _col);
+            });
+          });
+        }
+      }
     }
   };
 }

@@ -35,10 +35,9 @@ import {
   ORANGE_PACKET,
   COLOR_BOMB,
   NO_CANDY,
+  BOMB,
 } from "./constants.js";
-import {
-  drawImageContext,
-} from "./helperFunc.js";
+import { drawImageContext } from "./helperFunc.js";
 
 export default function Candy(game, x, y, color, id) {
   this.game = game;
@@ -324,6 +323,12 @@ export default function Candy(game, x, y, color, id) {
           this.height
         );
         break;
+      case "explode":
+        drawImageContext(CTX, BOMB, this.x, this.y, this.width, this.height);
+        break;
+      case "doubleExplode":
+        drawImageContext(CTX, BOMB, this.x, this.y, this.width, this.height);
+        break;
       default:
         drawImageContext(
           CTX,
@@ -334,32 +339,5 @@ export default function Candy(game, x, y, color, id) {
           this.height
         );
     }
-    //drawRectContext(CTX, this.x, this.y, this.width, this.height, this.color);
   };
 }
-
-/*
-switch (this.color) {
-      case "red":
-        drawImageContext(CTX, RED, this.x, this.y, this.width, this.height);
-        break;
-      case "blue":
-        drawImageContext(CTX, BLUE, this.x, this.y, this.width, this.height);
-        break;
-      case "green":
-        drawImageContext(CTX, GREEN, this.x, this.y, this.width, this.height);
-        break;
-      case "yellow":
-        drawImageContext(CTX, YELLOW, this.x, this.y, this.width, this.height);
-        break;
-      case "orange":
-        drawImageContext(CTX, ORANGE, this.x, this.y, this.width, this.height);
-        break;
-      case "purple":
-        drawImageContext(CTX, PURPLE, this.x, this.y, this.width, this.height);
-        break;
-      default:
-        drawImageContext(CTX, PURPLE, this.x, this.y, this.width, this.height);
-    }
-
-    */
