@@ -54,6 +54,8 @@ export const NO_CANDY = getImage("./images/noBG.png");
 
 export const COLOR_BOMB = getImage("./images/color-bomb.png");
 
+export const BOMB = getImage("./images/bomb.png");
+
 export const BG_1 = getImage("./images/bg1.png");
 export const BG_SELECTED = getImage("./images/bg1-selected.png");
 export const BG_2 = getImage("./images/bg2.png");

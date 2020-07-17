@@ -20,7 +20,7 @@ export const audio = {
     playAudio(getAudio("./audios/packet_blast.mp3"));
   },
   colorBombBlast: () => {
-    playAudio(getAudio("./audios/color_bomb_blast.mp3"));
+    playAudio(getAudio("./audios/colour_bomb_blast.mp3"));
   },
   swap: () => {
     playAudio(getAudio("./audios/swap.mp3"));
@@ -34,3 +34,4 @@ export const audio = {
     audio.volume = 0.2;
   },
 };
+
