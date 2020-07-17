@@ -11,7 +11,7 @@ export const CTX = CANVAS.getContext("2d");
 export const CANDY_WIDTH = 60;
 export const CANDY_HEIGHT = 60;
 export const CANDY_POINT = 10;
-export const CANDY_COLOR = ["r", "b", "g", "p", "y","o"];
+export const CANDY_COLOR = ["r", "b", "g", "p", "y", "o"];
 
 //declaring image constants
 export const BLUE = getImage("./images/blue-candy.png");
@@ -62,3 +62,29 @@ export const BG_2 = getImage("./images/bg2.png");
 export const BG_3 = getImage("./images/bg3.png");
 export const BG_4 = getImage("./images/bg4.png");
 
+export const START_BG = getImage("./images/startBG.png");
+export const LEVEL_BG = getImage("./images/levelBG.png");
+export const GAME_OVER_BG = getImage("./images/gameOverBG.png");
+export const GAME_COMPLETE_BG = getImage("./images/gameCompleteBG.png");
+
+export const LEVEL_1 = getImage("./images/level1.png");
+export const LEVEL_2 = getImage("./images/level2.png");
+export const LEVEL_3 = getImage("./images/level3.png");
+export const LEVEL_4 = getImage("./images/level4.png");
+export const LEVEL_5 = getImage("./images/level5.png");
+export const LEVEL_1_SELECTED = getImage("./images/level1-selected.png");
+export const LEVEL_2_SELECTED = getImage("./images/level2-selected.png");
+export const LEVEL_3_SELECTED = getImage("./images/level3-selected.png");
+export const LEVEL_4_SELECTED = getImage("./images/level4-selected.png");
+export const LEVEL_5_SELECTED = getImage("./images/level5-selected.png");
+
+export const PLAY_BTN = getImage("./images/playBtn.png");
+export const PLAY_BTN_SELECTED = getImage("./images/playBtn-selected.png");
+export const RETRY = getImage("./images/retryBtn.png");
+export const RETRY_SELECTED = getImage("./images/retryBtn-selected.png");
+export const NEXT = getImage("./images/nextBtn.png");
+export const NEXT_SELECTED = getImage("./images/nextBtn-selected.png");
+export const MENU = getImage("./images/menuBtn.png");
+export const MENU_SELECTED = getImage("./images/menuBtn-selected.png");
+export const BACK = getImage("./images/back.png");
+export const BACK_SELECTED = getImage("./images/back-selected.png");
