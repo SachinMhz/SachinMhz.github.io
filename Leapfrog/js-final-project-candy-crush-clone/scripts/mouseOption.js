@@ -55,12 +55,16 @@ export default function MouseOption({
         });
       });
     } else if (screen.show === "Game Over") {
+      game.clearGame();
+      score.clearScore();
       if (isPointInsideRect(mouse, gameOver.retryBtn)) {
         screen.show = "Game";
       } else if (isPointInsideRect(mouse, gameOver.menuBtn)) {
         screen.show = "Levels";
       }
     } else if (screen.show === "Game Complete") {
+      game.clearGame();
+      score.clearScore();
       if (isPointInsideRect(mouse, gameComplete.nextBtn)) {
         game.level = game.level == 5 ? 1 : game.level + 1;
         screen.show = "Game";
@@ -138,9 +142,13 @@ export default function MouseOption({
         });
       });
     } else if (screen.show === "Game Over") {
+      game.clearGame();
+      score.clearScore();
       gameOver.retrySelected = isPointInsideRect(mouse, gameOver.retryBtn);
       gameOver.menuSelected = isPointInsideRect(mouse, gameOver.menuBtn);
     } else if (screen.show === "Game Complete") {
+      game.clearGame();
+      score.clearScore();
       gameComplete.nextSelected = isPointInsideRect(
         mouse,
         gameComplete.nextBtn

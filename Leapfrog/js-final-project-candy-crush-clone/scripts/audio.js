@@ -25,6 +25,12 @@ export const audio = {
   swap: () => {
     playAudio(getAudio("./audios/swap.mp3"));
   },
+  levelCompleted: () => {
+    playAudio(getAudio("./audios/level_completed.mp3"));
+  },
+  levelFailed: () => {
+    playAudio(getAudio("./audios/level_failed.mp3"));
+  },
   level_bg: () => {
     let audio = getAudio("./audios/bg_music.mp3");
     audio.pause();
@@ -34,4 +40,3 @@ export const audio = {
     audio.volume = 0.2;
   },
 };
-

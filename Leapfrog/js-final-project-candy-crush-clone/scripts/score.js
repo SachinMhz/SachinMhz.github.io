@@ -4,7 +4,7 @@ export default function Score(game) {
   this.highScore = localStorage.getItem("highScore")
     ? localStorage.getItem("highScore")
     : 0;
-  this.moves = 40;
+  this.moves = 5;
   this.levelText = document.getElementById("level");
   this.scoreText = document.getElementById("score");
   this.moveText = document.getElementById("moves");
@@ -15,7 +15,7 @@ export default function Score(game) {
 
   this.clearScore = () => {
     this.score = 0;
-    this.moves = 40;
+    this.moves = 5;
   };
   this.draw = () => {
     this.levelText.innerHTML = "Level: " + game.level;
@@ -28,28 +28,24 @@ export default function Score(game) {
       this.obj1Text.innerHTML = "Score: " + 5000;
     }
     if (game.level == 2) {
-      this.obj1Text.innerHTML = "Collect Red: " + (50 - game.candiesCount.r);
-      this.obj2Text.innerHTML = "Collect Blue: " + (50 - game.candiesCount.b);
+      this.obj1Text.innerHTML = "Red: " + game.candiesCount.r + " / 50";
+      this.obj2Text.innerHTML = "Blue: " + game.candiesCount.b + " / 50";
     }
 
     if (game.level == 3) {
       this.obj1Text.innerHTML =
-        "Collect Red Strip: " +
-        (2 - game.candiesCount.rr - game.candiesCount.rc);
+        "Red Strip: " + (game.candiesCount.rr + game.candiesCount.rc) + " / 2";
       this.obj2Text.innerHTML =
-        "Collect Blue Strip: " +
-        (2 - game.candiesCount.br - game.candiesCount.bc);
+        "Blue Strip: " + (game.candiesCount.br + game.candiesCount.bc) + " / 2";
     }
 
     if (game.level == 4) {
-      this.obj1Text.innerHTML =
-        "Collect Color Bomb: " + (2 - game.candiesCount.cb);
+      this.obj1Text.innerHTML = "Color Bomb: " + game.candiesCount.cb + " / 2";
     }
 
     if (game.level == 5) {
       this.obj1Text.innerHTML = "Score: " + 50000;
-      this.obj2Text.innerHTML =
-        "Collect Green Packet: " + (1 - game.candiesCount.gp);
+      this.obj2Text.innerHTML = "Green Packet: " + game.candiesCount.gp + "/ 1";
     }
   };
 }

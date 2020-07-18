@@ -14,6 +14,11 @@ export default function Rules(game, power) {
         if (game.board[i][j] === 0) {
           game.isAnimating = true;
           break loop_row;
+        } else if (
+          game.board[i][j] === "explode" ||
+          game.board[i][j] === "doubleExplode"
+        ) {
+          game.willExplodePacket = true;
         }
       }
     }

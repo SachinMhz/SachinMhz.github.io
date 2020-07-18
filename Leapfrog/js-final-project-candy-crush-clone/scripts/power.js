@@ -104,7 +104,6 @@ export default function Power(game, score) {
           if (board[row][col][0] === rCandy[0]) {
             if (rCandy.length === 2) board[row][col] = rCandy;
             this.checkForPower(row, col);
-            board[row][col] = 0;
           }
         }
       }
@@ -116,7 +115,6 @@ export default function Power(game, score) {
           if (board[row][col][0] === dCandy[0]) {
             if (dCandy.length === 2) board[row][col] = dCandy;
             this.checkForPower(row, col);
-            board[row][col] = 0;
           }
         }
       }
