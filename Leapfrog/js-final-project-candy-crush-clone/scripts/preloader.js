@@ -37,8 +37,8 @@ export default function Preloader() {
     "./images/bomb",
 
     "./images/noBG",
-    "./images/CandyBG",
-    "./images/CandyBG-selected",
+    "./images/candyBG",
+    "./images/candyBG-selected",
 
     "./images/back",
     "./images/back-selected",

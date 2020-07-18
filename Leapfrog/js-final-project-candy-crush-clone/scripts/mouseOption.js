@@ -129,11 +129,11 @@ export default function MouseOption({
               }
               //if player swaps the candies :
               candy.isDraggable = false;
-              //  if (rules.checkValidMove()) {
-              game.isSwapping = true;
-              audio.swap();
-              score.moves -= 1;
-              //  }
+              if (rules.checkValidMove()) {
+                game.isSwapping = true;
+                audio.swap();
+                score.moves -= 1;
+              }
             }
           } else {
             candy.x = candy.realX;

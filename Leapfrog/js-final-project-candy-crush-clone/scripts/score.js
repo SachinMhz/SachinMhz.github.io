@@ -4,7 +4,7 @@ export default function Score(game) {
   this.highScore = localStorage.getItem("highScore")
     ? localStorage.getItem("highScore")
     : 0;
-  this.moves = 5;
+  this.moves = 40;
   this.levelText = document.getElementById("level");
   this.scoreText = document.getElementById("score");
   this.moveText = document.getElementById("moves");
@@ -15,7 +15,7 @@ export default function Score(game) {
 
   this.clearScore = () => {
     this.score = 0;
-    this.moves = 5;
+    this.moves = 40;
   };
   this.draw = () => {
     this.levelText.innerHTML = "Level: " + game.level;
