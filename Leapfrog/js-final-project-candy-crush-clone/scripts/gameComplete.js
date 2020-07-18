@@ -9,7 +9,7 @@ import {
 } from "./constants.js";
 import { drawImageContext } from "./helperFunc.js";
 
-export default function GameOver(game, score) {
+export default function GameComplete(game, score) {
   this.game = game;
   this.score = score;
   this.nextSelected = false;
@@ -60,5 +60,14 @@ export default function GameOver(game, score) {
         this.nextBtn.height
       );
     }
+
+    CTX.font = "30px Arial";
+    CTX.fillStyle = "blue";
+    CTX.fillText(score.score, 400, 365);
+    CTX.fillText(score.highScore, 400, 410);
+
+    CTX.font = "55px Arial";
+    CTX.fillStyle = "#682b71";
+    CTX.fillText(game.level, 375, 65);
   };
 }

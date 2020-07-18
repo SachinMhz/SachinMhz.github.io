@@ -61,5 +61,14 @@ export default function GameOver(game, score) {
         this.retryBtn.height
       );
     }
+
+    CTX.font = "30px Arial";
+    CTX.fillStyle = "blue";
+    CTX.fillText(score.score, 400, 365);
+    CTX.fillText(score.highScore, 400, 415);
+
+    CTX.font = "55px Arial";
+    CTX.fillStyle = "#682b71";
+    CTX.fillText(game.level, 375, 65);
   };
 }

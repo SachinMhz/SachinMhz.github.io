@@ -1,31 +1,33 @@
 export default function Objective(game, score) {
   this.game = game;
-  this.candiesCount = {};
   this.complete = false;
 
   this.level1 = () => {
-    if (score.score >= 10000) {
+    if (score.score >= 5000) {
       return true;
     }
   };
 
   this.level2 = () => {
-    if (this.candiesCount.r >= 10 && this.candiesCount.b >= 10) {
+    if (game.candiesCount.r >= 50 && game.candiesCount.b >= 50) {
       return true;
     }
   };
   this.level3 = () => {
-    if (this.candiesCount.rr >= 3 && this.candiesCount.br >= 3) {
+    if (
+      (game.candiesCount.rr >= 2 || game.candiesCount.rc >= 2) &&
+      (game.candiesCount.br >= 2 || game.candiesCount.bc >= 2)
+    ) {
       return true;
     }
   };
   this.level4 = () => {
-    if (this.candiesCount.cb >= 2) {
+    if (game.candiesCount.cb >= 2) {
       return true;
     }
   };
   this.level5 = () => {
-    if (score.score >= 50000 && this.candiesCount.gp >= 2) {
+    if (score.score >= 50000 && game.candiesCount.gp >= 2) {
       return true;
     }
   };

@@ -2,37 +2,44 @@ import { CANVAS } from "./constants.js";
 import { isPointInsideRect, isMouseInside, isDragLimit } from "./helperFunc.js";
 import { audio } from "./audio.js";
 
-export default function MouseOption() {
-  this.down = ({
-    game,
-    mouse,
-    screen,
-    startMenu,
-    levels,
-    gameOver,
-    gameComplete,
-  }) => {
+export default function MouseOption({
+  game,
+  screen,
+  startMenu,
+  gameOver,
+  gameComplete,
+  levels,
+  score,
+}) {
+  this.down = (mouse) => {
     if (screen.show === "Start Menu") {
       if (isPointInsideRect(mouse, startMenu.playBtn)) {
         screen.show = "Levels";
       }
     } else if (screen.show === "Levels") {
+      game.clearGame();
+      score.clearScore();
       if (isPointInsideRect(mouse, levels.backBtn)) {
         screen.show = "Start Menu";
       } else if (isPointInsideRect(mouse, levels.oneBtn)) {
         game.level = 1;
+        score.highScore = localStorage.getItem("level1") || 0;
         screen.show = "Game";
       } else if (isPointInsideRect(mouse, levels.twoBtn)) {
         game.level = 2;
+        score.highScore = localStorage.getItem("level2") || 0;
         screen.show = "Game";
       } else if (isPointInsideRect(mouse, levels.threeBtn)) {
         game.level = 3;
+        score.highScore = localStorage.getItem("level3") || 0;
         screen.show = "Game";
       } else if (isPointInsideRect(mouse, levels.fourBtn)) {
         game.level = 4;
+        score.highScore = localStorage.getItem("level4") || 0;
         screen.show = "Game";
       } else if (isPointInsideRect(mouse, levels.fiveBtn)) {
         game.level = 5;
+        score.highScore = localStorage.getItem("level5") || 0;
         screen.show = "Game";
       }
     } else if (screen.show === "Game") {
@@ -63,19 +70,12 @@ export default function MouseOption() {
     }
   };
 
-  this.move = ({
-    game,
-    mouse,
-    screen,
-    score,
-    startMenu,
-    levels,
-    gameOver,
-    gameComplete,
-  }) => {
+  this.move = (mouse) => {
     if (screen.show === "Start Menu") {
       startMenu.isSelected = isPointInsideRect(mouse, startMenu.playBtn);
     } else if (screen.show === "Levels") {
+      game.clearGame();
+      score.clearScore();
       levels.backSelected = isPointInsideRect(mouse, levels.backBtn);
       levels.oneSelected = isPointInsideRect(mouse, levels.oneBtn);
       levels.twoSelected = isPointInsideRect(mouse, levels.twoBtn);
@@ -152,9 +152,9 @@ export default function MouseOption() {
     }
   };
 
-  this.up = ({ game, mouse, screen }) => {
+  this.up = (mouse) => {
     //screen.show = "Game";
-    if (screen === "Game") {
+    if (screen.show === "Game") {
       game.candies.forEach((candyList) => {
         candyList.forEach((candy) => {
           candy.isDraggable = false;

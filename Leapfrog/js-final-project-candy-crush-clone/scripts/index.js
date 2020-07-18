@@ -17,24 +17,34 @@ function Main() {
   var score, power, rules, mouseOption, objective;
   var game, startMenu, levels, gameOver, gameComplete;
   var preloader = new Preloader();
+  this.loaded = false;
   var screen = { show: "Start Menu" };
   preloader.load(() => {
     this.init();
     this.draw();
+    audio.level_bg();
   });
 
   this.init = () => {
+    this.loaded = true;
     game = new Game();
     score = new Score(game);
     objective = new Objective(game, score);
-    power = new Power(game, objective);
-    rules = new Rules(game, power, score);
+    power = new Power(game, score);
+    rules = new Rules(game, power);
     startMenu = new StartMenu(game);
     levels = new LevelSelection(game);
-    mouseOption = new MouseOption(game);
     gameOver = new GameOver(game, score);
     gameComplete = new GameComplete(game, score);
-    audio.level_bg();
+    mouseOption = new MouseOption({
+      game,
+      screen,
+      startMenu,
+      gameOver,
+      gameComplete,
+      levels,
+      score,
+    });
     game.createBoard();
     game.changeCandiesList();
     game.createCandiesBackground();
@@ -101,6 +111,9 @@ function Main() {
       if (!game.isAnimating && objective.check()) {
         setTimeout(() => {
           if (game.isAnimating === false) {
+            if (score.score >= score.highScore) {
+              localStorage.setItem("level" + game.level, score.score);
+            }
             screen.show = "Game Complete";
           }
         }, 1000);
@@ -140,15 +153,8 @@ function Main() {
       x: e.offsetX,
       y: e.offsetY,
     };
-    mouseOption.down({
-      game,
-      mouse,
-      screen,
-      startMenu,
-      levels,
-      gameOver,
-      gameComplete,
-    });
+    if (this.loaded) mouseOption.down(mouse);
+    //this.init();
   });
 
   CANVAS.addEventListener("mousemove", (e) => {
@@ -157,16 +163,7 @@ function Main() {
       y: e.offsetY,
     };
 
-    mouseOption.move({
-      game,
-      mouse,
-      screen,
-      score,
-      startMenu,
-      levels,
-      gameOver,
-      gameComplete,
-    });
+    if (this.loaded) mouseOption.move(mouse);
   });
 
   CANVAS.addEventListener("mouseup", (e) => {
@@ -176,7 +173,7 @@ function Main() {
       x: e.offsetX,
       y: e.offsetY,
     };
-    mouseOption.up({ game, mouse, screen });
+    if (this.loaded) mouseOption.up(mouse);
   });
 }
 

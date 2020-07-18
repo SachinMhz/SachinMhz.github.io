@@ -1,13 +1,15 @@
 import { CANDY_POINT, CANDY_COLOR } from "./constants.js";
 import { audio } from "./audio.js";
 
-export default function Power(game, objective) {
+export default function Power(game, score) {
   this.game = game;
+  this.score = score;
 
   this.checkForPower = (row, col) => {
     let color = game.board[row][col];
-    objective.candiesCount[color] = (objective.candiesCount[color] || 0) + 1;
+    game.candiesCount[color] = (game.candiesCount[color] || 0) + 1;
 
+    score.score += CANDY_POINT;
     if (game.board[row][col].length === 1) {
       game.board[row][col] = 0;
       return;
@@ -28,13 +30,13 @@ export default function Power(game, objective) {
       this.colorBombPowerAuto();
       game.board[row][col] = 0;
     } else if (game.board[row][col] === "explode") {
+      audio.packetBlast();
       this.packetPower(row, col);
     }
   };
 
   this.destroyEntireCol = (_row, col) => {
     game.board[_row][col] = 0;
-    score.score += game.col * CANDY_POINT;
     for (let row = game.row; row < game.row * 2; row++) {
       this.checkForPower(row, col);
     }
@@ -42,7 +44,6 @@ export default function Power(game, objective) {
 
   this.destroyEntireRow = (row, _col) => {
     game.board[row][_col] = 0;
-    score.score += game.row * CANDY_POINT;
     for (let col = 0; col < game.col; col++) {
       this.checkForPower(row, col);
     }
@@ -239,7 +240,6 @@ export default function Power(game, objective) {
         colArray = colArray.splice(0, 3);
       }
 
-      console.log(rowArray, colArray);
       game.board[rRow][rCol] = 0;
       game.board[dRow][dCol] = 0;
       rowArray.forEach((_row) => {
@@ -248,6 +248,7 @@ export default function Power(game, objective) {
         });
       });
       if (!game.willExplodePacket) {
+        audio.packetBlast();
         game.willExplodePacket = true;
         game.board[rRow][rCol] = "doubleExplode";
         game.candies[rRow][rCol].color = "doubleExplode";
@@ -256,6 +257,7 @@ export default function Power(game, objective) {
   };
 
   this.doublePacketSecondExplosion = () => {
+    audio.packetBlast();
     for (let row = game.row; row < game.row * 2; row++) {
       for (let col = 0; col < game.col; col++) {
         if (game.board[row][col] === "doubleExplode") {

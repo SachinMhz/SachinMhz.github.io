@@ -71,20 +71,19 @@ export default function Preloader() {
     for (var i = 0; i < this.audio.length; i++) {
       CTX.beginPath();
       CTX.rect(0, 0, CANVAS.width, CANVAS.height);
-      CTX.fillStyle = "black";
+      CTX.fillStyle = "Orange";
       CTX.fill();
       CTX.fillStyle = "white";
       CTX.fillText("Loading Sound ...", 300, 300);
       var audio = new Audio();
       audio.src = this.audio[i];
-      
-      audio.oncanplaythrough = () => {
+
+      audio.addEventListener("canplay", () => {
         this.loadedAudio += 1;
         if (this.loadedAudio == this.audio.length - 1) {
-          //addAudio();
           start();
         }
-      };
+      });
     }
   };
 }

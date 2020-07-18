@@ -14,15 +14,18 @@ export default function Game() {
   this.swapDirection = null;
   this.isAnimating = false;
   this.animationTime = CANDY_HEIGHT;
+  this.candiesCount = { r: 0, b: 0, rc: 0, rr: 0, br: 0, bc: 0, gp: 0, cb: 0 };
   this.frame = 0;
   this.swapFrame = 0;
   this.dragFrame = 0;
   this.checkCondition = true;
   this.isSwapping = false;
   this.isDragged = false;
-  this.willExplodePacket = false
+  this.willExplodePacket = false;
+  this.level = 1;
 
   this.createBoard = () => {
+    this.board = [];
     for (let i = 0; i < this.row * 2; i++) {
       let row = [];
       for (let j = 0; j < this.col; j++) {
@@ -54,6 +57,33 @@ export default function Game() {
         this.candyBackground.push(new Background(j, i, "bg1"));
       }
     }
+  };
+
+  this.clearGame = () => {
+    this.draggedCandy = { row: 0, col: 0, color: "a" };
+    this.replacedCandy = { row: 0, col: 1, color: "a" };
+    this.swapDirection = null;
+    this.isAnimating = false;
+    this.animationTime = CANDY_HEIGHT;
+    this.candiesCount = {
+      r: 0,
+      b: 0,
+      rc: 0,
+      rr: 0,
+      br: 0,
+      bc: 0,
+      gp: 0,
+      cb: 0,
+    };
+    this.frame = 0;
+    this.swapFrame = 0;
+    this.dragFrame = 0;
+    this.checkCondition = true;
+    this.isSwapping = false;
+    this.isDragged = false;
+    this.willExplodePacket = false;
+    this.createBoard();
+    this.changeCandiesList();
   };
 
   this.replaceZero = () => {

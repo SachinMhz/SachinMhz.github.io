@@ -2,10 +2,9 @@ import { swapArray, randomInt, getRandomColor } from "./helperFunc.js";
 import { CANDY_POINT } from "./constants.js";
 import { audio } from "./audio.js";
 
-export default function Rules(game, power, score) {
+export default function Rules(game, power) {
   this.game = game;
   this.power = power;
-  this.score = score;
 
   this.checkZero = () => {
     let row = game.row;
@@ -16,11 +15,6 @@ export default function Rules(game, power, score) {
           game.isAnimating = true;
           break loop_row;
         }
-        // if (game.candies[i][j].color === 0) {
-        //   game.board[i][j] = 0;
-        //   game.isAnimating = true;
-        //   break loop_row;
-        // }
       }
     }
   };
@@ -36,9 +30,7 @@ export default function Rules(game, power, score) {
         if (value === 0) continue;
         if (checkIdx.every((index) => game.board[i][index][0] === value[0])) {
           audio.match();
-          score.score += 3 * CANDY_POINT;
           checkIdx.forEach((index) => {
-            //console.log(i,index)
             power.checkForPower(i, index);
           });
         }
@@ -54,7 +46,6 @@ export default function Rules(game, power, score) {
         if (value === 0) continue;
         if (checkIdx.every((index) => game.board[index][j][0] === value[0])) {
           audio.match();
-          score.score += 3 * CANDY_POINT;
           checkIdx.forEach((index) => {
             power.checkForPower(index, j);
           });
@@ -78,12 +69,12 @@ export default function Rules(game, power, score) {
         let isReasonDrag = false;
         if (checkIdx.every((index) => game.board[i][index][0] === value[0])) {
           audio.stripCreated();
-          score.score += 4 * CANDY_POINT;
           checkIdx.forEach((index) => {
             power.checkForPower(i, index);
             if (
-              (dragRow === i && dragCol === index) ||
-              (replRow === i && replCol === index)
+              ((dragRow === i && dragCol === index) ||
+                (replRow === i && replCol === index)) &&
+              game.board[i][index][0] !== "e"
             ) {
               isReasonDrag = true;
               game.board[i][index] = game.candies[i][index].color[0] + "c";
@@ -91,7 +82,7 @@ export default function Rules(game, power, score) {
                 game.candies[i][index].color[0] + "c";
             }
           });
-          if (!isReasonDrag) {
+          if (!isReasonDrag && game.board[i][j][0] !== "e") {
             game.board[i][j] =
               game.candies[i][j].color !== 0
                 ? game.candies[i][j].color[0] + "c"
@@ -122,12 +113,12 @@ export default function Rules(game, power, score) {
         let isReasonDrag = false;
         if (checkIdx.every((index) => game.board[index][j][0] === value[0])) {
           audio.stripCreated();
-          score.score += 4 * CANDY_POINT;
           checkIdx.forEach((index) => {
             power.checkForPower(index, j);
             if (
-              (dragRow === index && dragCol === j) ||
-              (replRow === index && replCol === j)
+              ((dragRow === index && dragCol === j) ||
+                (replRow === index && replCol === j)) &&
+              game.board[index][j][0] !== "e"
             ) {
               isReasonDrag = true;
               game.board[index][j] = game.candies[index][j].color[0] + "r";
@@ -136,7 +127,7 @@ export default function Rules(game, power, score) {
             }
           });
 
-          if (!isReasonDrag) {
+          if (!isReasonDrag && game.board[i][j][0] !== "e") {
             game.board[i][j] =
               game.candies[i][j].color !== 0
                 ? game.candies[i][j].color[0] + "r"
@@ -167,19 +158,19 @@ export default function Rules(game, power, score) {
         let isReasonDrag = false;
         if (checkIdx.every((index) => game.board[i][index][0] === value[0])) {
           audio.colorBombCreated();
-          score.score += 5 * CANDY_POINT;
           checkIdx.forEach((index) => {
             power.checkForPower(i, index);
             if (
-              (dragRow === i && dragCol === index) ||
-              (replRow === i && replCol === index)
+              ((dragRow === i && dragCol === index) ||
+                (replRow === i && replCol === index)) &&
+              game.board[i][index][0] !== "e"
             ) {
               isReasonDrag = true;
               game.board[i][index] = "cb";
               game.candies[i][index].color = "cb";
             }
           });
-          if (!isReasonDrag) {
+          if (!isReasonDrag && game.board[i][j][0] !== "e") {
             game.board[i][j] = "cb";
             game.candies[i][j].color = "cb";
           }
@@ -203,12 +194,12 @@ export default function Rules(game, power, score) {
         let isReasonDrag = false;
         if (checkIdx.every((index) => game.board[index][j][0] === value[0])) {
           audio.colorBombCreated();
-          score.score += 5 * CANDY_POINT;
           checkIdx.forEach((index) => {
             power.checkForPower(index, j);
             if (
-              (dragRow === index && dragCol === j) ||
-              (replRow === index && replCol === j)
+              ((dragRow === index && dragCol === j) ||
+                (replRow === index && replCol === j)) &&
+              game.board[index][j][0] !== "e"
             ) {
               isReasonDrag = true;
               game.board[index][j] = "cb";
@@ -404,8 +395,7 @@ export default function Rules(game, power, score) {
     }
 
     //packet and packet
-    else if (rCandy[1] === "p" && dCandy[1] === "p") isValid = true
-
+    else if (rCandy[1] === "p" && dCandy[1] === "p") isValid = true;
     //colorBomb
     else if (rCandy === "cb" || dCandy === "cb") isValid = true;
 
