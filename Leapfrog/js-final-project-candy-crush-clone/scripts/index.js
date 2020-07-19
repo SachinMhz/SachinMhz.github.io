@@ -1,11 +1,10 @@
 import { CANVAS, CTX } from "./constants.js";
-import { isPointInsideRect, isDragLimit, isMouseInside } from "./helperFunc.js";
 import Game from "./game.js";
 import Power from "./power.js";
 import Score from "./score.js";
 import Rules from "./rules.js";
 import MouseOption from "./mouseOption.js";
-import { audio } from "./audio.js";
+import Audios from "./audio.js";
 import Preloader from "./preloader.js";
 import StartMenu from "./startMenu.js";
 import LevelSelection from "./levelSelection.js";
@@ -14,7 +13,7 @@ import GameOver from "./gameOver.js";
 import GameComplete from "./gameComplete.js";
 
 function Main() {
-  var score, power, rules, mouseOption, objective;
+  var score, power, rules, mouseOption, objective, audios;
   var game, startMenu, levels, gameOver, gameComplete;
   var preloader = new Preloader();
   this.loaded = false;
@@ -22,16 +21,17 @@ function Main() {
   preloader.load(() => {
     this.init();
     this.draw();
-    audio.level_bg();
   });
 
   this.init = () => {
     this.loaded = true;
     game = new Game();
-    score = new Score(game);
+    audios = new Audios(game);
+    score = new Score(game, audios, screen);
+    audios.level_bg();
     objective = new Objective(game, score);
-    power = new Power(game, score);
-    rules = new Rules(game, power);
+    power = new Power(game, score, audios);
+    rules = new Rules(game, power, audios);
     startMenu = new StartMenu(game);
     levels = new LevelSelection(game);
     gameOver = new GameOver(game, score);
@@ -44,6 +44,8 @@ function Main() {
       gameComplete,
       levels,
       score,
+      rules,
+      audios,
     });
     game.createBoard();
     game.changeCandiesList();
@@ -57,79 +59,79 @@ function Main() {
     } else if (screen.show === "Levels") {
       levels.draw();
     } else if (screen.show === "Game") {
-      //game.candies = sortCandies(game.candies);
       game.candyBackground.forEach((bg) => {
         bg.draw();
       });
-      //checks matched candies and start animation
-      rules.checkZero();
+      if (!game.isPaused) {
+        //checks matched candies and start animation
+        rules.checkZero();
 
-      // check match case in the board
-      rules.checkFiveRow();
-      rules.checkFiveColumn();
-      rules.checkPacket();
-      rules.checkFourRow();
-      rules.checkFourColumn();
-      rules.checkThreeRow();
-      rules.checkThreeColumn();
+        // check match case in the board
+        rules.checkFiveRow();
+        rules.checkFiveColumn();
+        rules.checkPacket();
+        rules.checkFourRow();
+        rules.checkFourColumn();
+        rules.checkThreeRow();
+        rules.checkThreeColumn();
 
-      // check if dragged or replaced candies have power
-      if (game.isDragged) {
-        power.colorBombPower();
-        power.twoStripedCandies();
-        power.stripAndPacket();
-        power.packetAndPacket();
-        game.isDragged = false;
-      }
+        // check if dragged or replaced candies have power
+        if (game.isDragged) {
+          power.colorBombPower();
+          power.twoStripedCandies();
+          power.stripAndPacket();
+          power.packetAndPacket();
+          game.isDragged = false;
+        }
 
-      // remove candies from display
-      game.replaceZero();
+        // remove candies from display
+        game.replaceZero();
 
-      //start moving down animaton
-      if (game.isAnimating) {
-        game.frame += 1;
-        game.animatingMoveDown();
-      }
+        //start moving down animaton
+        if (game.isAnimating) {
+          game.frame += 1;
+          game.animatingMoveDown();
+        }
 
-      // start swapping animation
-      if (game.isSwapping) {
-        game.swapFrame += 1;
-        game.swapAnimation();
-      }
+        // start swapping animation
+        if (game.isSwapping) {
+          game.swapFrame += 1;
+          game.swapAnimation();
+        }
 
-      // checks if all the candies are dropped and start exploding packet the second time
-      if (!game.isAnimating && game.willExplodePacket) {
-        setTimeout(() => {
-          if (game.isAnimating === false) {
-            power.packetSecondExplosion();
-            power.doublePacketSecondExplosion();
-            game.willExplodePacket = false;
-          }
-        }, 200);
-      }
-
-      if (!game.isAnimating && objective.check()) {
-        setTimeout(() => {
-          if (game.isAnimating === false) {
-            if (score.score >= score.highScore) {
-              localStorage.setItem("level" + game.level, score.score);
+        // checks if all the candies are dropped and start exploding packet the second time
+        if (!game.isAnimating && game.willExplodePacket) {
+          setTimeout(() => {
+            if (game.isAnimating === false) {
+              power.packetSecondExplosion();
+              power.doublePacketSecondExplosion();
+              game.willExplodePacket = false;
             }
-            screen.show = "Game Complete";
-          }
-        }, 1000);
+          }, 200);
+        }
+
+        if (!game.isAnimating && objective.check()) {
+          setTimeout(() => {
+            if (game.isAnimating === false) {
+              if (score.score >= score.highScore) {
+                localStorage.setItem("level" + game.level, score.score);
+              }
+              screen.show = "Game Complete";
+            }
+          }, 1000);
+        }
+
+        if (!game.isAnimating && score.moves <= 0) {
+          setTimeout(() => {
+            if (game.isAnimating === false) {
+              screen.show = "Game Over";
+            }
+          }, 1000);
+        }
+
+        //displays score
+        score.draw();
       }
-
-      if (!game.isAnimating && score.moves <= 0) {
-        setTimeout(() => {
-          if (game.isAnimating === false) {
-            screen.show = "Game Over";
-          }
-        }, 1000);
-      }
-
-      //displays score
-      score.draw();
-
       //displays candies in the game
       game.candies.forEach((candiesRow) => {
         candiesRow.forEach((candy) => {
@@ -167,8 +169,8 @@ function Main() {
   });
 
   CANVAS.addEventListener("mouseup", (e) => {
-    console.log("board", game.board.slice(game.row, game.row * 2));
-    console.log(game.isAnimating, game.frame);
+    // console.log("board", game.board.slice(game.row, game.row * 2));
+    // console.log(game.isAnimating, game.frame);
     var mouse = {
       x: e.offsetX,
       y: e.offsetY,
