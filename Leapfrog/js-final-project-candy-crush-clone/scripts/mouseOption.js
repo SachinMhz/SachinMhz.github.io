@@ -1,6 +1,5 @@
 import { CANVAS } from "./constants.js";
 import { isPointInsideRect, isMouseInside, isDragLimit } from "./helperFunc.js";
-import { audio } from "./audio.js";
 
 export default function MouseOption({
   game,
@@ -10,37 +9,52 @@ export default function MouseOption({
   gameComplete,
   levels,
   score,
+  rules,
+  audios,
 }) {
+  this.clear = () => {
+    audios.pressed();
+    game.clearGame();
+    score.clearScore();
+    score.onChangeScreen();
+  };
   this.down = (mouse) => {
     if (screen.show === "Start Menu") {
       if (isPointInsideRect(mouse, startMenu.playBtn)) {
         screen.show = "Levels";
+        this.clear();
       }
     } else if (screen.show === "Levels") {
       game.clearGame();
       score.clearScore();
       if (isPointInsideRect(mouse, levels.backBtn)) {
         screen.show = "Start Menu";
+        this.clear();
       } else if (isPointInsideRect(mouse, levels.oneBtn)) {
         game.level = 1;
         score.highScore = localStorage.getItem("level1") || 0;
         screen.show = "Game";
+        this.clear();
       } else if (isPointInsideRect(mouse, levels.twoBtn)) {
         game.level = 2;
         score.highScore = localStorage.getItem("level2") || 0;
         screen.show = "Game";
+        this.clear();
       } else if (isPointInsideRect(mouse, levels.threeBtn)) {
         game.level = 3;
         score.highScore = localStorage.getItem("level3") || 0;
         screen.show = "Game";
+        this.clear();
       } else if (isPointInsideRect(mouse, levels.fourBtn)) {
         game.level = 4;
         score.highScore = localStorage.getItem("level4") || 0;
         screen.show = "Game";
+        this.clear();
       } else if (isPointInsideRect(mouse, levels.fiveBtn)) {
         game.level = 5;
         score.highScore = localStorage.getItem("level5") || 0;
         screen.show = "Game";
+        this.clear();
       }
     } else if (screen.show === "Game") {
       game.candies.forEach((candyList) => {
@@ -55,21 +69,21 @@ export default function MouseOption({
         });
       });
     } else if (screen.show === "Game Over") {
-      game.clearGame();
-      score.clearScore();
       if (isPointInsideRect(mouse, gameOver.retryBtn)) {
         screen.show = "Game";
+        this.clear();
       } else if (isPointInsideRect(mouse, gameOver.menuBtn)) {
         screen.show = "Levels";
+        this.clear();
       }
     } else if (screen.show === "Game Complete") {
-      game.clearGame();
-      score.clearScore();
       if (isPointInsideRect(mouse, gameComplete.nextBtn)) {
         game.level = game.level == 5 ? 1 : game.level + 1;
         screen.show = "Game";
+        this.clear();
       } else if (isPointInsideRect(mouse, gameComplete.menuBtn)) {
         screen.show = "Levels";
+        this.clear();
       }
     }
   };
@@ -78,8 +92,6 @@ export default function MouseOption({
     if (screen.show === "Start Menu") {
       startMenu.isSelected = isPointInsideRect(mouse, startMenu.playBtn);
     } else if (screen.show === "Levels") {
-      game.clearGame();
-      score.clearScore();
       levels.backSelected = isPointInsideRect(mouse, levels.backBtn);
       levels.oneSelected = isPointInsideRect(mouse, levels.oneBtn);
       levels.twoSelected = isPointInsideRect(mouse, levels.twoBtn);
@@ -129,11 +141,11 @@ export default function MouseOption({
               }
               //if player swaps the candies :
               candy.isDraggable = false;
-              if (rules.checkValidMove()) {
-                game.isSwapping = true;
-                audio.swap();
-                score.moves -= 1;
-              }
+              // if (rules.checkValidMove()) {
+              game.isSwapping = true;
+              audios.swap();
+              score.moves -= 1;
+              // }
             }
           } else {
             candy.x = candy.realX;
@@ -142,13 +154,9 @@ export default function MouseOption({
         });
       });
     } else if (screen.show === "Game Over") {
-      game.clearGame();
-      score.clearScore();
       gameOver.retrySelected = isPointInsideRect(mouse, gameOver.retryBtn);
       gameOver.menuSelected = isPointInsideRect(mouse, gameOver.menuBtn);
     } else if (screen.show === "Game Complete") {
-      game.clearGame();
-      score.clearScore();
       gameComplete.nextSelected = isPointInsideRect(
         mouse,
         gameComplete.nextBtn

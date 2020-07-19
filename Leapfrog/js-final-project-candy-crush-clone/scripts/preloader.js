@@ -60,6 +60,12 @@ export default function Preloader() {
     "./images/playBtn-selected",
     "./images/retryBtn",
     "./images/retryBtn-selected",
+    "./images/pauseBtn",
+    "./images/pauseBtn-selected",
+    "./images/volumeBtn",
+    "./images/volumeBtn-selected",
+    "./images/restartBtn",
+    "./images/restartBtn-selected",
 
     "./images/startBG",
     "./images/levelBG",
@@ -81,6 +87,7 @@ export default function Preloader() {
     "./audios/packet_candy_created.mp3",
     "./audios/striped_candy_created.mp3",
     "./audios/swap.mp3",
+    "./audios/button_press.mp3"
   ];
   this.loadedImages = 0;
   this.loadedAudio = 0;
