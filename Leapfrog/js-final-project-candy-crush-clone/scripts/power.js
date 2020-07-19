@@ -1,7 +1,6 @@
 import { CANDY_POINT, CANDY_COLOR } from "./constants.js";
-import { audio } from "./audio.js";
 
-export default function Power(game, score) {
+export default function Power(game, score,audios) {
   this.game = game;
   this.score = score;
 
@@ -14,23 +13,23 @@ export default function Power(game, score) {
       game.board[row][col] = 0;
       return;
     } else if (game.board[row][col][1] === "c") {
-      audio.stripBlast();
+      audios.stripBlast();
       this.destroyEntireCol(row, col);
     } else if (game.board[row][col][1] === "r") {
-      audio.stripBlast();
+      audios.stripBlast();
       this.destroyEntireRow(row, col);
     } else if (game.board[row][col][1] === "p") {
-      audio.packetBlast();
+      audios.packetBlast();
       game.willExplodePacket = true;
       this.packetPower(row, col);
       game.board[row][col] = "explode";
       game.candies[row][col].color = "explode";
     } else if (game.board[row][col] === "cb") {
-      audio.colorBombBlast();
+      audios.colorBombBlast();
       this.colorBombPowerAuto();
       game.board[row][col] = 0;
     } else if (game.board[row][col] === "explode") {
-      audio.packetBlast();
+      audios.packetBlast();
       this.packetPower(row, col);
     }
   };
@@ -246,7 +245,7 @@ export default function Power(game, score) {
         });
       });
       if (!game.willExplodePacket) {
-        audio.packetBlast();
+        audios.packetBlast();
         game.willExplodePacket = true;
         game.board[rRow][rCol] = "doubleExplode";
         game.candies[rRow][rCol].color = "doubleExplode";
@@ -255,7 +254,7 @@ export default function Power(game, score) {
   };
 
   this.doublePacketSecondExplosion = () => {
-    audio.packetBlast();
+    audios.packetBlast();
     for (let row = game.row; row < game.row * 2; row++) {
       for (let col = 0; col < game.col; col++) {
         if (game.board[row][col] === "doubleExplode") {

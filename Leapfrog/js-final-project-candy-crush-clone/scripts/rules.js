@@ -1,8 +1,6 @@
 import { swapArray, randomInt, getRandomColor } from "./helperFunc.js";
-import { CANDY_POINT } from "./constants.js";
-import { audio } from "./audio.js";
 
-export default function Rules(game, power) {
+export default function Rules(game, power, audios) {
   this.game = game;
   this.power = power;
 
@@ -34,7 +32,7 @@ export default function Rules(game, power) {
         let value = game.board[i][j];
         if (value === 0) continue;
         if (checkIdx.every((index) => game.board[i][index][0] === value[0])) {
-          audio.match();
+          audios.match();
           checkIdx.forEach((index) => {
             power.checkForPower(i, index);
           });
@@ -50,7 +48,7 @@ export default function Rules(game, power) {
         let value = game.board[i][j];
         if (value === 0) continue;
         if (checkIdx.every((index) => game.board[index][j][0] === value[0])) {
-          audio.match();
+          audios.match();
           checkIdx.forEach((index) => {
             power.checkForPower(index, j);
           });
@@ -73,7 +71,7 @@ export default function Rules(game, power) {
 
         let isReasonDrag = false;
         if (checkIdx.every((index) => game.board[i][index][0] === value[0])) {
-          audio.stripCreated();
+          audios.stripCreated();
           checkIdx.forEach((index) => {
             power.checkForPower(i, index);
             if (
@@ -117,7 +115,7 @@ export default function Rules(game, power) {
 
         let isReasonDrag = false;
         if (checkIdx.every((index) => game.board[index][j][0] === value[0])) {
-          audio.stripCreated();
+          audios.stripCreated();
           checkIdx.forEach((index) => {
             power.checkForPower(index, j);
             if (
@@ -162,7 +160,7 @@ export default function Rules(game, power) {
 
         let isReasonDrag = false;
         if (checkIdx.every((index) => game.board[i][index][0] === value[0])) {
-          audio.colorBombCreated();
+          audios.colorBombCreated();
           checkIdx.forEach((index) => {
             power.checkForPower(i, index);
             if (
@@ -198,7 +196,7 @@ export default function Rules(game, power) {
 
         let isReasonDrag = false;
         if (checkIdx.every((index) => game.board[index][j][0] === value[0])) {
-          audio.colorBombCreated();
+          audios.colorBombCreated();
           checkIdx.forEach((index) => {
             power.checkForPower(index, j);
             if (
@@ -252,12 +250,12 @@ export default function Rules(game, power) {
                 game.board[rIdx][col] = game.candies[rIdx][col].color[0] + "p";
                 game.candies[rIdx][col].color =
                   game.candies[rIdx][col].color[0] + "p";
-                audio.packetCreated();
+                audios.packetCreated();
               } else {
                 game.board[row][col] = game.candies[rIdx][col].color[0] + "p";
                 game.candies[row][col].color =
                   game.candies[rIdx][col].color[0] + "p";
-                audio.packetCreated();
+                audios.packetCreated();
               }
             }
           });
@@ -290,12 +288,12 @@ export default function Rules(game, power) {
                 game.board[rIdx][col] = game.candies[rIdx][col].color[0] + "p";
                 game.candies[rIdx][col].color =
                   game.candies[rIdx][col].color[0] + "p";
-                audio.packetCreated();
+                audios.packetCreated();
               } else {
                 game.board[row][col] = game.candies[rIdx][col].color[0] + "p";
                 game.candies[row][col].color =
                   game.candies[rIdx][col].color[0] + "p";
-                audio.packetCreated();
+                audios.packetCreated();
               }
             }
           });
@@ -328,12 +326,12 @@ export default function Rules(game, power) {
                 game.board[rIdx][col] = game.candies[rIdx][col].color[0] + "p";
                 game.candies[rIdx][col].color =
                   game.candies[rIdx][col].color[0] + "p";
-                audio.packetCreated();
+                audios.packetCreated();
               } else {
                 game.board[row][col] = game.candies[rIdx][col].color[0] + "p";
                 game.candies[row][col].color =
                   game.candies[rIdx][col].color[0] + "p";
-                audio.packetCreated();
+                audios.packetCreated();
               }
             }
           });
