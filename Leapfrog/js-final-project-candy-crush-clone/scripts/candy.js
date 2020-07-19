@@ -54,8 +54,15 @@ export default function Candy(game, x, y, color, id) {
   this.dragDirection = "center";
   this.moveAboveCandy = false;
   this.animationTime = CANDY_HEIGHT;
+  this.packetAnimation = 0;
+  this.normalPacket = true;
 
   this.draw = () => {
+    this.packetAnimation += 1;
+    if (this.packetAnimation > 20) {
+      this.normalPacket = !this.normalPacket;
+      this.packetAnimation = 0;
+    }
     switch (this.color) {
       //for red candies
       case "r":
@@ -324,10 +331,30 @@ export default function Candy(game, x, y, color, id) {
         );
         break;
       case "explode":
-        drawImageContext(CTX, BOMB, this.x, this.y, this.width, this.height);
+        if (this.normalPacket)
+          drawImageContext(CTX, BOMB, this.x, this.y, this.width, this.height);
+        else
+          drawImageContext(
+            CTX,
+            BOMB,
+            this.x + 10,
+            this.y + 10,
+            this.width - 20,
+            this.height - 20
+          );
         break;
       case "doubleExplode":
-        drawImageContext(CTX, BOMB, this.x, this.y, this.width, this.height);
+        if (this.normalPacket)
+          drawImageContext(CTX, BOMB, this.x, this.y, this.width, this.height);
+        else
+          drawImageContext(
+            CTX,
+            BOMB,
+            this.x + 10,
+            this.y + 10,
+            this.width - 20,
+            this.height - 20
+          );
         break;
       default:
         drawImageContext(
