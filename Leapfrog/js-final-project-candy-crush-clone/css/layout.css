@@ -12,6 +12,7 @@
 
 .left-container {
   /* width: 30%; */
+  position: relative;
   width: 300px;
   height: 600px;
   background-color: transparent;
@@ -24,13 +25,12 @@
   color: #3a3838;
 }
 
+.score-container {
+  display: none;
+}
 .right-container {
   position: relative;
-  /* width: 70%; */
   width: 600px;
   height: 600px;
 }
 
-#canvas {
-  /* position: absolute; */
-}

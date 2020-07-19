@@ -1,4 +1,5 @@
-export default function Score(game) {
+export default function Score(game, audios, screen) {
+  var self = this;
   this.game = game;
   this.score = 0;
   this.highScore = localStorage.getItem("highScore")
@@ -12,6 +13,13 @@ export default function Score(game) {
   this.targetText = document.getElementById("target");
   this.obj1Text = document.getElementById("obj1");
   this.obj2Text = document.getElementById("obj2");
+
+  this.restartBtn = document.getElementById("restartBtn");
+  this.volumeBtn = document.getElementById("volumeBtn");
+  this.pauseBtn = document.getElementById("pauseBtn");
+  this.menuBtn = document.getElementById("menuBtn");
+
+  this.scoreContainer = document.getElementById("scoreContainer");
 
   this.clearScore = () => {
     this.score = 0;
@@ -48,4 +56,44 @@ export default function Score(game) {
       this.obj2Text.innerHTML = "Green Packet: " + game.candiesCount.gp + "/ 1";
     }
   };
+
+  this.onChangeScreen = () => {
+    if (screen.show === "Levels" || screen.show === "Start Menu") {
+      this.scoreContainer.style.display = "none";
+    } else {
+      this.scoreContainer.style.display = "block";
+    }
+  };
+
+  function volume() {
+    audios.pressed();
+    if (audios.enabled) {
+      audios.enabled = false;
+      audios.stopBG();
+    } else {
+      audios.enabled = true;
+      audios.level_bg();
+    }
+  }
+  this.volumeBtn.addEventListener("click", volume, false);
+
+  function restart() {
+    audios.pressed();
+    game.clearGame();
+    self.clearScore();
+  }
+  this.restartBtn.addEventListener("click", restart, false);
+
+  function pause() {
+    audios.pressed();
+    game.isPaused = !game.isPaused;
+  }
+  this.pauseBtn.addEventListener("click", pause, false);
+
+  function menu() {
+    audios.pressed();
+    screen.show = "Levels";
+    self.onChangeScreen();
+  }
+  this.menuBtn.addEventListener("click", menu, false);
 }

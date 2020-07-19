@@ -1,0 +1,43 @@
+.btn {
+  position: absolute;
+  bottom: 15px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 125px;
+  height: 40px;
+}
+
+.restart-btn {
+  left: 15px;
+  background-image: url("../images/restartBtn.png");
+}
+.restart-btn:hover {
+  background-image: url("../images/restartBtn-selected.png");
+}
+
+.menu-btn {
+  left: 15px;
+  bottom: 65px;
+  background-image: url("../images/menuBtn.png");
+}
+.menu-btn:hover {
+  background-image: url("../images/menuBtn-selected.png");
+}
+
+.volume-btn {
+  right: 15px;
+  background-image: url("../images/volumeBtn.png");
+}
+.volume-btn:hover {
+  background-image: url("../images/volumeBtn-selected.png");
+}
+
+.pause-btn {
+  right: 15px;
+  bottom: 65px;
+  background-image: url("../images/pauseBtn.png");
+}
+.pause-btn:hover {
+  background-image: url("../images/pauseBtn-selected.png");
+}
