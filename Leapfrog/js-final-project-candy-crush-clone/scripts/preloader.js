@@ -33,6 +33,14 @@ export default function Preloader() {
     "./images/orange-col",
     "./images/orange-packet",
 
+    
+    "./images/red-packet-explode",
+    "./images/blue-packet-explode",
+    "./images/green-packet-explode",
+    "./images/yellow-packet-explode",
+    "./images/orange-packet-explode",
+    "./images/purple-packet-explode",
+
     "./images/color-bomb",
     "./images/bomb",
 

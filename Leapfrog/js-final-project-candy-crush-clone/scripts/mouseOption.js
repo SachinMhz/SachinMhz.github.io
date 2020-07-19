@@ -117,7 +117,7 @@ export default function MouseOption({
 
             let row = Math.floor(candy.id / game.row) + game.row;
             let col = candy.id % game.col;
-            if (direction !== "center") {
+            if (direction !== "center" && score.moves > 0) {
               if (direction === "right") {
                 game.replacedCandy.row = row;
                 game.replacedCandy.col = col + 1;
@@ -141,11 +141,11 @@ export default function MouseOption({
               }
               //if player swaps the candies :
               candy.isDraggable = false;
-              // if (rules.checkValidMove()) {
+              if (rules.checkValidMove()) {
               game.isSwapping = true;
               audios.swap();
               score.moves -= 1;
-              // }
+              }
             }
           } else {
             candy.x = candy.realX;
