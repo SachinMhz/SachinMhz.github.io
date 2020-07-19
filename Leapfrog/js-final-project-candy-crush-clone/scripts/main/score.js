@@ -43,6 +43,7 @@ export default function Score(game, audios, screen) {
 
     if (game.level == 1) {
       this.obj1Text.innerHTML = 'Score: ' + 2500;
+      this.obj2Text.innerHTML = '';
     }
     //
     else if (game.level == 2) {
@@ -59,6 +60,7 @@ export default function Score(game, audios, screen) {
     //
     else if (game.level == 4) {
       this.obj1Text.innerHTML = 'Color Bomb: ' + game.candiesCount.cb + ' / 2';
+      this.obj2Text.innerHTML = '';
     }
     //
     else if (game.level == 5) {
