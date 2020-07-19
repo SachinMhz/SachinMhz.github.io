@@ -36,10 +36,17 @@ import {
   COLOR_BOMB,
   NO_CANDY,
   BOMB,
+  BLUE_PE,
+  RED_PE,
+  GREEN_PE,
+  ORANGE_PE,
+  YELLOW_PE,
+  PURPLE_PE,
 } from "./constants.js";
 import { drawImageContext } from "./helperFunc.js";
 
 export default function Candy(game, x, y, color, id) {
+  var draw = drawImageContext;
   this.game = game;
   this.realX = x * CANDY_WIDTH;
   this.realY = y * CANDY_HEIGHT;
@@ -66,305 +73,172 @@ export default function Candy(game, x, y, color, id) {
     switch (this.color) {
       //for red candies
       case "r":
-        drawImageContext(CTX, RED, this.x, this.y, this.width, this.height);
+        draw(CTX, RED, this.x, this.y, this.width, this.height);
         break;
       case "rs":
-        drawImageContext(
-          CTX,
-          RED_SELECTED,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, RED_SELECTED, this.x, this.y, this.width, this.height);
         break;
       case "rr":
-        drawImageContext(CTX, RED_ROW, this.x, this.y, this.width, this.height);
+        draw(CTX, RED_ROW, this.x, this.y, this.width, this.height);
         break;
       case "rc":
-        drawImageContext(CTX, RED_COL, this.x, this.y, this.width, this.height);
+        draw(CTX, RED_COL, this.x, this.y, this.width, this.height);
         break;
       case "rp":
-        drawImageContext(
-          CTX,
-          RED_PACKET,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, RED_PACKET, this.x, this.y, this.width, this.height);
         break;
 
       //for blue candies
       case "b":
-        drawImageContext(CTX, BLUE, this.x, this.y, this.width, this.height);
+        draw(CTX, BLUE, this.x, this.y, this.width, this.height);
         break;
       case "bs":
-        drawImageContext(
-          CTX,
-          BLUE_SELECTED,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, BLUE_SELECTED, this.x, this.y, this.width, this.height);
         break;
       case "br":
-        drawImageContext(
-          CTX,
-          BLUE_ROW,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, BLUE_ROW, this.x, this.y, this.width, this.height);
         break;
       case "bc":
-        drawImageContext(
-          CTX,
-          BLUE_COL,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, BLUE_COL, this.x, this.y, this.width, this.height);
         break;
       case "bp":
-        drawImageContext(
-          CTX,
-          BLUE_PACKET,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, BLUE_PACKET, this.x, this.y, this.width, this.height);
         break;
 
       //for green color
       case "g":
-        drawImageContext(CTX, GREEN, this.x, this.y, this.width, this.height);
+        draw(CTX, GREEN, this.x, this.y, this.width, this.height);
         break;
       case "gs":
-        drawImageContext(
-          CTX,
-          GREEN_SELECTED,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, GREEN_SELECTED, this.x, this.y, this.width, this.height);
         break;
       case "gr":
-        drawImageContext(
-          CTX,
-          GREEN_ROW,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, GREEN_ROW, this.x, this.y, this.width, this.height);
         break;
       case "gc":
-        drawImageContext(
-          CTX,
-          GREEN_COL,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, GREEN_COL, this.x, this.y, this.width, this.height);
         break;
       case "gp":
-        drawImageContext(
-          CTX,
-          GREEN_PACKET,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, GREEN_PACKET, this.x, this.y, this.width, this.height);
         break;
 
       //for yellow color
       case "y":
-        drawImageContext(CTX, YELLOW, this.x, this.y, this.width, this.height);
+        draw(CTX, YELLOW, this.x, this.y, this.width, this.height);
         break;
       case "ys":
-        drawImageContext(
-          CTX,
-          YELLOW_SELECTED,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, YELLOW_SELECTED, this.x, this.y, this.width, this.height);
         break;
       case "yr":
-        drawImageContext(
-          CTX,
-          YELLOW_ROW,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, YELLOW_ROW, this.x, this.y, this.width, this.height);
         break;
       case "yc":
-        drawImageContext(
-          CTX,
-          YELLOW_COL,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, YELLOW_COL, this.x, this.y, this.width, this.height);
         break;
       case "yp":
-        drawImageContext(
-          CTX,
-          YELLOW_PACKET,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, YELLOW_PACKET, this.x, this.y, this.width, this.height);
         break;
 
       //for orange
       case "o":
-        drawImageContext(CTX, ORANGE, this.x, this.y, this.width, this.height);
+        draw(CTX, ORANGE, this.x, this.y, this.width, this.height);
         break;
       case "os":
-        drawImageContext(
-          CTX,
-          ORANGE_SELECTED,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, ORANGE_SELECTED, this.x, this.y, this.width, this.height);
         break;
       case "or":
-        drawImageContext(
-          CTX,
-          ORANGE_ROW,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, ORANGE_ROW, this.x, this.y, this.width, this.height);
         break;
       case "op":
-        drawImageContext(
-          CTX,
-          ORANGE_PACKET,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, ORANGE_PACKET, this.x, this.y, this.width, this.height);
         break;
       case "oc":
-        drawImageContext(
-          CTX,
-          ORANGE_COL,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, ORANGE_COL, this.x, this.y, this.width, this.height);
         break;
       //for purple color
       case "p":
-        drawImageContext(CTX, PURPLE, this.x, this.y, this.width, this.height);
+        draw(CTX, PURPLE, this.x, this.y, this.width, this.height);
         break;
       case "ps":
-        drawImageContext(
-          CTX,
-          PURPLE_SELECTED,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, PURPLE_SELECTED, this.x, this.y, this.width, this.height);
         break;
       case "pr":
-        drawImageContext(
-          CTX,
-          PURPLE_ROW,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, PURPLE_ROW, this.x, this.y, this.width, this.height);
         break;
       case "pc":
-        drawImageContext(
-          CTX,
-          PURPLE_COL,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, PURPLE_COL, this.x, this.y, this.width, this.height);
         break;
       case "pp":
-        drawImageContext(
-          CTX,
-          PURPLE_PACKET,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, PURPLE_PACKET, this.x, this.y, this.width, this.height);
         break;
 
       //color bomb
       case "cb":
-        drawImageContext(
-          CTX,
-          COLOR_BOMB,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, COLOR_BOMB, this.x, this.y, this.width, this.height);
         break;
-      case "explode":
+      case "rep":
         if (this.normalPacket)
-          drawImageContext(CTX, BOMB, this.x, this.y, this.width, this.height);
-        else
-          drawImageContext(
-            CTX,
-            BOMB,
-            this.x + 10,
-            this.y + 10,
-            this.width - 20,
-            this.height - 20
-          );
+          draw(CTX, RED, this.x, this.y, this.width, this.height);
+        else draw(CTX, RED_PE, this.x, this.y, this.width, this.height);
         break;
-      case "doubleExplode":
+      case "bep":
         if (this.normalPacket)
-          drawImageContext(CTX, BOMB, this.x, this.y, this.width, this.height);
-        else
-          drawImageContext(
-            CTX,
-            BOMB,
-            this.x + 10,
-            this.y + 10,
-            this.width - 20,
-            this.height - 20
-          );
+          draw(CTX, BLUE, this.x, this.y, this.width, this.height);
+        else draw(CTX, BLUE_PE, this.x, this.y, this.width, this.height);
+        break;
+      case "gep":
+        if (this.normalPacket)
+          draw(CTX, GREEN, this.x, this.y, this.width, this.height);
+        else draw(CTX, GREEN_PE, this.x, this.y, this.width, this.height);
+        break;
+      case "yep":
+        if (this.normalPacket)
+          draw(CTX, YELLOW, this.x, this.y, this.width, this.height);
+        else draw(CTX, YELLOW_PE, this.x, this.y, this.width, this.height);
+        break;
+      case "oep":
+        if (this.normalPacket)
+          draw(CTX, ORANGE, this.x, this.y, this.width, this.height);
+        else draw(CTX, ORANGE_PE, this.x, this.y, this.width, this.height);
+        break;
+      case "pep":
+        if (this.normalPacket)
+          draw(CTX, PURPLE, this.x, this.y, this.width, this.height);
+        else draw(CTX, PURPLE_PE, this.x, this.y, this.width, this.height);
+        break;
+
+      case "rdep":
+        if (this.normalPacket)
+          draw(CTX, RED, this.x, this.y, this.width, this.height);
+        else draw(CTX, RED_PE, this.x, this.y, this.width, this.height);
+        break;
+      case "bdep":
+        if (this.normalPacket)
+          draw(CTX, BLUE, this.x, this.y, this.width, this.height);
+        else draw(CTX, BLUE_PE, this.x, this.y, this.width, this.height);
+        break;
+      case "gdep":
+        if (this.normalPacket)
+          draw(CTX, GREEN, this.x, this.y, this.width, this.height);
+        else draw(CTX, GREEN_PE, this.x, this.y, this.width, this.height);
+        break;
+      case "ydep":
+        if (this.normalPacket)
+          draw(CTX, YELLOW, this.x, this.y, this.width, this.height);
+        else draw(CTX, YELLOW_PE, this.x, this.y, this.width, this.height);
+        break;
+      case "odep":
+        if (this.normalPacket)
+          draw(CTX, ORANGE, this.x, this.y, this.width, this.height);
+        else draw(CTX, ORANGE_PE, this.x, this.y, this.width, this.height);
+        break;
+      case "pdep":
+        if (this.normalPacket)
+          draw(CTX, PURPLE, this.x, this.y, this.width, this.height);
+        else draw(CTX, PURPLE_PE, this.x, this.y, this.width, this.height);
         break;
       default:
-        drawImageContext(
-          CTX,
-          NO_CANDY,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
+        draw(CTX, NO_CANDY, this.x, this.y, this.width, this.height);
     }
   };
 }
