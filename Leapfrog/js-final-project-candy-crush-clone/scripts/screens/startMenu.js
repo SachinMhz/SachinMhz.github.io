@@ -4,8 +4,8 @@ import {
   START_BG,
   PLAY_BTN_SELECTED,
   PLAY_BTN,
-} from './constants.js';
-import { drawImageContext } from './helperFunc.js';
+} from '../utils/constants.js';
+import { drawImageContext } from '../utils/helperFunc.js';
 
 export default function StartMenu(game) {
   this.game = game;

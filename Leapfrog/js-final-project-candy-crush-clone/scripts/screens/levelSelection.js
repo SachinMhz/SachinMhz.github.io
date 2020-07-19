@@ -14,8 +14,8 @@ import {
   LEVEL_5_SELECTED,
   BACK,
   BACK_SELECTED,
-} from './constants.js';
-import { drawImageContext } from './helperFunc.js';
+} from '../utils/constants.js';
+import { drawImageContext } from '../utils/helperFunc.js';
 
 /**
  * 

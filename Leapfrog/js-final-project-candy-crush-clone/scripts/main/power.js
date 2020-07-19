@@ -1,4 +1,4 @@
-import { CANDY_POINT } from './constants.js';
+import { CANDY_POINT } from '../utils/constants.js';
 
 /**
  *

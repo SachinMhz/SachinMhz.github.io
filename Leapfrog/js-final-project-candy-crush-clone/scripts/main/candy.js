@@ -34,8 +34,8 @@ import {
   ORANGE_PE,
   YELLOW_PE,
   PURPLE_PE,
-} from './constants.js';
-import { drawImageContext } from './helperFunc.js';
+} from '../utils/constants.js';
+import { drawImageContext } from '../utils/helperFunc.js';
 
 export default function Candy(game, x, y, color, id) {
   this.game = game;

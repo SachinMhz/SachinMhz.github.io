@@ -4,8 +4,8 @@ import {
   CANDY_WIDTH,
   BG_1,
   BG_SELECTED,
-} from './constants.js';
-import { drawImageContext } from './helperFunc.js';
+} from '../utils/constants.js';
+import { drawImageContext } from '../utils/helperFunc.js';
 
 export default function Background(x, y, bg) {
   this.x = x * CANDY_WIDTH;

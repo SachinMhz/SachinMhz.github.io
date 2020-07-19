@@ -1,48 +1,48 @@
 import {
   CTX,
   CANVAS,
-  GAME_OVER_BG,
-  RETRY,
+  GAME_COMPLETE_BG,
+  NEXT,
   MENU,
   MENU_SELECTED,
-  RETRY_SELECTED,
-} from './constants.js';
-import { drawImageContext } from './helperFunc.js';
+  NEXT_SELECTED,
+} from '../utils/constants.js';
+import { drawImageContext } from '../utils/helperFunc.js';
 
 /** A class for showing game complete screen
  * @param game : complete game object,
  * @param score : score object for showing score in canvas
  */
-export default function GameOver(game, score) {
+export default function GameComplete(game, score) {
   this.game = game;
   this.score = score;
-  this.retrySelected = false;
+  this.nextSelected = false;
   this.menuSelected = false;
   this.menuBtn = { x: 75, y: 475, width: 200, height: 75 };
-  this.retryBtn = { x: 325, y: 475, width: 200, height: 75 };
+  this.nextBtn = { x: 325, y: 475, width: 200, height: 75 };
 
   /** draws the background and button to the screen */
   this.draw = () => {
     // background
-    drawImageContext(CTX, GAME_OVER_BG, 0, 0, CANVAS.width, CANVAS.height);
+    drawImageContext(CTX, GAME_COMPLETE_BG, 0, 0, CANVAS.width, CANVAS.height);
     //back button
-    if (!this.retrySelected) {
+    if (!this.nextSelected) {
       drawImageContext(
         CTX,
-        RETRY,
-        this.retryBtn.x,
-        this.retryBtn.y,
-        this.retryBtn.width,
-        this.retryBtn.height
+        NEXT,
+        this.nextBtn.x,
+        this.nextBtn.y,
+        this.nextBtn.width,
+        this.nextBtn.height
       );
     } else {
       drawImageContext(
         CTX,
-        RETRY_SELECTED,
-        this.retryBtn.x,
-        this.retryBtn.y,
-        this.retryBtn.width,
-        this.retryBtn.height
+        NEXT_SELECTED,
+        this.nextBtn.x,
+        this.nextBtn.y,
+        this.nextBtn.width,
+        this.nextBtn.height
       );
     }
 
@@ -62,17 +62,17 @@ export default function GameOver(game, score) {
         this.menuBtn.x,
         this.menuBtn.y,
         this.menuBtn.width,
-        this.retryBtn.height
+        this.nextBtn.height
       );
     }
-    
+
     // display score and highScore text in the canvas
     CTX.font = '30px Arial';
     CTX.fillStyle = 'blue';
     CTX.fillText(score.score, 400, 365);
-    CTX.fillText(score.highScore, 400, 415);
+    CTX.fillText(score.highScore, 400, 410);
 
-    // display  game level information text in the canvas
+    //displays level information text in the canvas
     CTX.font = '55px Arial';
     CTX.fillStyle = '#682b71';
     CTX.fillText(game.level, 375, 65);

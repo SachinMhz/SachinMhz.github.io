@@ -1,4 +1,4 @@
-import { swapArray, randomInt, getRandomColor } from './helperFunc.js';
+import { swapArray, getRandomColor } from '../utils/helperFunc.js';
 
 export default function Rules(game, power, audios) {
   this.game = game;

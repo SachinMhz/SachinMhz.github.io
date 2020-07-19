@@ -1,5 +1,5 @@
-import { getRandomColor, swapArray } from './helperFunc.js';
-import { CANDY_HEIGHT, GAME_ROW, GAME_COL } from './constants.js';
+import { getRandomColor, swapArray } from '../utils/helperFunc.js';
+import { CANDY_HEIGHT, GAME_ROW, GAME_COL } from '../utils/constants.js';
 import Candy from './candy.js';
 import Background from './candyBG.js';
 

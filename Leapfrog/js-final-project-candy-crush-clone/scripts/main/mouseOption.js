@@ -1,4 +1,4 @@
-import { isPointInsideRect, isDragLimit } from './helperFunc.js';
+import { isPointInsideRect, isDragLimit } from '../utils/helperFunc.js';
 
 /**
  *

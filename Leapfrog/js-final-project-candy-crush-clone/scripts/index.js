@@ -1,20 +1,20 @@
-import { CANVAS, CTX } from './constants.js';
+import { CANVAS, CTX } from './utils/constants.js';
+import Audios from './utils/audio.js';
 
 // Game objects import
-import Game from './game.js';
-import Preloader from './preloader.js';
-import Power from './power.js';
-import Score from './score.js';
-import Rules from './rules.js';
-import Audios from './audio.js';
-import Objective from './objective.js';
-import MouseOption from './mouseOption.js';
+import Game from './main/game.js';
+import Preloader from './utils/preloader.js';
+import Power from './main/power.js';
+import Score from './main/score.js';
+import Rules from './main/rules.js';
+import Objective from './main/objective.js';
+import MouseOption from './main/mouseOption.js';
 
 // Screens import
-import StartMenu from './startMenu.js';
-import LevelSelection from './levelSelection.js';
-import GameComplete from './gameComplete.js';
-import GameOver from './gameOver.js';
+import StartMenu from './screens/startMenu.js';
+import LevelSelection from './screens/levelSelection.js';
+import GameComplete from './screens/gameComplete.js';
+import GameOver from './screens/gameOver.js';
 
 /** Initialize the main game screen **/
 function Main() {

@@ -1,4 +1,4 @@
-import { NO_OF_MOVES } from './constants.js';
+import { NO_OF_MOVES } from '../utils/constants.js';
 
 export default function Score(game, audios, screen) {
   var self = this;
