@@ -1,6 +1,6 @@
 import { CANDY_POINT, CANDY_COLOR } from "./constants.js";
 
-export default function Power(game, score,audios) {
+export default function Power(game, score, audios) {
   this.game = game;
   this.score = score;
 
@@ -20,15 +20,16 @@ export default function Power(game, score,audios) {
       this.destroyEntireRow(row, col);
     } else if (game.board[row][col][1] === "p") {
       audios.packetBlast();
+      let temp = game.board[row][col];
       game.willExplodePacket = true;
       this.packetPower(row, col);
-      game.board[row][col] = "explode";
-      game.candies[row][col].color = "explode";
+      game.board[row][col] = temp[0] + "ep";
+      game.candies[row][col].color = temp[0] + "ep";
     } else if (game.board[row][col] === "cb") {
       audios.colorBombBlast();
       this.colorBombPowerAuto();
       game.board[row][col] = 0;
-    } else if (game.board[row][col] === "explode") {
+    } else if (game.board[row][col][1] === "e") {
       audios.packetBlast();
       this.packetPower(row, col);
     }
@@ -73,7 +74,7 @@ export default function Power(game, score,audios) {
   this.packetSecondExplosion = () => {
     for (let row = game.row; row < game.row * 2; row++) {
       for (let col = 0; col < game.col; col++) {
-        if (game.board[row][col] === "explode") {
+        if (game.board[row][col][1] === "e") {
           this.checkForPower(row, col);
         }
       }
@@ -236,7 +237,7 @@ export default function Power(game, score,audios) {
       } else if (rCol === game.col - 2) {
         colArray = colArray.splice(0, 3);
       }
-
+      let temp = game.board[rRow][rCol][0];
       game.board[rRow][rCol] = 0;
       game.board[dRow][dCol] = 0;
       rowArray.forEach((_row) => {
@@ -247,8 +248,8 @@ export default function Power(game, score,audios) {
       if (!game.willExplodePacket) {
         audios.packetBlast();
         game.willExplodePacket = true;
-        game.board[rRow][rCol] = "doubleExplode";
-        game.candies[rRow][rCol].color = "doubleExplode";
+        game.board[rRow][rCol] = temp + "dep";
+        game.candies[rRow][rCol].color = temp + "dep";
       }
     }
   };
@@ -257,7 +258,7 @@ export default function Power(game, score,audios) {
     audios.packetBlast();
     for (let row = game.row; row < game.row * 2; row++) {
       for (let col = 0; col < game.col; col++) {
-        if (game.board[row][col] === "doubleExplode") {
+        if (game.board[row][col][1] === "d") {
           let rowArray = [row - 2, row - 1, row, row + 1, row + 2];
           let colArray = [col - 2, col - 1, col, col + 1, col + 2];
           if (row === game.row) {

@@ -13,8 +13,8 @@ export default function Rules(game, power, audios) {
           game.isAnimating = true;
           break loop_row;
         } else if (
-          game.board[i][j] === "explode" ||
-          game.board[i][j] === "doubleExplode"
+          game.board[i][j][1] === "e" ||
+          game.board[i][j][1] === "d"
         ) {
           game.willExplodePacket = true;
         }

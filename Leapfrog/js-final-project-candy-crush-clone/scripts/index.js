@@ -169,7 +169,7 @@ function Main() {
   });
 
   CANVAS.addEventListener("mouseup", (e) => {
-    // console.log("board", game.board.slice(game.row, game.row * 2));
+    console.log("board", game.board.slice(game.row, game.row * 2));
     // console.log(game.isAnimating, game.frame);
     var mouse = {
       x: e.offsetX,
