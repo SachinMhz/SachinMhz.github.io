@@ -23,6 +23,7 @@ export default function Game() {
   this.isDragged = false;
   this.willExplodePacket = false;
   this.level = 1;
+  this.isPaused = false;
 
   this.createBoard = () => {
     this.board = [];
