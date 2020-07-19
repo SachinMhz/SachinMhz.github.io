@@ -14,9 +14,13 @@ import {
   LEVEL_5_SELECTED,
   BACK,
   BACK_SELECTED,
-} from "./constants.js";
-import { drawImageContext } from "./helperFunc.js";
+} from './constants.js';
+import { drawImageContext } from './helperFunc.js';
 
+/**
+ * 
+ * @param {object} game : a game objects  
+ */
 export default function LevelSelection(game) {
   this.game = game;
   this.backSelected = false;
@@ -32,6 +36,7 @@ export default function LevelSelection(game) {
   this.fourBtn = { x: 300, y: 50, width: 75, height: 75 };
   this.fiveBtn = { x: 475, y: 100, width: 75, height: 75 };
 
+  /** draws level map and button on the screen */
   this.draw = () => {
     // background
     drawImageContext(CTX, LEVEL_BG, 0, 0, CANVAS.width, CANVAS.height);
@@ -56,7 +61,7 @@ export default function LevelSelection(game) {
       );
     }
 
-    //back button
+    //one button
     if (!this.oneSelected) {
       drawImageContext(
         CTX,
@@ -77,7 +82,7 @@ export default function LevelSelection(game) {
       );
     }
 
-    //back button
+    //two button
     if (!this.twoSelected) {
       drawImageContext(
         CTX,
@@ -98,7 +103,7 @@ export default function LevelSelection(game) {
       );
     }
 
-    //back button
+    //three button
     if (!this.threeSelected) {
       drawImageContext(
         CTX,
@@ -119,7 +124,7 @@ export default function LevelSelection(game) {
       );
     }
 
-    //back button
+    //four button
     if (!this.fourSelected) {
       drawImageContext(
         CTX,
@@ -140,7 +145,7 @@ export default function LevelSelection(game) {
       );
     }
 
-    //back button
+    //five button
     if (!this.fiveSelected) {
       drawImageContext(
         CTX,

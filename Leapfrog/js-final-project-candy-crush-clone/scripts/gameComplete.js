@@ -6,9 +6,13 @@ import {
   MENU,
   MENU_SELECTED,
   NEXT_SELECTED,
-} from "./constants.js";
-import { drawImageContext } from "./helperFunc.js";
+} from './constants.js';
+import { drawImageContext } from './helperFunc.js';
 
+/** A class for showing game complete screen
+ * @param game : complete game object,
+ * @param score : score object for showing score in canvas
+ */
 export default function GameComplete(game, score) {
   this.game = game;
   this.score = score;
@@ -17,6 +21,7 @@ export default function GameComplete(game, score) {
   this.menuBtn = { x: 75, y: 475, width: 200, height: 75 };
   this.nextBtn = { x: 325, y: 475, width: 200, height: 75 };
 
+  /** draws the background and button to the screen */
   this.draw = () => {
     // background
     drawImageContext(CTX, GAME_COMPLETE_BG, 0, 0, CANVAS.width, CANVAS.height);
@@ -61,13 +66,15 @@ export default function GameComplete(game, score) {
       );
     }
 
-    CTX.font = "30px Arial";
-    CTX.fillStyle = "blue";
+    // display score and highScore text in the canvas
+    CTX.font = '30px Arial';
+    CTX.fillStyle = 'blue';
     CTX.fillText(score.score, 400, 365);
     CTX.fillText(score.highScore, 400, 410);
 
-    CTX.font = "55px Arial";
-    CTX.fillStyle = "#682b71";
+    //displays level information text in the canvas
+    CTX.font = '55px Arial';
+    CTX.fillStyle = '#682b71';
     CTX.fillText(game.level, 375, 65);
   };
 }

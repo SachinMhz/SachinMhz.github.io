@@ -1,5 +1,4 @@
 import { CTX, CANVAS } from "./constants.js";
-//import { addAudio } from './audio.js';
 
 export default function Preloader() {
   this.images = [
@@ -33,7 +32,6 @@ export default function Preloader() {
     "./images/orange-col",
     "./images/orange-packet",
 
-    
     "./images/red-packet-explode",
     "./images/blue-packet-explode",
     "./images/green-packet-explode",
@@ -42,7 +40,6 @@ export default function Preloader() {
     "./images/purple-packet-explode",
 
     "./images/color-bomb",
-    "./images/bomb",
 
     "./images/noBG",
     "./images/candyBG",
@@ -95,24 +92,38 @@ export default function Preloader() {
     "./audios/packet_candy_created.mp3",
     "./audios/striped_candy_created.mp3",
     "./audios/swap.mp3",
-    "./audios/button_press.mp3"
+    "./audios/button_press.mp3",
   ];
+
+  //initialize image and audio load variables
   this.loadedImages = 0;
   this.loadedAudio = 0;
 
   this.load = function (start) {
     for (var i = 0; i < this.images.length; i++) {
-      CTX.beginPath();
-      CTX.rect(0, 0, CANVAS.width, CANVAS.height);
-      CTX.fillStyle = "orange";
-      CTX.fill();
-      CTX.fillStyle = "white";
-      CTX.fillText("Loading Images ...", 300, 300);
-
       var img = new Image();
       img.src = this.images[i] + ".png";
+
       img.onload = () => {
         this.loadedImages += 1;
+
+        //draw into canvas
+        CTX.beginPath();
+        CTX.rect(0, 0, CANVAS.width, CANVAS.height);
+        CTX.font = "24px Arial";
+        CTX.fillStyle = "orange";
+        CTX.fill();
+        CTX.fillStyle = "white";
+        CTX.textAlign = "center";
+        CTX.fillText(
+          "Loading Images ..." +
+            this.loadedImages +
+            " of " +
+            this.images.length,
+          CANVAS.width / 2,
+          CANVAS.height / 2
+        );
+
         if (this.loadedImages == this.images.length - 1) {
           this.loadAudio(start);
         }
@@ -122,17 +133,26 @@ export default function Preloader() {
 
   this.loadAudio = function (start) {
     for (var i = 0; i < this.audio.length; i++) {
-      CTX.beginPath();
-      CTX.rect(0, 0, CANVAS.width, CANVAS.height);
-      CTX.fillStyle = "Orange";
-      CTX.fill();
-      CTX.fillStyle = "white";
-      CTX.fillText("Loading Sound ...", 300, 300);
-
       var audio = new Audio();
       audio.src = this.audio[i];
+
       audio.addEventListener("canplay", () => {
         this.loadedAudio += 1;
+        
+        // draw into canvas
+        CTX.beginPath();
+        CTX.rect(0, 0, CANVAS.width, CANVAS.height);
+        CTX.font = "24px Arial";
+        CTX.fillStyle = "orange";
+        CTX.fill();
+        CTX.fillStyle = "white";
+        CTX.textAlign = "center";
+        CTX.fillText(
+          "Loading Audios ..." + this.loadedAudio + " of " + this.audio.length,
+          CANVAS.width / 2,
+          CANVAS.height / 2
+        );
+
         if (this.loadedAudio == this.audio.length - 1) {
           start();
         }

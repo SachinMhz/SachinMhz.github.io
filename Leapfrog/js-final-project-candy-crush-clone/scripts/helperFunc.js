@@ -1,4 +1,4 @@
-import { CANDY_COLOR } from "./constants.js";
+import { CANDY_COLOR } from './constants.js';
 
 //returns random integer excluding max value
 export function randomInt(min, max) {
@@ -19,28 +19,7 @@ export function drawImageContext(ctx, img, x, y, width, height) {
   ctx.closePath();
 }
 
-//draw rect to the context
-export function drawRectContext(ctx, x, y, width, height, color) {
-  ctx.beginPath();
-  ctx.rect(x, y, width, height);
-  ctx.fillStyle = color;
-  ctx.fill();
-  ctx.closePath();
-}
-
-export function sortCandies(array) {
-  var result = array.sort(function (a, b) {
-    if (a.zIndex < b.zIndex) {
-      return -1;
-    }
-    if (a.zIndex > b.zIndex) {
-      return 1;
-    }
-    return 0;
-  });
-  return result;
-}
-
+/** finds out if the direction of the mouse moved */
 export function isDragLimit(mouse, candy) {
   //mouse inside the selected candy boundary
   if (
@@ -49,7 +28,8 @@ export function isDragLimit(mouse, candy) {
     mouse.y >= candy.realY &&
     mouse.y <= candy.realY + candy.height
   ) {
-    return "center";
+
+    return 'center';
   }
   //mouse outside the self boundary to the right side
   else if (
@@ -58,7 +38,8 @@ export function isDragLimit(mouse, candy) {
     mouse.y > candy.realY &&
     mouse.y < candy.realY + candy.height
   ) {
-    return "right";
+
+    return 'right';
   }
   //mouse outside the self boundary to the left side
   else if (
@@ -67,7 +48,8 @@ export function isDragLimit(mouse, candy) {
     mouse.y > candy.realY &&
     mouse.y < candy.realY + candy.height
   ) {
-    return "left";
+
+    return 'left';
   }
   //mouse outside the self boundary to the above
   else if (
@@ -76,7 +58,8 @@ export function isDragLimit(mouse, candy) {
     mouse.y > candy.realY - candy.height &&
     mouse.y < candy.realY
   ) {
-    return "up";
+
+    return 'up';
   }
   //mouse outside the self boundary to the below
   else if (
@@ -85,24 +68,14 @@ export function isDragLimit(mouse, candy) {
     mouse.y > candy.realY + candy.height &&
     mouse.y < candy.realY + candy.height * 2
   ) {
-    return "down";
+
+    return 'down';
   }
+
   return false;
 }
 
-export function isMouseInside(mouse, rect) {
-  //mouse inside the selected rect boundary
-  if (
-    mouse.x >= rect.x &&
-    mouse.x <= rect.x + rect.width &&
-    mouse.y >= rect.y &&
-    mouse.y <= rect.y + rect.height
-  ) {
-    return true;
-  }
-  return false;
-}
-
+/**  returns if the point is inside or outside a given rectangular object */
 export function isPointInsideRect(point, rect) {
   //mouse position inside the selected candy
   if (
@@ -111,11 +84,13 @@ export function isPointInsideRect(point, rect) {
     point.y > rect.y &&
     point.y < rect.y + rect.height
   ) {
+
     return true;
   }
+
   return false;
 }
-
+ /** swaps element of 2d array */
 export function swapArray(array, row1, col1, row2, col2) {
   let temp = array[row1][col1];
   array[row1][col1] = array[row2][col2];
@@ -126,6 +101,7 @@ export function swapArray(array, row1, col1, row2, col2) {
 export function getImage(path) {
   let image = new Image();
   image.src = path;
+
   return image;
 }
 
@@ -133,6 +109,7 @@ export function getImage(path) {
 export function getAudio(path) {
   let audio = new Audio();
   audio.src = path;
+
   return audio;
 }
 // responsible to play audio

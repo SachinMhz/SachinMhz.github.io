@@ -1,9 +1,10 @@
-import { swapArray, randomInt, getRandomColor } from "./helperFunc.js";
+import { swapArray, randomInt, getRandomColor } from './helperFunc.js';
 
 export default function Rules(game, power, audios) {
   this.game = game;
   this.power = power;
 
+  /** if there is zero on the board i.e. candy were destroyed then start animation */
   this.checkZero = () => {
     let row = game.row;
     let col = game.col;
@@ -12,16 +13,14 @@ export default function Rules(game, power, audios) {
         if (game.board[i][j] === 0) {
           game.isAnimating = true;
           break loop_row;
-        } else if (
-          game.board[i][j][1] === "e" ||
-          game.board[i][j][1] === "d"
-        ) {
+        } else if (game.board[i][j][1] === 'e' || game.board[i][j][1] === 'd') {
           game.willExplodePacket = true;
         }
       }
     }
   };
 
+  /** check three and destroy three similar candies being formed horizontally */
   this.checkThreeRow = () => {
     let row = game.row;
     let col = game.col;
@@ -41,6 +40,7 @@ export default function Rules(game, power, audios) {
     }
   };
 
+  /** check three and destroy three similar candies being formed vertically */
   this.checkThreeColumn = () => {
     for (let i = game.row; i < game.row * 2 - 2; i++) {
       for (let j = 0; j < game.col; j++) {
@@ -57,6 +57,7 @@ export default function Rules(game, power, audios) {
     }
   };
 
+  /** check three and destroy four similar candies being formed horizontally */
   this.checkFourRow = () => {
     for (let i = game.row; i < game.row * 2; i++) {
       for (let j = 0; j < game.col - 3; j++) {
@@ -77,30 +78,31 @@ export default function Rules(game, power, audios) {
             if (
               ((dragRow === i && dragCol === index) ||
                 (replRow === i && replCol === index)) &&
-              game.board[i][index][0] !== "e"
+              game.board[i][index][0] !== 'e'
             ) {
               isReasonDrag = true;
-              game.board[i][index] = game.candies[i][index].color[0] + "c";
+              game.board[i][index] = game.candies[i][index].color[0] + 'c';
               game.candies[i][index].color =
-                game.candies[i][index].color[0] + "c";
+                game.candies[i][index].color[0] + 'c';
             }
           });
-          if (!isReasonDrag && game.board[i][j][0] !== "e") {
+          if (!isReasonDrag && game.board[i][j][0] !== 'e') {
             game.board[i][j] =
               game.candies[i][j].color !== 0
-                ? game.candies[i][j].color[0] + "c"
-                : getRandomColor() + "c";
+                ? game.candies[i][j].color[0] + 'c'
+                : getRandomColor() + 'c';
 
             game.candies[i][j].color =
               game.candies[i][j].color !== 0
-                ? game.candies[i][j].color[0] + "c"
-                : getRandomColor() + "c";
+                ? game.candies[i][j].color[0] + 'c'
+                : getRandomColor() + 'c';
           }
         }
       }
     }
   };
 
+  /** check three and destroy four similar candies being formed vertically */
   this.checkFourColumn = () => {
     for (let i = game.row; i < game.row * 2 - 3; i++) {
       for (let j = 0; j < game.col; j++) {
@@ -121,31 +123,32 @@ export default function Rules(game, power, audios) {
             if (
               ((dragRow === index && dragCol === j) ||
                 (replRow === index && replCol === j)) &&
-              game.board[index][j][0] !== "e"
+              game.board[index][j][0] !== 'e'
             ) {
               isReasonDrag = true;
-              game.board[index][j] = game.candies[index][j].color[0] + "r";
+              game.board[index][j] = game.candies[index][j].color[0] + 'r';
               game.candies[index][j].color =
-                game.candies[index][j].color[0] + "r";
+                game.candies[index][j].color[0] + 'r';
             }
           });
 
-          if (!isReasonDrag && game.board[i][j][0] !== "e") {
+          if (!isReasonDrag && game.board[i][j][0] !== 'e') {
             game.board[i][j] =
               game.candies[i][j].color !== 0
-                ? game.candies[i][j].color[0] + "r"
-                : getRandomColor() + "r";
+                ? game.candies[i][j].color[0] + 'r'
+                : getRandomColor() + 'r';
 
             game.candies[i][j].color =
               game.candies[i][j].color !== 0
-                ? game.candies[i][j].color[0] + "r"
-                : getRandomColor() + "r";
+                ? game.candies[i][j].color[0] + 'r'
+                : getRandomColor() + 'r';
           }
         }
       }
     }
   };
 
+  /** check three and destroy five similar candies being formed horizontally */
   this.checkFiveRow = () => {
     for (let i = game.row; i < game.row * 2; i++) {
       for (let j = 0; j < game.col - 4; j++) {
@@ -166,22 +169,23 @@ export default function Rules(game, power, audios) {
             if (
               ((dragRow === i && dragCol === index) ||
                 (replRow === i && replCol === index)) &&
-              game.board[i][index][0] !== "e"
+              game.board[i][index][0] !== 'e'
             ) {
               isReasonDrag = true;
-              game.board[i][index] = "cb";
-              game.candies[i][index].color = "cb";
+              game.board[i][index] = 'cb';
+              game.candies[i][index].color = 'cb';
             }
           });
-          if (!isReasonDrag && game.board[i][j][0] !== "e") {
-            game.board[i][j] = "cb";
-            game.candies[i][j].color = "cb";
+          if (!isReasonDrag && game.board[i][j][0] !== 'e') {
+            game.board[i][j] = 'cb';
+            game.candies[i][j].color = 'cb';
           }
         }
       }
     }
   };
 
+  /** check three and destroy five similar candies being formed vertically */
   this.checkFiveColumn = () => {
     for (let i = game.row; i < game.row * 2 - 4; i++) {
       for (let j = 0; j < game.col; j++) {
@@ -202,22 +206,23 @@ export default function Rules(game, power, audios) {
             if (
               ((dragRow === index && dragCol === j) ||
                 (replRow === index && replCol === j)) &&
-              game.board[index][j][0] !== "e"
+              game.board[index][j][0] !== 'e'
             ) {
               isReasonDrag = true;
-              game.board[index][j] = "cb";
-              game.candies[index][j].color = "cb";
+              game.board[index][j] = 'cb';
+              game.candies[index][j].color = 'cb';
             }
           });
           if (!isReasonDrag) {
-            game.board[i][j] = "cb";
-            game.candies[i][j].color = "cb";
+            game.board[i][j] = 'cb';
+            game.candies[i][j].color = 'cb';
           }
         }
       }
     }
   };
 
+  /** check if candies are formed in the T- L- or + shapes */
   this.checkPacket = () => {
     let board = game.board;
     let dragRow = game.draggedCandy.row;
@@ -247,14 +252,14 @@ export default function Rules(game, power, audios) {
                 (dragRow === rIdx && dragCol === col) ||
                 (replRow === rIdx && replCol === col)
               ) {
-                game.board[rIdx][col] = game.candies[rIdx][col].color[0] + "p";
+                game.board[rIdx][col] = game.candies[rIdx][col].color[0] + 'p';
                 game.candies[rIdx][col].color =
-                  game.candies[rIdx][col].color[0] + "p";
+                  game.candies[rIdx][col].color[0] + 'p';
                 audios.packetCreated();
               } else {
-                game.board[row][col] = game.candies[rIdx][col].color[0] + "p";
+                game.board[row][col] = game.candies[rIdx][col].color[0] + 'p';
                 game.candies[row][col].color =
-                  game.candies[rIdx][col].color[0] + "p";
+                  game.candies[rIdx][col].color[0] + 'p';
                 audios.packetCreated();
               }
             }
@@ -285,14 +290,14 @@ export default function Rules(game, power, audios) {
                 (dragRow === rIdx && dragCol === col) ||
                 (replRow === rIdx && replCol === col)
               ) {
-                game.board[rIdx][col] = game.candies[rIdx][col].color[0] + "p";
+                game.board[rIdx][col] = game.candies[rIdx][col].color[0] + 'p';
                 game.candies[rIdx][col].color =
-                  game.candies[rIdx][col].color[0] + "p";
+                  game.candies[rIdx][col].color[0] + 'p';
                 audios.packetCreated();
               } else {
-                game.board[row][col] = game.candies[rIdx][col].color[0] + "p";
+                game.board[row][col] = game.candies[rIdx][col].color[0] + 'p';
                 game.candies[row][col].color =
-                  game.candies[rIdx][col].color[0] + "p";
+                  game.candies[rIdx][col].color[0] + 'p';
                 audios.packetCreated();
               }
             }
@@ -323,14 +328,14 @@ export default function Rules(game, power, audios) {
                 (dragRow === rIdx && dragCol === col) ||
                 (replRow === rIdx && replCol === col)
               ) {
-                game.board[rIdx][col] = game.candies[rIdx][col].color[0] + "p";
+                game.board[rIdx][col] = game.candies[rIdx][col].color[0] + 'p';
                 game.candies[rIdx][col].color =
-                  game.candies[rIdx][col].color[0] + "p";
+                  game.candies[rIdx][col].color[0] + 'p';
                 audios.packetCreated();
               } else {
-                game.board[row][col] = game.candies[rIdx][col].color[0] + "p";
+                game.board[row][col] = game.candies[rIdx][col].color[0] + 'p';
                 game.candies[row][col].color =
-                  game.candies[rIdx][col].color[0] + "p";
+                  game.candies[rIdx][col].color[0] + 'p';
                 audios.packetCreated();
               }
             }
@@ -340,6 +345,7 @@ export default function Rules(game, power, audios) {
     }
   };
 
+  /** checks if the current move is valid of not */
   this.checkValidMove = () => {
     let dRow = game.draggedCandy.row;
     let dCol = game.draggedCandy.col;
@@ -358,7 +364,7 @@ export default function Rules(game, power, audios) {
 
     let row = game.row;
     let col = game.col;
-    //checking for horizontal matched
+    // valid move if three same candies is formed horizontally
     for (let i = row; i < row * 2; i++) {
       for (let j = 0; j < col - 2; j++) {
         let checkIdx = [j, j + 1, j + 2];
@@ -369,7 +375,7 @@ export default function Rules(game, power, audios) {
       }
     }
 
-    //checking for vertical match
+    //valid move if three  same candies is formed vertically
     for (let i = row; i < row * 2 - 2; i++) {
       for (let j = 0; j < col; j++) {
         let checkIdx = [i, i + 1, i + 2];
@@ -381,26 +387,24 @@ export default function Rules(game, power, audios) {
     }
 
     //checking for powers swaps
-    //two stripes
+    //valid for two stripes candies
     if (
-      (dCandy[1] == "r" || dCandy[1] == "c") &&
-      (rCandy[1] == "r" || rCandy[1] == "c")
+      (dCandy[1] == 'r' || dCandy[1] == 'c') &&
+      (rCandy[1] == 'r' || rCandy[1] == 'c')
     ) {
       isValid = true;
     }
-
-    //strip and packet
+    //valid for strip and packet
     else if (
-      ((dCandy[1] === "c" || dCandy[1] === "r") && rCandy[1] === "p") ||
-      ((rCandy[1] === "c" || rCandy[1] === "r") && dCandy[1] === "p")
+      ((dCandy[1] === 'c' || dCandy[1] === 'r') && rCandy[1] === 'p') ||
+      ((rCandy[1] === 'c' || rCandy[1] === 'r') && dCandy[1] === 'p')
     ) {
       isValid = true;
     }
-
-    //packet and packet
-    else if (rCandy[1] === "p" && dCandy[1] === "p") isValid = true;
-    //colorBomb
-    else if (rCandy === "cb" || dCandy === "cb") isValid = true;
+    //valid for packet and packet
+    else if (rCandy[1] === 'p' && dCandy[1] === 'p') isValid = true;
+    //valid for colorBomb
+    else if (rCandy === 'cb' || dCandy === 'cb') isValid = true;
 
     return isValid;
   };

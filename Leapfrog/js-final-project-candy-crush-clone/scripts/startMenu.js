@@ -4,8 +4,8 @@ import {
   START_BG,
   PLAY_BTN_SELECTED,
   PLAY_BTN,
-} from "./constants.js";
-import { drawImageContext } from "./helperFunc.js";
+} from './constants.js';
+import { drawImageContext } from './helperFunc.js';
 
 export default function StartMenu(game) {
   this.game = game;
@@ -15,26 +15,24 @@ export default function StartMenu(game) {
   this.draw = () => {
     // background
     drawImageContext(CTX, START_BG, 0, 0, CANVAS.width, CANVAS.height);
-    //button
+    // play button
     if (!this.isSelected) {
       drawImageContext(
         CTX,
         PLAY_BTN,
-        225, //CANVAS.width - btnWidth / 2,
-        375, //CANVAS.height - btnHeight / 2,
-        150,
-        50
+        this.playBtn.x,
+        this.playBtn.y,
+        this.playBtn.width,
+        this.playBtn.height
       );
-    }
-    //volume button
-    else {
+    } else {
       drawImageContext(
         CTX,
         PLAY_BTN_SELECTED,
-        225, //CANVAS.width - btnWidth / 2,
-        375, //CANVAS.height - btnHeight / 2,
-        150,
-        50
+        this.playBtn.x,
+        this.playBtn.y,
+        this.playBtn.width,
+        this.playBtn.height
       );
     }
   };

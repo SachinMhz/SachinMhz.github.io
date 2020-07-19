@@ -1,34 +1,45 @@
-import { CANVAS, CTX } from "./constants.js";
-import Game from "./game.js";
-import Power from "./power.js";
-import Score from "./score.js";
-import Rules from "./rules.js";
-import MouseOption from "./mouseOption.js";
-import Audios from "./audio.js";
-import Preloader from "./preloader.js";
-import StartMenu from "./startMenu.js";
-import LevelSelection from "./levelSelection.js";
-import Objective from "./objective.js";
-import GameOver from "./gameOver.js";
-import GameComplete from "./gameComplete.js";
+import { CANVAS, CTX } from './constants.js';
 
+// Game objects import
+import Game from './game.js';
+import Preloader from './preloader.js';
+import Power from './power.js';
+import Score from './score.js';
+import Rules from './rules.js';
+import Audios from './audio.js';
+import Objective from './objective.js';
+import MouseOption from './mouseOption.js';
+
+// Screens import
+import StartMenu from './startMenu.js';
+import LevelSelection from './levelSelection.js';
+import GameComplete from './gameComplete.js';
+import GameOver from './gameOver.js';
+
+/** Initialize the main game screen **/
 function Main() {
+  //declaration of game objects
   var score, power, rules, mouseOption, objective, audios;
+  //declaration of screens objects
   var game, startMenu, levels, gameOver, gameComplete;
+
   var preloader = new Preloader();
   this.loaded = false;
-  var screen = { show: "Start Menu" };
+
+  // keep track of the screen to display
+  var screen = { show: 'Start Menu' };
   preloader.load(() => {
     this.init();
     this.draw();
   });
 
+  /* initializing game variables and objects */
   this.init = () => {
     this.loaded = true;
     game = new Game();
     audios = new Audios(game);
-    score = new Score(game, audios, screen);
     audios.level_bg();
+    score = new Score(game, audios, screen);
     objective = new Objective(game, score);
     power = new Power(game, score, audios);
     rules = new Rules(game, power, audios);
@@ -52,13 +63,21 @@ function Main() {
     game.createCandiesBackground();
   };
 
+  /* draws all the contents to the canvas */
   this.draw = () => {
+    // clears the canvas
     CTX.clearRect(0, 0, CANVAS.width, CANVAS.height);
-    if (screen.show === "Start Menu") {
+
+    //draws content of start menu
+    if (screen.show === 'Start Menu') {
       startMenu.draw();
-    } else if (screen.show === "Levels") {
+    }
+    // draws content of level menus
+    else if (screen.show === 'Levels') {
       levels.draw();
-    } else if (screen.show === "Game") {
+    }
+    // draws content of game screen
+    else if (screen.show === 'Game') {
       game.candyBackground.forEach((bg) => {
         bg.draw();
       });
@@ -87,7 +106,7 @@ function Main() {
         // remove candies from display
         game.replaceZero();
 
-        //start moving down animaton
+        //start moving down animation
         if (game.isAnimating) {
           game.frame += 1;
           game.animatingMoveDown();
@@ -110,28 +129,32 @@ function Main() {
           }, 200);
         }
 
+        // displays game over screen after all the candies drop and stop animating
+        if (!game.isAnimating && score.moves <= 0) {
+          setTimeout(() => {
+            if (game.isAnimating === false) {
+              screen.show = 'Game Over';
+            }
+          }, 1000);
+        }
+
+        // displays game complete screen after all the candies drop and stop animating
         if (!game.isAnimating && objective.check()) {
           setTimeout(() => {
             if (game.isAnimating === false) {
               if (score.score >= score.highScore) {
-                localStorage.setItem("level" + game.level, score.score);
+                localStorage.setItem('level' + game.level, score.score);
+                score.highScore = score.score;
               }
-              screen.show = "Game Complete";
+              screen.show = 'Game Complete';
             }
           }, 1000);
         }
 
-        if (!game.isAnimating && score.moves <= 0) {
-          setTimeout(() => {
-            if (game.isAnimating === false) {
-              screen.show = "Game Over";
-            }
-          }, 1000);
-        }
-
-        //displays score
+        //displays score, moves and level objectives
         score.draw();
       }
+
       //displays candies in the game
       game.candies.forEach((candiesRow) => {
         candiesRow.forEach((candy) => {
@@ -140,26 +163,26 @@ function Main() {
       });
     }
 
-    if (screen.show === "Game Complete") {
+    //draws content of game complete screen
+    else if (screen.show === 'Game Complete') {
       gameComplete.draw();
     }
-
-    if (screen.show === "Game Over") {
+    //  draws content of game over screen
+    else if (screen.show === 'Game Over') {
       gameOver.draw();
     }
     requestAnimationFrame(this.draw);
   };
 
-  CANVAS.addEventListener("mousedown", (e) => {
+  CANVAS.addEventListener('mousedown', (e) => {
     var mouse = {
       x: e.offsetX,
       y: e.offsetY,
     };
     if (this.loaded) mouseOption.down(mouse);
-    //this.init();
   });
 
-  CANVAS.addEventListener("mousemove", (e) => {
+  CANVAS.addEventListener('mousemove', (e) => {
     var mouse = {
       x: e.offsetX,
       y: e.offsetY,
@@ -168,9 +191,7 @@ function Main() {
     if (this.loaded) mouseOption.move(mouse);
   });
 
-  CANVAS.addEventListener("mouseup", (e) => {
-    console.log("board", game.board.slice(game.row, game.row * 2));
-    // console.log(game.isAnimating, game.frame);
+  CANVAS.addEventListener('mouseup', (e) => {
     var mouse = {
       x: e.offsetX,
       y: e.offsetY,
@@ -179,4 +200,5 @@ function Main() {
   });
 }
 
+// making the main game objects
 var newGame = new Main();
