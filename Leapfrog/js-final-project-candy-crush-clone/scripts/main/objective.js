@@ -9,7 +9,7 @@ export default function Objective(game, score) {
   this.complete = false;
 
   this.level1 = () => {
-    if (score.score >= 2500) {
+    if (score.score >= 1500) {
       return true;
     }
   };

@@ -38,7 +38,7 @@ function Main() {
     this.loaded = true;
     game = new Game();
     audios = new Audios(game);
-    audios.level_bg();
+    //audios.level_bg();
     score = new Score(game, audios, screen);
     objective = new Objective(game, score);
     power = new Power(game, score, audios);
@@ -133,6 +133,10 @@ function Main() {
         if (!game.isAnimating && score.moves <= 0) {
           setTimeout(() => {
             if (game.isAnimating === false) {
+              if (score.score >= score.highScore) {
+                localStorage.setItem('level' + game.level, score.score);
+                score.highScore = score.score;
+              }
               screen.show = 'Game Over';
             }
           }, 1000);
@@ -144,6 +148,11 @@ function Main() {
             if (game.isAnimating === false) {
               if (score.score >= score.highScore) {
                 localStorage.setItem('level' + game.level, score.score);
+                console.log(localStorage.getItem('level1'))
+                console.log(localStorage.getItem('level2'))
+                console.log(localStorage.getItem('level3'))
+                console.log(localStorage.getItem('level4'))
+                console.log(localStorage.getItem('level5'))
                 score.highScore = score.score;
               }
               screen.show = 'Game Complete';

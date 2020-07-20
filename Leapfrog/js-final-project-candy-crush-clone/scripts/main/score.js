@@ -37,12 +37,15 @@ export default function Score(game, audios, screen) {
     this.levelText.innerHTML = 'Level: ' + game.level;
     this.scoreText.innerHTML = 'Score: ' + this.score;
     this.moveText.innerHTML = 'Moves: ' + this.moves;
+    if(this.score >= this.highScore)
+    this.highScoreText.innerHTML = 'High Score: ' + this.score;
+    else
     this.highScoreText.innerHTML = 'High Score: ' + this.highScore;
 
     this.targetText.innerHTML = 'Targets: ';
 
     if (game.level == 1) {
-      this.obj1Text.innerHTML = 'Score: ' + 2500;
+      this.obj1Text.innerHTML = 'Score: ' + 1500;
       this.obj2Text.innerHTML = '';
     }
     //
