@@ -69,6 +69,7 @@ export default function GameOver(game, score) {
     // display score and highScore text in the canvas
     CTX.font = '30px Arial';
     CTX.fillStyle = 'blue';
+    CTX.textAlign = 'start';
     CTX.fillText(score.score, 400, 365);
     CTX.fillText(score.highScore, 400, 415);
 
