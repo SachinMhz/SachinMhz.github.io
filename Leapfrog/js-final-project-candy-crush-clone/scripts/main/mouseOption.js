@@ -29,6 +29,8 @@ export default function MouseOption({
     if (screen.show === 'Start Menu') {
       if (isPointInsideRect(mouse, startMenu.playBtn)) {
         screen.show = 'Levels';
+        audios.stopBG();
+        audios.level_bg();
         this.clear();
       }
     }
@@ -64,6 +66,7 @@ export default function MouseOption({
         score.highScore = localStorage.getItem('level5') || 0;
         screen.show = 'Game';
         this.clear();
+        score.moves = 3;
       }
     }
     //
@@ -108,7 +111,7 @@ export default function MouseOption({
   /** functionality when mouse is moved in the canvas  */
   this.move = (mouse) => {
     if (screen.show === 'Start Menu') {
-      //change the image of btn the mouse is on
+      //change the image of btn the mouse is over
       startMenu.isSelected = isPointInsideRect(mouse, startMenu.playBtn);
     }
     //

@@ -5,7 +5,7 @@ export default function Audio(game) {
   this.game = game;
   // flag that is used to know if user has turn on or off the volume
   this.enabled = true;
-  
+
   //functions plays the sound when called
   this.match = () => {
     if (this.enabled) playAudio(getAudio('./audios/combo_sound.mp3'));
@@ -54,6 +54,7 @@ export default function Audio(game) {
 
   //this stops the background music
   this.stopBG = () => {
+    if (!bgSound) return;
     bgSound.pause();
     bgSound.currentTime = 0;
   };
