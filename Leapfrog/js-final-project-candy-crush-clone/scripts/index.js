@@ -148,11 +148,6 @@ function Main() {
             if (game.isAnimating === false) {
               if (score.score >= score.highScore) {
                 localStorage.setItem('level' + game.level, score.score);
-                console.log(localStorage.getItem('level1'))
-                console.log(localStorage.getItem('level2'))
-                console.log(localStorage.getItem('level3'))
-                console.log(localStorage.getItem('level4'))
-                console.log(localStorage.getItem('level5'))
                 score.highScore = score.score;
               }
               screen.show = 'Game Complete';
