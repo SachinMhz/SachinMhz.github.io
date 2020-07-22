@@ -1,0 +1,36 @@
+.card {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: -1px 2px 4px black;
+  margin: 0 auto;
+  max-width: 340px;
+}
+
+.card__image {
+  width: 100%;
+}
+
+.card__content {
+  padding: 5px 15px;
+}
+
+.card__title {
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+.card__btn {
+  display: inline-block;
+  border-radius: 4px;
+  color: #ffab40;
+  background-color: rgba(255, 168, 58, 0.2);
+  text-decoration: none;
+  font-weight: 500;
+  margin: 0;
+  padding: 10px;
+}
+
+.card__btn:hover {
+  background-color: rgba(255, 168, 58, 0.5);
+}
