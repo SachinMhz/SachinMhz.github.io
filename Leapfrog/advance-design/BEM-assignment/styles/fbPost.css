@@ -76,11 +76,22 @@
   float: right;
 }
 
+.post__btn {
+  margin: auto;
+  margin-top: 12px;
+  color: #7f7f7f;
+  font-family: Helvetica;
+  font-size: 12px;
+  font-weight: bold;
+  border-top: 1px solid #e5e5e5;
+}
+
 .btn {
   display: inline-block;
   margin: auto;
   width: 30%;
   height: 15px;
+  margin-left: 10px;
 }
 .btn__image {
   display: inline-block;
@@ -97,13 +108,4 @@
 .btn__text:hover {
   text-decoration: underline;
   cursor: pointer;
-}
-.post__btn {
-  margin: auto;
-  margin-top: 12px;
-  color: #7f7f7f;
-  font-family: Helvetica;
-  font-size: 12px;
-  font-weight: bold;
-  border-top: 1px solid #e5e5e5;
 }
