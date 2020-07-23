@@ -18,7 +18,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    transform: translate(-50%, -50%);
   }
 
   @include e(title) {
@@ -26,10 +26,10 @@
     color: $white;
     font-size: 40px;
 
-    @include mq("md") {
+    @include mq(md) {
       font-size: 60px;
     }
-    @include mq("xl") {
+    @include mq(xl) {
       font-size: 78px;
     }
   }
@@ -41,28 +41,33 @@
     font-size: 16px;
     line-height: 33px;
 
-    @include mq("md") {
+    @include mq(md) {
       font-size: 22px;
     }
-    @include mq("xl") {
+    @include mq(xl) {
       width: 900px;
     }
   }
 
   @include e(btn) {
-    width: 150px;
-    height: 50px;
-    background-color: $primary-btn-color;
-    color: white;
+    display: inline-block;
     border-radius: 5px;
-    font-size: 12px;
-    margin: 60px auto;
-    padding-top: 16px;
-    @include mq('md') {
+    background-color: $primary-btn-color;
+    padding: 26px 70px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: $white;
+    margin-top: 64px;
+    @include mq(md) {
       font-size: 16px;
       height: 65px;
       padding-top: 24px;
       width: 294px;
+    }
+
+    &:hover {
+      background-color: $primary-btn-hover-color;
     }
   }
 }
