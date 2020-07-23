@@ -1,0 +1,122 @@
+.works {
+  background-color: $athens-gray;
+  padding: 75px 0px;
+  text-align: center;
+
+  @include mq(md) {
+    padding: 130px 0px;
+  }
+
+  @include e(title) {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: $primary-text-color;
+    @include mq(md) {
+      font-size: 44px;
+    }
+  }
+
+  @include e(desc) {
+    font-size: 16px;
+    margin: auto;
+    margin-bottom: 80px;
+    color: $secondary-text-color;
+    @include mq(md) {
+      font-size: 22px;
+    }
+  }
+
+  @include e(big-list) {
+    list-style: none;
+    li {
+      width: 100%;
+      padding: 0px 20px 40px 20px;
+      @include mq(md) {
+        float: left;
+        width: 50%;
+        padding-right: 30px;
+        padding-bottom: 80px;
+      }
+    }
+  }
+
+  @include e(big-list-image) {
+    width: 100%;
+  }
+
+  @include e(big-list-content) {
+    background-color: white;
+    padding: 36px 0px 30px 0px;
+
+    @include mq(md) {
+      padding: 24px 0px 20px 0px;
+    }
+    @include mq(lg) {
+      padding: 36px 0px 30px 0px;
+    }
+  }
+
+  @include e(list-title) {
+    font-size: 20px;
+    padding-bottom: 12px;
+    @include mq(md) {
+      font-size: 14px;
+    }
+    @include mq(lg) {
+      font-size: 20px;
+    }
+  }
+  @include e(list-text) {
+    font-size: 14px;
+    color: $secondary-text-color;
+    @include mq(md) {
+      font-size: 12px;
+    }
+    @include mq(lg) {
+      font-size: 14px;
+    }
+  }
+
+  @include e(image-list) {
+    list-style: none;
+    text-align: center;
+    li {
+      width: 100%;
+      padding: 0px 16px 28px 16px;
+      @include mq(md) {
+        float: left;
+        width: 25%;
+        padding-right: 16px;
+        padding-bottom: 44px;
+      }
+      @include mq(lg) {
+        padding-right: 32px;
+        padding-bottom: 44px;
+      }
+    }
+  }
+
+  @include e(indicator) {
+    list-style: none;
+    li {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border-radius: 10px;
+      margin-right: 10px;
+    }
+    li:last-child {
+      padding-right: 0px;
+    }
+    li:hover {
+      cursor: pointer;
+    }
+
+    @include m(inactive) {
+      background-color: $primary-text-color;
+    }
+    @include m(active) {
+      background-color: $caribbean-green;
+    }
+  }
+}
