@@ -1,6 +1,64 @@
-.features{
-    @include e(title){
-        font-size: 24px;
-        font-weight: 800;
+.features {
+  padding: 75px 0px;
+  text-align: center;
+  @include mq(md) {
+    padding: 130px 0px;
+  }
+
+  @include e(title) {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 40px;
+    color: $primary-text-color;
+    @include mq(md) {
+      font-size: 44px;
     }
+  }
+
+  @include e(content) {
+    font-size: 16px;
+    max-width: 800px;
+    margin: auto;
+    margin-bottom: 80px;
+    color: $secondary-text-color;
+    @include mq(md) {
+        font-size: 22px;
+      }
+  }
+
+  @include e(list) {
+    list-style: none;
+    li {
+      width: 100%;
+      @include mq(md) {
+        float: left;
+        width: 33.33%;
+        padding-right: 30px;
+      }
+    }
+    @include mq(md) {
+      li:last-child {
+        padding-right: 0px;
+      }
+    }
+  }
+
+  @include e(list-image) {
+    float: left;
+    max-width: 64px;
+    max-height: 64px;
+    width: 16.25%;
+    display: block;
+
+    @include mq(lg) {
+      font-size: 62px;
+    }
+  }
+
+  @include e(list-content) {
+    float: right;
+    max-width: 82.25%;
+    text-align: start;
+    padding-left: 28px;
+  }
 }
