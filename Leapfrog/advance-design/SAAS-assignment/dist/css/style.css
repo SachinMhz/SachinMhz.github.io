@@ -580,6 +580,118 @@ button {
       .nav__search {
         display: block; } }
 
+.footer {
+  padding-top: 40px;
+  background-color: #2f4052;
+  color: #a3b1bf; }
+  @media (min-width: 768px) {
+    .footer {
+      padding: 75px 0px; } }
+  .footer--left {
+    float: left; }
+  .footer--right {
+    float: right; }
+  .footer__title {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 26px; }
+  .footer__logo {
+    width: 130px;
+    height: 36px;
+    margin-bottom: 24px; }
+  .footer__desc {
+    font-size: 14px;
+    line-height: 22px;
+    margin-bottom: 24px; }
+  .footer__more {
+    font-size: 15px;
+    font-weight: bold; }
+    .footer__more:hover {
+      text-decoration: underline; }
+  .footer__img {
+    width: 50%;
+    padding-right: 5px;
+    margin-bottom: 5px; }
+    .footer__img--left {
+      float: left; }
+    .footer__img--right {
+      float: right; }
+  .footer__contact-detail {
+    font-size: 14px;
+    padding-bottom: 10px; }
+    .footer__contact-detail span {
+      padding-left: 8px; }
+  .footer__form {
+    position: relative;
+    background-color: #4e5c6c;
+    margin-top: 15px;
+    height: 40px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 270px; }
+  .footer__input {
+    font-size: 13px;
+    padding-left: 12px;
+    color: #828e99;
+    background-color: #4e5c6c;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    width: 175px; }
+    .footer__input:focus {
+      outline: none; }
+  .footer__btn {
+    position: absolute;
+    border-radius: 5px;
+    background-color: #00bc9c;
+    color: #fff;
+    font-size: 12px;
+    padding-top: 9px;
+    text-align: center;
+    height: 30px;
+    width: 88px;
+    top: 5px;
+    right: 5px; }
+  .footer__row {
+    list-style: none;
+    margin: auto; }
+    .footer__row li {
+      width: 100%;
+      margin-bottom: 64px; }
+      @media (min-width: 768px) {
+        .footer__row li {
+          float: left;
+          width: 50%;
+          padding-right: 30px; } }
+      @media (min-width: 992px) {
+        .footer__row li {
+          width: 25%; } }
+    @media (min-width: 768px) {
+      .footer__row li:last-child {
+        padding-right: 0px; } }
+
+.footer-info {
+  padding: 36px 0px;
+  background-color: #283645;
+  font-size: 14px; }
+  .footer-info__copyright {
+    float: left; }
+  .footer-info__list {
+    float: right;
+    list-style: none; }
+    .footer-info__list li {
+      padding-bottom: 5px; }
+    @media (min-width: 768px) {
+      .footer-info__list li {
+        float: left;
+        padding-right: 12px; }
+        .footer-info__list li:before {
+          content: "\2022";
+          padding: 0px 10px; }
+        .footer-info__list li:first-child:before {
+          content: "";
+          padding: 0px; } }
+
 .banner {
   position: relative;
   background: url("../img/banner.png");
