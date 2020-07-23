@@ -134,3 +134,10 @@ var tr17 = new TableRow(
   "advance-design/BEM-assignment",
   table
 );
+
+
+var tr18 = new TableRow(
+  "Advance Design: SASS",
+  "advance-design/SASS-assignment/dist",
+  table
+);
