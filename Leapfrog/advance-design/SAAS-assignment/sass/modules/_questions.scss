@@ -1,0 +1,43 @@
+.questions {
+  padding: 75px 0px;
+  text-align: center;
+
+  @include mq(md) {
+    padding: 130px 0px;
+  }
+
+  @include e(title) {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: $primary-text-color;
+    @include mq(md) {
+      font-size: 44px;
+    }
+  }
+
+  @include e(desc) {
+    font-size: 16px;
+    margin: auto;
+    margin-bottom: 80px;
+    color: $secondary-text-color;
+    @include mq(md) {
+      font-size: 22px;
+    }
+  }
+
+  @include e(btn) {
+    border-radius: 5px;
+    background-color: $primary-btn-color;
+    padding: 15px 28px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: $white;
+
+    &:hover{
+        cursor: pointer;
+        background-color: $primary-btn-hover-color;
+    }
+  }
+  
+}
