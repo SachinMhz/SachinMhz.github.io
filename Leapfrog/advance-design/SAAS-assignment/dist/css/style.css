@@ -636,6 +636,10 @@ button {
         padding-top: 24px;
         width: 294px; } }
 
+.features__title {
+  font-size: 24px;
+  font-weight: 800; }
+
 @media (min-width: 576px) {
   .is-collapsed-mobile {
     visibility: collapse;
