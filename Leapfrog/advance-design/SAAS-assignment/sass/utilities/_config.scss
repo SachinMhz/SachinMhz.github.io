@@ -29,29 +29,34 @@ $base__line: 24px;
 //  ),
 //);
 
-$font-family-sans-fallback: 'Arial', sans-serif;
-$font-family-sans: 'Source Sans Pro', 'Helvetica Neue', 'Helvetica', $font-family-sans-fallback;
-$font-family-serif: 'Georgia', 'Cambria', 'Times New Roman', 'Times', serif;
-$font-family-monospace: 'Inconsolata', 'Menlo', 'Consolas', 'Bitstream Vera Sans Mono', 'Courier', monospace;
-$font-family--primary : $font-family-sans;
-$font-family--secondary : $font-family-sans;
+$font-family-sans-fallback: "Arial", sans-serif;
+$font-family-sans: "Source Sans Pro", "Helvetica Neue", "Helvetica",
+  $font-family-sans-fallback;
+$font-family-serif: "Georgia", "Cambria", "Times New Roman", "Times", serif;
+$font-family-monospace: "Inconsolata", "Menlo", "Consolas",
+  "Bitstream Vera Sans Mono", "Courier", monospace;
+$font-family--primary: $font-family-sans;
+$font-family--secondary: $font-family-sans;
 
 //Colors
 $blue-bayoux: #506a85;
 $cadet-blue: #a3b1bf;
+$athens-gray: #f2f5f7;
+$mountain-meadow: #17a78b;
+$lynch: #73879c;
 $white: #fff;
 $black: #000;
 $gray: #e6e9ed;
 $catskill-white: #f5f7fa;
-$caribbean-green : #00bc9c;
-$red: #D24D57;
-$blue: #3A539B;
-$light-blue: #009BDE;
-$yellow: #F7CA18;
-$green: #36D7B7;
+$caribbean-green: #00bc9c;
+$red: #d24d57;
+$blue: #3a539b;
+$light-blue: #009bde;
+$yellow: #f7ca18;
+$green: #36d7b7;
 
 //Message Colors
-$error: lighten($red,5%) !default;
+$error: lighten($red, 5%) !default;
 $success: $green !default;
 $edit: $yellow !default;
 
@@ -66,23 +71,22 @@ $ui-colors: (
   default: $blue,
   success: $success,
   error: $error,
-  warning: $edit
+  warning: $edit,
 );
 
 //Color Palette
 $palettes: (
   gray-shades: (
     base: $gray,
-    dark: darken($gray,20%),
-    light: lighten($gray,20%)
+    dark: darken($gray, 20%),
+    light: lighten($gray, 20%),
   ),
   blue-shades: (
     base: $blue,
-    dark: darken($blue,20%),
-    light: lighten($blue,20%)
-  )
+    dark: darken($blue, 20%),
+    light: lighten($blue, 20%),
+  ),
 );
-
 
 //Font size variables
 $default-font-size: $base__font-size - 2px;
@@ -99,7 +103,7 @@ $head3-font-size: $head1-font-size - 8px !default;
 $primary-color: $white;
 $secondary-color: $black;
 $accent-color: $gray;
-$shadow-color: rgba($black, .2);
+$shadow-color: rgba($black, 0.2);
 $border-color: $gray;
 $color-text: $blue-bayoux;
 $color-link: $blue-bayoux;
@@ -108,7 +112,9 @@ $color-link: $blue-bayoux;
 $path--rel: "../images";
 
 //Text color
-$primary-text-color : $blue-bayoux;
+$primary-text-color: $blue-bayoux;
+$secondary-text-color: $lynch;
 
 //Button color
-$primary-btn-color : $caribbean-green;
+$primary-btn-color: $caribbean-green;
+$primary-btn-hover-color: $mountain-meadow;
