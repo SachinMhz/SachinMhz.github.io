@@ -1,0 +1,44 @@
+.nav {
+  padding: 36px 0px;
+
+  @include e(logo) {
+    display: block;
+    margin: 0px auto;
+    width: 100px;
+    @include mq(lg) {
+      float: left;
+      margin-right: 58px;
+      width: 160px;
+    }
+  }
+
+  @include e(list) {
+    display: none;
+    @include mq(md) {
+      display: block;
+      float: left;
+      font-size: 12px;
+      font-weight: bold;
+      li {
+        padding: 12px 22px;
+        float: left;
+      }
+    }
+    @include mq(lg) {
+      font-size: 15px;
+    }
+  }
+
+  @include e(search) {
+    display: none;
+    @include mq(md) {
+      float: right;
+      background: transparent;
+      color: $color-text;
+      padding: 12px 0px;
+    }
+    @include mq(lg) {
+      display: block;
+    }
+  }
+}
