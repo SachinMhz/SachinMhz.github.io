@@ -138,6 +138,6 @@ var tr17 = new TableRow(
 
 var tr18 = new TableRow(
   "Advance Design: SASS",
-  "advance-design/SASS-assignment/dist",
+  "advance-design/SAAS-assignment/dist",
   table
 );
