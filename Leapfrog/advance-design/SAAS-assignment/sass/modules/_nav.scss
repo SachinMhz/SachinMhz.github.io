@@ -1,9 +1,13 @@
 .nav {
-  padding: 36px 0px;
+  padding: 20px 0px;
+
+  @include mq(md) {
+    padding: 36px 0px;
+  }
 
   @include e(logo) {
-    display: block;
-    margin: 0px auto;
+    float: left;
+    // margin: 0px auto;
     width: 100px;
     @include mq(lg) {
       float: left;
@@ -15,7 +19,6 @@
   @include e(list) {
     display: none;
     @include mq(md) {
-      display: block;
       float: left;
       font-size: 12px;
       font-weight: bold;
@@ -25,179 +28,32 @@
       }
     }
     @include mq(lg) {
+      display: block;
       font-size: 15px;
     }
   }
 
+  @include e(left-container) {
+    float: right;
+    padding-top: 12px;
+  }
+
   @include e(search) {
-    display: none;
-    @include mq(md) {
-      float: right;
-      background: transparent;
-      color: $color-text;
-      padding: 12px 0px;
-    }
+    float: right;
+    background: transparent;
+    color: $color-text;
     @include mq(lg) {
       display: block;
     }
   }
-}
 
-.footer {
-  padding-top: 40px;
-  background-color: $pickled-bluewood;
-
-  color: $cadet-blue;
-
-  @include mq(md) {
-    padding: 75px 0px;
-  }
-
-  @include m(left) {
+  @include e(ham-menu) {
     float: left;
-  }
-
-  @include m(right) {
-    float: right;
-  }
-
-  @include e(title) {
-    color: $white;
-    font-size: 16px;
-    margin-bottom: 26px;
-  }
-
-  @include e(logo) {
-    width: 130px;
-    height: 36px;
-    margin-bottom: 24px;
-  }
-
-  @include e(desc) {
-    font-size: 14px;
-    line-height: 22px;
-    margin-bottom: 24px;
-  }
-
-  @include e(more) {
-    font-size: 15px;
-    font-weight: bold;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  @include e(img) {
-    width: 50%;
-    padding-right: 5px;
-    margin-bottom: 5px;
-
-    @include m(left) {
-      float: left;
-    }
-    @include m(right) {
-      float: right;
-    }
-  }
-
-  @include e(contact-detail) {
-    font-size: 14px;
-    padding-bottom: 10px;
-
-    span {
-      padding-left: 8px;
-    }
-  }
-
-  @include e(form) {
-    position: relative;
-    background-color: $river-bed;
-    margin-top: 15px;
-    height: 40px;
-    border-radius: 5px;
-    width: 100%;
-    max-width: 270px;
-  }
-  @include e(input) {
-    font-size: 13px;
-    padding-left: 12px;
-    color: $regent-gray;
-    background-color: $river-bed;
-    border: none;
-    border-radius: 5px;
-    height: 40px;
-    width: 175px;
-    &:focus {
-      outline: none;
-    }
-  }
-  @include e(btn) {
-    position: absolute;
-    border-radius: 5px;
-    background-color: $primary-btn-color;
-    color: $white;
-    font-size: 12px;
-    padding-top: 9px;
-    text-align: center;
-    height: 30px;
-    width: 88px;
-    top: 5px;
-    right: 5px;
-  }
-
-  @include e(row) {
-    list-style: none;
-    margin: auto;
-    li {
-      width: 100%;
-      margin-bottom: 64px;
-      @include mq(md) {
-        float: left;
-        width: 50%;
-        padding-right: 30px;
-      }
-      @include mq(lg) {
-        width: 25%;
-      }
-    }
-    @include mq(md) {
-      li:last-child {
-        padding-right: 0px;
-      }
-    }
-  }
-}
-
-.footer-info {
-  padding: 36px 0px;
-  background-color: $ebony-clay;
-  font-size: 14px;
-
-  @include e(copyright) {
-    float: left;
-  }
-
-  @include e(list) {
-    float: right;
-    list-style: none;
-
-    li {
-      padding-bottom: 5px;
-    }
-    @include mq(md) {
-      li {
-        float: left;
-        padding-right: 12px;
-        
-        &:before {
-          content: "\2022";
-          padding: 0px 10px;
-        }
-        &:first-child:before {
-          content: "";
-          padding: 0px;
-        }
-      }
+    background: transparent;
+    padding-right: 30px;
+    color: $color-text;
+    @include mq(lg) {
+      display: none;
     }
   }
 }

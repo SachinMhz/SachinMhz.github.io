@@ -1,0 +1,33 @@
+.footer-info {
+  padding: 36px 0px;
+  background-color: $ebony-clay;
+  font-size: 14px;
+
+  @include e(copyright) {
+    float: left;
+  }
+
+  @include e(list) {
+    float: right;
+    list-style: none;
+
+    li {
+      padding-bottom: 5px;
+    }
+    @include mq(md) {
+      li {
+        float: left;
+        padding-right: 12px;
+
+        &:before {
+          content: "\2022";
+          padding: 0px 10px;
+        }
+        &:first-child:before {
+          content: "";
+          padding: 0px;
+        }
+      }
+    }
+  }
+}

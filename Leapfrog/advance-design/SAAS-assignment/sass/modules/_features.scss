@@ -30,10 +30,12 @@
     list-style: none;
     li {
       width: 100%;
+      margin-bottom: 28px;
       @include mq(md) {
         float: left;
         width: 33.33%;
         padding-right: 30px;
+        margin-bottom: 0px;
       }
     }
     @include mq(md) {
