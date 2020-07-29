@@ -146,5 +146,5 @@ var tr18 = new TableRow(
 var tr19 = new TableRow(
   "React",
   "react/Todo",
-  tables
+  table
 );
