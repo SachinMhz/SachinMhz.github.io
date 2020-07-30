@@ -1,5 +1,6 @@
 import React from "react";
-import "./App.css";
+import "./styles/App.css";
+import "./styles/reset.css";
 
 import Header from "./components/header";
 // import SearchBar from "./components/searchBar";
@@ -9,18 +10,50 @@ import ListItem from "./components/listItem";
 class App extends React.Component {
   state = {
     searchText: "",
-    list: [{ id: Date.now(), body: "this is a task", isCompleted: false }],
+    show: "all",
+    list: [],
+    filteredList: [],
   };
 
-  searchItem = (val) => {
-    let newList = this.state.list.filter(
-      (item) => item.body.toLowerCase().indexOf(val.toLowerCase()) !== -1
-    );
-    this.setState({ searchList: newList });
-  };
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.list !== prevState.list ||
+      this.state.show !== prevState.show
+    ) {
+      let newList = this.state.list.filter(
+        (item) =>
+          item.body
+            .toLowerCase()
+            .indexOf(this.state.searchText.toLowerCase()) !== -1
+      );
+      let newCompletedlist = this.state.list.filter(
+        (item) =>
+          item.body
+            .toLowerCase()
+            .indexOf(this.state.searchText.toLowerCase()) !== -1 &&
+          item.isCompleted === true
+      );
+      let newRemainingList = this.state.list.filter(
+        (item) =>
+          item.body
+            .toLowerCase()
+            .indexOf(this.state.searchText.toLowerCase()) !== -1 &&
+          item.isCompleted === false
+      );
+      if (this.state.show === "all") this.setState({ filteredList: newList });
+      if (this.state.show === "completed")
+        this.setState({ filteredList: newCompletedlist });
+      if (this.state.show === "remaining")
+        this.setState({ filteredList: newRemainingList });
+    }
+  }
 
   onSearchChange = (e) => {
-    this.setState({ searchText: e.target.value });
+    let input = e.target.value;
+    let newList = this.state.list.filter(
+      (item) => item.body.toLowerCase().indexOf(input.toLowerCase()) !== -1
+    );
+    this.setState({ searchText: input, filteredList: newList });
   };
 
   addItem = (obj) => {
@@ -46,11 +79,6 @@ class App extends React.Component {
   };
 
   render() {
-    const filteredList = this.state.list.filter(
-      (item) =>
-        item.body.toLowerCase().indexOf(this.state.searchText.toLowerCase()) !==
-        -1
-    );
     return (
       <div className="App">
         <Header />
@@ -63,7 +91,40 @@ class App extends React.Component {
           />
         </div>
         <ListHeader addItem={this.addItem} />
-        {filteredList.map((item, index) => {
+        <ul className="nav clearFix">
+          <li
+            className="nav__item"
+            onClick={() => {
+              this.setState({ show: "all" });
+            }}
+          >
+            <a href="#" title="show all">
+              All
+            </a>
+          </li>
+          <li
+            className="nav__item"
+            onClick={() => {
+              this.setState({ show: "completed" });
+            }}
+          >
+            <a href="#" title="show completed">
+              Completed
+            </a>
+          </li>
+          <li
+            className="nav__item"
+            onClick={() => {
+              this.setState({ show: "remaining" });
+            }}
+          >
+            <a href="#" title="show remaining">
+              Remaining
+            </a>
+          </li>
+        </ul>
+        <br />
+        {this.state.filteredList.map((item, index) => {
           return (
             <ListItem
               key={index}

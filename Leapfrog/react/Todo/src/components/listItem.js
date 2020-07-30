@@ -11,13 +11,22 @@ class ListItem extends React.Component {
         <input
           className="list-item__input"
           type="checkbox"
-          value={item.isCompleted}
-          onClick={() => completeItem(item.id)}
+          checked={item.isCompleted}
+          onChange={() => completeItem(item.id)}
         />
         <span className={textStyle}>{item.body}</span>
-        <button className="list-item__btn" onClick={() => deleteItem(item.id)}>
-          Delete
-        </button>
+        <a
+          className="list-item__btn"
+          onClick={() => deleteItem(item.id)}
+          href="#"
+          title="delete"
+        >
+          <img
+            className="icons"
+            src={require("../images/delete.png")}
+            alt={"delete icon"}
+          />
+        </a>
       </div>
     );
   }

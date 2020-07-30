@@ -1,0 +1,102 @@
+input {
+  outline: none;
+  padding: 20px 0px;
+}
+a {
+  text-decoration: none;
+}
+.App {
+  width: 600px;
+  margin: auto;
+  padding: 0px 15px;
+}
+
+.header {
+  background-color: blue;
+  color: white;
+  padding: 10px 0px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.search {
+  width: 100%;
+  margin: 5px 0px 5px 10px;
+}
+.search__input {
+  width: 90%;
+  margin: auto;
+  height: 25px;
+  font-size: 18px;
+  padding-left: 5px;
+}
+
+.list-header {
+  width: 100%;
+  margin: 5px 0px 5px 10px;
+}
+.list-header__input {
+  width: 90%;
+  margin: auto;
+  height: 25px;
+  font-size: 18px;
+  padding-left: 5px;
+}
+.list-header__btn {
+  margin: 5px 0px;
+  width: 94%;
+  height: 35px;
+}
+
+.nav {
+  list-style: none;
+  width: 100%;
+}
+
+.nav__item {
+  float: left;
+  width: 30%;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: gray;
+  text-align: center;
+  padding: 6px 0px;
+  margin: 0px 5px;
+  font-size: 18px;
+}
+.nav__item:hover {
+  color: green;
+}
+.nav__item a {
+  text-decoration: none;
+  width: 100%;
+}
+
+.nav__item a:hover {
+  color: red;
+}
+
+.list-item {
+  width: 95%;
+  margin: 10px auto;
+  border-bottom: 1px solid black;
+  height: 25px;
+}
+.list-item__span {
+  font-size: 18px;
+  padding-left: 15px;
+}
+.list-item__btn {
+  float: right;
+  margin: auto 5px;
+}
+
+.icons {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+.text-cross {
+  text-decoration: line-through;
+}

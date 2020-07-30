@@ -21,6 +21,11 @@ class ListHeader extends React.Component {
     return list;
   };
 
+  onKeyPressed = (e) => {
+    if (e.key === "Enter") {
+      this.props.addItem(this.newList());
+    }
+  };
   render() {
     return (
       <div className="list-header">
@@ -29,6 +34,7 @@ class ListHeader extends React.Component {
           placeholder="Add New List"
           value={this.state.input}
           onChange={this.onInputChange}
+          onKeyPress={this.onKeyPressed}
         />
         <button
           className="list-header__btn"
