@@ -1,59 +1,21 @@
 import React from "react";
-import "./styles/App.css";
+import "./styles/style.css";
 import "./styles/reset.css";
 
-import Header from "./components/header";
-// import SearchBar from "./components/searchBar";
-import ListHeader from "./components/listHeader";
-import ListItem from "./components/listItem";
+import Header from "./components/Header";
+import ListHeader from "./components/ListHeader";
+import TabBar from "./components/TabBar";
+import ListItem from "./components/ListItem";
 
 class App extends React.Component {
   state = {
-    searchText: "",
+    search: "",
     show: "all",
     list: [],
-    filteredList: [],
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      this.state.list !== prevState.list ||
-      this.state.show !== prevState.show
-    ) {
-      let newList = this.state.list.filter(
-        (item) =>
-          item.body
-            .toLowerCase()
-            .indexOf(this.state.searchText.toLowerCase()) !== -1
-      );
-      let newCompletedlist = this.state.list.filter(
-        (item) =>
-          item.body
-            .toLowerCase()
-            .indexOf(this.state.searchText.toLowerCase()) !== -1 &&
-          item.isCompleted === true
-      );
-      let newRemainingList = this.state.list.filter(
-        (item) =>
-          item.body
-            .toLowerCase()
-            .indexOf(this.state.searchText.toLowerCase()) !== -1 &&
-          item.isCompleted === false
-      );
-      if (this.state.show === "all") this.setState({ filteredList: newList });
-      if (this.state.show === "completed")
-        this.setState({ filteredList: newCompletedlist });
-      if (this.state.show === "remaining")
-        this.setState({ filteredList: newRemainingList });
-    }
-  }
-
   onSearchChange = (e) => {
-    let input = e.target.value;
-    let newList = this.state.list.filter(
-      (item) => item.body.toLowerCase().indexOf(input.toLowerCase()) !== -1
-    );
-    this.setState({ searchText: input, filteredList: newList });
+    this.setState({ search: e.target.value });
   };
 
   addItem = (obj) => {
@@ -73,9 +35,36 @@ class App extends React.Component {
     this.setState({ list: newList });
   };
 
+  updateItem = (id, body) => {
+    let newList = this.state.list.map((item) => {
+      if (item.id === id) {
+        item.body = body;
+      }
+      return item;
+    });
+    this.setState({ list: newList });
+  };
   deleteItem = (id) => {
     let newList = this.state.list.filter((item) => item.id !== id);
     this.setState({ list: newList });
+  };
+
+  changeVisibility = (show) => {
+    this.setState({ show });
+  };
+
+  filterList = (list) => {
+    return this.state.show === "all"
+      ? list
+      : this.state.show === "completed"
+      ? list.filter((item) => item.isCompleted)
+      : list.filter((item) => !item.isCompleted);
+  };
+
+  searchList = (list) => {
+    return list.filter((item) =>
+      item.body.toLowerCase().includes(this.state.search.toLowerCase())
+    );
   };
 
   render() {
@@ -86,54 +75,27 @@ class App extends React.Component {
           <input
             className="search__input"
             placeholder="Search"
-            value={this.state.searchText}
+            value={this.state.search}
             onChange={this.onSearchChange}
           />
         </div>
         <ListHeader addItem={this.addItem} />
-        <ul className="nav clearFix">
-          <li
-            className="nav__item"
-            onClick={() => {
-              this.setState({ show: "all" });
-            }}
-          >
-            <a href="#" title="show all">
-              All
-            </a>
-          </li>
-          <li
-            className="nav__item"
-            onClick={() => {
-              this.setState({ show: "completed" });
-            }}
-          >
-            <a href="#" title="show completed">
-              Completed
-            </a>
-          </li>
-          <li
-            className="nav__item"
-            onClick={() => {
-              this.setState({ show: "remaining" });
-            }}
-          >
-            <a href="#" title="show remaining">
-              Remaining
-            </a>
-          </li>
+        <TabBar changeVisibility={this.changeVisibility} />
+        <ul className="todo-list">
+          {this.filterList(this.searchList(this.state.list)).map(
+            (item, index) => {
+              return (
+                <ListItem
+                  key={index}
+                  item={item}
+                  deleteItem={this.deleteItem}
+                  completeItem={this.completeItem}
+                  updateItem={this.updateItem}
+                />
+              );
+            }
+          )}
         </ul>
-        <br />
-        {this.state.filteredList.map((item, index) => {
-          return (
-            <ListItem
-              key={index}
-              item={item}
-              deleteItem={this.deleteItem}
-              completeItem={this.completeItem}
-            />
-          );
-        })}
       </div>
     );
   }

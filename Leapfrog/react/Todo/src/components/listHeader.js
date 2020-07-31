@@ -31,7 +31,7 @@ class ListHeader extends React.Component {
       <div className="list-header">
         <input
           className="list-header__input"
-          placeholder="Add New List"
+          placeholder="Add New Item"
           value={this.state.input}
           onChange={this.onInputChange}
           onKeyPress={this.onKeyPressed}
