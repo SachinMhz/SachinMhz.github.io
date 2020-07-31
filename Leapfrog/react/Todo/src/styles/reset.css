@@ -9,3 +9,13 @@
   clear: both;
   display: table;
 }
+
+input {
+  outline: none;
+  padding: 20px 0px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
