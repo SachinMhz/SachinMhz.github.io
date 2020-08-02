@@ -1,47 +1,66 @@
 import React from "react";
 import Headline from "../components/Headline";
 
+const NO_OF_PAGES = 20;
+
+function HeadlineWrapper({ page, data }) {
+  const pageNo = (page - 1) * NO_OF_PAGES;
+  const storyList = data.slice(pageNo, pageNo + NO_OF_PAGES);
+  return (
+    <div>
+      {storyList.map((id) => (
+        <Headline key={id} id={id} />
+      ))}
+    </div>
+  );
+}
+
 class HomePage extends React.Component {
   state = {
     data: [],
     isLoading: true,
     headlineNo: 15,
+    page: 1,
   };
   componentDidMount() {
     fetch("https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty")
       .then((res) => res.json())
-      .then((result) =>
-        this.setState(
-          { data: result.slice(0, this.state.headlineNo), isLoading: false },
-          () => {
-            console.log(this.state.data);
-          }
-        )
-      );
+      .then((result) => this.setState({ data: result, isLoading: false }));
   }
 
-  showMoreContent = () => {
-    let headlineNo = this.state.headlineNo;
-    if (headlineNo < 490) {
-      headlineNo += 10;
-      this.setState({ headlineNo });
+  nextPage = () => {
+    if (this.state.page < 500 / NO_OF_PAGES) {
+      this.setState({ page: this.state.page + 1 });
+    }
+  };
+  prevPage = () => {
+    if (this.state.page > 1) {
+      this.setState({ page: this.state.page - 1 });
     }
   };
 
   render() {
     return (
       <div className="Main">
-        <h1 className="heading">Hacker News Stories</h1>
+        <div className="heading clearFix">
+          <h1 className="heading__text">Hacker News </h1>
+          <span className="heading__nav">
+            <span className="heading__arrow" onClick={this.prevPage}>
+              {"<"}
+            </span>
+            <span className="heading__number">{this.state.page}</span>
+            <span className="heading__arrow" onClick={this.nextPage}>
+              {">"}
+            </span>
+          </span>
+        </div>
         {this.state.isLoading ? (
           <h1> loading...</h1>
         ) : (
           <div>
-            {this.state.data.map((id) => (
-              <Headline key={id} id={id} />
-            ))}
+            <HeadlineWrapper data={this.state.data} page={this.state.page} />
           </div>
         )}
-        <button onClick={() => this.showMoreContent()}>Show More</button>
       </div>
     );
   }

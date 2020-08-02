@@ -1,6 +1,8 @@
 import React from "react";
 import Comment from "../components/Comment";
 
+import loading from "../res/images/loading.gif";
+
 class StoryPage extends React.Component {
   state = {
     item: [],
@@ -22,25 +24,25 @@ class StoryPage extends React.Component {
   }
 
   empty = () => {
-    return <div>Loading ...</div>;
-  };
-
-  loaded = () => {
-    const { title, url, by, time, kids, text } = this.state.item;
     return (
-      <div>
-        <a class="story__heading" href={url} title={url}>
+      <div className="loading">
+        <img className="loading__image" src={loading} alt="loading..." />
+      </div>
+    );
+  };
+  loaded = () => {
+    const { title, url, by, kids, text } = this.state.item;
+    const { showChild } = this.state;
+    return (
+      <div className="story">
+        <a className="story__title" href={url} title={url}>
           {title}
         </a>
+        <div className="story__user">(by {by})</div>
 
         <div style={{ marginLeft: 10 }}>
-          <span>
-            <strong>{by}</strong> {"  "} {time} {"  "}
-          </span>
-          {this.state.showChild && (
-            <div dangerouslySetInnerHTML={{ __html: text }} />
-          )}
-          {this.state.showChild && kids && (
+          {showChild && <div dangerouslySetInnerHTML={{ __html: text }} />}
+          {showChild && kids && (
             <div>
               {kids.map((id) => (
                 <Comment key={id} id={id} />

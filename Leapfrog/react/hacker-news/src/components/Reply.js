@@ -1,5 +1,6 @@
 import React from "react";
 import Comment from "./Comment";
+import loading from "../res/images/loading.gif";
 
 class Story extends React.Component {
   state = {
@@ -20,27 +21,30 @@ class Story extends React.Component {
   }
 
   empty = () => {
-    return <div>Loading ...</div>;
-  };
-
-  loaded = () => {
     return (
-      <div style={{ border: "1px solid black", margin: 15, marginRight: 0 }}>
-        <span>
-          <strong>{this.state.item.by}</strong> {"  "} {this.state.item.time}{" "}
-          {"  "}
-        </span>
-        <span
-          onClick={() => this.setState({ showChild: !this.state.showChild })}
-        >
-          {this.state.showChild ? "hide" : "show"}
-        </span>
-        {this.state.showChild && (
-          <div dangerouslySetInnerHTML={{ __html: this.state.item.text }} />
-        )}
-        {this.state.showChild && this.state.item.kids && (
-          <div style={{ borderLeft: "5px solid blue" }}>
-            {this.state.item.kids.map((id) => (
+      <div className="loading">
+        <img className="loading__image" src={loading} alt="loading..." />
+      </div>
+    );
+  };
+  loaded = () => {
+    const { by, kids, text } = this.state.item;
+    const { showChild } = this.state;
+    return (
+      <div className="comment">
+        <div className="comment__header">
+          <span className="comment__user">{by}</span>
+          <span
+            className="comment__visibility"
+            onClick={() => this.setState({ showChild: !showChild })}
+          >
+            [{showChild ? "hide" : "show"} -{kids ? kids.length : "0"}]
+          </span>
+        </div>
+        {showChild && <div dangerouslySetInnerHTML={{ __html: text }} />}
+        {showChild && kids && (
+          <div>
+            {kids.map((id) => (
               <Comment key={id} id={id} />
             ))}
           </div>

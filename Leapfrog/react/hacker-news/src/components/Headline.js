@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Comment from "./Comment";
+import loading from "../res/images/loading.gif";
 
 class Headline extends React.Component {
   state = {
@@ -21,33 +22,38 @@ class Headline extends React.Component {
   }
 
   empty = () => {
-    return <div>Loading ...</div>;
+    return (
+      <div className="loading">
+        <img className="loading__image" src={loading} alt="loading..." />
+      </div>
+    );
   };
 
   loaded = () => {
-    const { title, score, kids, time, by, url } = this.state.item;
+    const { title, score, kids, by, url } = this.state.item;
+    const { showChild } = this.state;
     return (
-      <div className={"headline"}>
-        <a className="headline__title" href={url} title={url}>
-          {title}
-        </a>
-        <span className="headline__score">{score} points</span>
-        <span className="headline__user">
-          by <strong>{by}</strong>
-        </span>
-        <span className="headline__time">{time}</span>
-        <Link to={`/story/${this.state.id}`}>
-          <span
-            className="headline__comment"
-            onClick={() => this.setState({ showChild: !this.state.showChild })}
-          >
-            {kids ? kids.length : "0"} comments
+      <div className={"headline clearFix"}>
+        <div className="float-left">
+          <a className="headline__title" href={url} title={url}>
+            {title}
+          </a>
+          <span className="headline__score">{score} points</span>
+          <span className="headline__user">
+            by <strong>{by}</strong>
           </span>
+        </div>
+        <Link
+          className="headline__comment float-right"
+          to={`/story/${this.state.id}`}
+          onClick={() => this.setState({ showChild: !showChild })}
+        >
+          Comments
         </Link>
         <div>
-          {this.state.showChild && kids && (
+          {showChild && kids && (
             <div style={{ borderLeft: "5px solid red" }}>
-              {this.state.item.kids.map((id) => (
+              {kids.map((id) => (
                 <Comment key={id} id={id} />
               ))}
             </div>
