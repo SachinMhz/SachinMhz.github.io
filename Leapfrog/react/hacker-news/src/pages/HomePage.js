@@ -46,11 +46,11 @@ class HomePage extends React.Component {
           <h1 className="heading__text">Hacker News </h1>
           <span className="heading__nav">
             <span className="heading__arrow" onClick={this.prevPage}>
-              {"<"}
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>
             </span>
             <span className="heading__number">{this.state.page}</span>
             <span className="heading__arrow" onClick={this.nextPage}>
-              {">"}
+              <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </span>
           </span>
         </div>

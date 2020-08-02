@@ -32,6 +32,9 @@
   cursor: pointer;
   margin: 15px;
 }
+.heading__arrow:hover {
+  color: #33c4b0;
+}
 .heading__number {
   font-size: 24px;
   font-weight: bold;
