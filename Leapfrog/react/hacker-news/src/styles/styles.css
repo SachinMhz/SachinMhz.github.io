@@ -1,0 +1,47 @@
+.Main {
+  max-width: 1002px;
+  margin: auto;
+  background-color: #dfe1e6;
+}
+
+.heading {
+  background-color: red;
+  padding: 10px 0px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.headline {
+  background-color: #dfe176;
+  border: 1px solid red;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.headline__title {
+  display: block;
+  margin: 0px 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: green;
+  text-decoration: none;
+}
+.headline__title:hover {
+  color: blue;
+}
+
+.headline__user {
+  margin: 0px 10px;
+}
+
+.headline__comment {
+  margin: 0px 10px;
+  cursor: pointer;
+}
+.headline__comment:hover {
+  color: blue;
+  text-decoration: underline;
+}
+.headline__score {
+  margin: 0px 10px;
+}
