@@ -1,5 +1,6 @@
 import React from "react";
 import Headline from "../components/Headline";
+import loading from "../res/images/loading.gif";
 
 const NO_OF_PAGES = 20;
 
@@ -55,7 +56,9 @@ class HomePage extends React.Component {
           </span>
         </div>
         {this.state.isLoading ? (
-          <h1> loading...</h1>
+          <div className="loading">
+            <img className="loading__image" src={loading} alt="loading..." />
+          </div>
         ) : (
           <div>
             <HeadlineWrapper data={this.state.data} page={this.state.page} />
