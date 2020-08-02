@@ -1,34 +1,19 @@
 import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
 
-import Headline from "./components/Headline";
+import HomePage from "./pages/HomePage";
+import StoryPage from "./pages/StoryPage";
 
 class App extends React.Component {
-  state = {
-    data: [],
-    isLoading: true,
-  };
-  componentDidMount() {
-    console.log("mounting");
-    fetch("https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty")
-      .then((res) => res.json())
-      .then((result) =>
-        this.setState({ data: result.slice(0, 2), isLoading: false }, () => {
-          console.log(this.state.data);
-        })
-      );
-  }
   render() {
     return (
-      <div className="App">
-        {this.state.isLoading ? (
-          <h1> loading...</h1>
-        ) : (
+      <div className="Main">
+        <BrowserRouter>
           <div>
-            {this.state.data.map((id) => (
-              <Headline key={id} id={id} />
-            ))}
+            <Route path="/" exact component={HomePage} />
+            <Route path="/story/:id" component={StoryPage} />
           </div>
-        )}
+        </BrowserRouter>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from "react";
 import Comment from "./Comment";
 
-class Reply extends React.Component {
+class Story extends React.Component {
   state = {
     id: this.props.id,
     item: [],
@@ -15,7 +15,7 @@ class Reply extends React.Component {
     )
       .then((res) => res.json())
       .then((result) => {
-        this.setState({ item: result, isLoading: false });
+        this.setState({ item: result, isLoading: false, showChild: true });
       });
   }
 
@@ -24,24 +24,27 @@ class Reply extends React.Component {
   };
 
   loaded = () => {
-    console.log(this.state.item);
     return (
-      <div
-        style={{ border: "1px solid black", marginLeft: 25 }}
-        onClick={() => this.setState({ showChild: true })}
-      >
-        <div dangerouslySetInnerHTML={{ __html: this.state.item.text }} />
-        {/* {this.state.showChild &&
-          this.state.item.kids.map((id) => <div>{id}</div>)} */}
-        {
-          /*this.state.showChild &&*/ this.state.item.kids && (
-            <div style={{ borderLeft: "5px solid green" }}>
-              {this.state.item.kids.map((id) => (
-                <Comment key={id} id={id} />
-              ))}
-            </div>
-          )
-        }
+      <div style={{ border: "1px solid black", margin: 15, marginRight: 0 }}>
+        <span>
+          <strong>{this.state.item.by}</strong> {"  "} {this.state.item.time}{" "}
+          {"  "}
+        </span>
+        <span
+          onClick={() => this.setState({ showChild: !this.state.showChild })}
+        >
+          {this.state.showChild ? "hide" : "show"}
+        </span>
+        {this.state.showChild && (
+          <div dangerouslySetInnerHTML={{ __html: this.state.item.text }} />
+        )}
+        {this.state.showChild && this.state.item.kids && (
+          <div style={{ borderLeft: "5px solid blue" }}>
+            {this.state.item.kids.map((id) => (
+              <Comment key={id} id={id} />
+            ))}
+          </div>
+        )}
       </div>
     );
   };
@@ -50,4 +53,4 @@ class Reply extends React.Component {
   }
 }
 
-export default Reply;
+export default Story;

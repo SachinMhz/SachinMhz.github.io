@@ -1,5 +1,6 @@
 import React from "react";
-import Story from "./Story";
+import { Link } from "react-router-dom";
+import Comment from "./Comment";
 
 class Headline extends React.Component {
   state = {
@@ -24,30 +25,30 @@ class Headline extends React.Component {
   };
 
   loaded = () => {
-    console.log(this.state.item);
     const { title, score, kids, time, by, url } = this.state.item;
     return (
-      <div style={{ border: "1px solid black", marginBottom: 15 }}>
-        __by {by}
-        __time {time}
+      <div className={"headline"}>
+        <a className="headline__title" href={url} title={url}>
+          {title}
+        </a>
+        <span className="headline__score">{score} points</span>
+        <span className="headline__user">
+          by <strong>{by}</strong>
+        </span>
+        <span className="headline__time">{time}</span>
+        <Link to={`/story/${this.state.id}`}>
+          <span
+            className="headline__comment"
+            onClick={() => this.setState({ showChild: !this.state.showChild })}
+          >
+            {kids ? kids.length : "0"} comments
+          </span>
+        </Link>
         <div>
-          <a href={url} title={url}>
-            {title}{" "}
-          </a>
-        </div>
-        __score {score}
-        <div
-          onClick={() => this.setState({ showChild: !this.state.showChild })}
-        >
-          __kids {kids && kids.length}
-        </div>
-        <div>
-          {
-          this.state.showChild && 
-          kids && (
+          {this.state.showChild && kids && (
             <div style={{ borderLeft: "5px solid red" }}>
               {this.state.item.kids.map((id) => (
-                <Story key={id} id={id} />
+                <Comment key={id} id={id} />
               ))}
             </div>
           )}
