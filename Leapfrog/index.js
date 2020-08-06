@@ -161,3 +161,10 @@ var tr20 = new TableData(
   "https://github.com/SachinMhz/SachinMhz.github.io/tree/master/Leapfrog/react/hacker-news",
   "https://sachinmhz.github.io/hacker-news/"
 );
+
+
+var tr21 = new TableData(
+  "GitHub-Repo-Clone",
+  "https://github.com/SachinMhz/github-repo/tree/master",
+  "https://sachinmhz.github.io/github-repo/"
+);
