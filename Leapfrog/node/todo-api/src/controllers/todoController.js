@@ -3,9 +3,11 @@ const logger = require("../utils/logger");
 
 //get all todo
 const getAll = async (req, res, next) => {
-  console.log(req.user);
   try {
-    const todo = await pool.query("SELECT * FROM todo ORDER BY id ASC");
+    const todo = await pool.query(
+      "SELECT * FROM todo WHERE email = $1 ORDER BY id ASC",
+      [req.user.email]
+    );
     res.json(todo.rows);
   } catch (err) {
     next(err);
@@ -19,8 +21,8 @@ const getAll = async (req, res, next) => {
 const getRemaining = async (req, res, next) => {
   try {
     const remaining = await pool.query(
-      "SELECT * FROM todo WHERE is_complete = $1 ORDER BY id ASC",
-      [false]
+      "SELECT * FROM todo WHERE is_complete = $1 AND email=$2 ORDER BY id ASC",
+      [false, req.user.email]
     );
     res.json(remaining.rows);
   } catch (err) {
@@ -34,10 +36,9 @@ const getRemaining = async (req, res, next) => {
 const getCompleted = async (req, res, next) => {
   try {
     const remaining = await pool.query(
-      "SELECT * FROM todo WHERE is_complete = $1 ORDER BY id ASC",
-      [true]
+      "SELECT * FROM todo WHERE is_complete = $1 AND email=$2 ORDER BY id ASC",
+      [true, req.user.email]
     );
-    console.log(remaining.rows);
     res.json(remaining.rows);
   } catch (err) {
     next(err);
@@ -50,8 +51,8 @@ const postTodo = async (req, res, next) => {
   try {
     const { description } = req.body;
     const newTodo = await pool.query(
-      "INSERT INTO todo (description,is_complete) VALUES ($1, $2) RETURNING *",
-      [description, false]
+      "INSERT INTO todo (description,is_complete,email) VALUES ($1, $2,$3) RETURNING *",
+      [description, false, req.user.email]
     );
     const todo = await pool.query("SELECT * FROM todo ORDER BY id ASC");
     res.json(todo.rows);

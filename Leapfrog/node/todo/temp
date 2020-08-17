@@ -1,15 +1,19 @@
 import React from "react";
 // import "./styles/style.css";
 // import "./styles/reset.css";
+import Cookies from "universal-cookie";
 import Header from "../components/header";
 import ListHeader from "../components/listHeader";
 import TabBar from "../components/TabBar";
 import ListItem from "../components/listItem";
+import { Redirect } from "react-router-dom";
 
+const cookies = new Cookies();
+const token = cookies.get("token");
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
+    super();
     this.cookies = props.cookies;
     this.state = {
       search: "",
@@ -24,7 +28,7 @@ class App extends React.Component {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: this.props.cookies.cookies.token,
+        Authorization: token,
       },
     };
     const response = await fetch(
@@ -47,10 +51,7 @@ class App extends React.Component {
   completeItem = async (id) => {
     const requestOptions = {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.props.cookies.cookies.token,
-      },
+      headers: { "Content-Type": "application/json", Authorization: token },
       body: JSON.stringify({ id }),
     };
     const response = await fetch(
@@ -64,10 +65,7 @@ class App extends React.Component {
   updateItem = async (id, description) => {
     const requestOptions = {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.props.cookies.cookies.token,
-      },
+      headers: { "Content-Type": "application/json", Authorization: token },
       body: JSON.stringify({ id, description }),
     };
     const response = await fetch(
@@ -81,10 +79,7 @@ class App extends React.Component {
   deleteItem = async (id) => {
     const requestOptions = {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.props.cookies.cookies.token,
-      },
+      headers: { "Content-Type": "application/json", Authorization: token },
       body: JSON.stringify({ id }),
     };
     const response = await fetch(
@@ -99,10 +94,7 @@ class App extends React.Component {
     let display = show == "all" ? "" : show;
     const requestOptions = {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.props.cookies.cookies.token,
-      },
+      headers: { "Content-Type": "application/json", Authorization: token },
     };
     const response = await fetch(
       "http://localhost:8000/api/todo/" + display,
@@ -130,10 +122,7 @@ class App extends React.Component {
   fetchData = async () => {
     const requestOptions = {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.props.cookies.cookies.token,
-      },
+      headers: { "Content-Type": "application/json", Authorization: token },
     };
     const response = await fetch(
       "http://localhost:8000/api/todo",
@@ -146,10 +135,7 @@ class App extends React.Component {
   postData = async (description) => {
     const requestOptions = {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.props.cookies.cookies.token,
-      },
+      headers: { "Content-Type": "application/json", Authorization: token },
       body: JSON.stringify({ description }),
     };
     const response = await fetch(
@@ -160,10 +146,23 @@ class App extends React.Component {
     this.setState({ list: data });
   };
 
+  logOut = () => {
+    this.cookies.set("username", "");
+    this.cookies.set("token", "");
+    this.setState({
+      ...this.state,
+      redirect: true,
+    });
+    console.log("logiing our");
+  };
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/login" />;
+    }
     return (
       <div className="App">
-        <Header cookies={this.props.cookies} />
+        <Header />
+        <div onClick={this.logOut}>logOut</div>
         <div className="search">
           <input
             className="search__input"

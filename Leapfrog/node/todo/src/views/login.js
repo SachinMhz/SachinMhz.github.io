@@ -1,12 +1,21 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 class Login extends React.Component {
-  state = {
-    email: "",
-    password: "",
-    redirect: false,
-  };
+  constructor(props) {
+    super();
+    this.cookies = props.cookies;
+    this.state = {
+      email: "",
+      password: "",
+      error: "",
+      redirect: this.cookies.cookies.email ? true : false,
+    };
+  }
+
   setEmail = (e) => {
     this.setState({ email: e.target.value });
   };
@@ -26,11 +35,19 @@ class Login extends React.Component {
       "http://localhost:8000/api/auth/login",
       requestOptions
     );
+
     const data = await response.json();
-    global.token = data.token;
+    // console.log(data);
+    cookies.set("token", data.token, { path: "/" });
+    this.cookies.set("email", data.data.email);
+    this.cookies.set("token", data.token);
+
     this.setState({ redirect: true });
   };
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/home" />;
+    }
     return (
       <div className="login-container">
         <div className="input-container">
@@ -54,7 +71,7 @@ class Login extends React.Component {
         <button className="button" onClick={this.login}>
           Login
         </button>
-        {this.state.redirect && <Redirect to="/home" />}
+        {/* {this.state.redirect && <Redirect to="/home" />} */}
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { HashRouter, Route, Redirect } from "react-router-dom";
+import { withCookies } from "react-cookie";
 
 import "./styles/style.css";
 import "./styles/reset.css";
@@ -14,9 +15,19 @@ class App extends React.Component {
       <div className="App">
         <HashRouter>
           <div>
-            <Route path="/" exact component={Login} />
-            <Route path="/register" exact component={Register} />
-            <Route path="/home" component={Main} />
+            <Route path="/" exact component={() => <Redirect to="/login" />} />
+            <Route
+              path="/login"
+              component={() => <Login cookies={this.props.cookies} />}
+            />
+            <Route
+              path="/register"
+              component={() => <Register cookies={this.props.cookies} />}
+            />
+            <Route
+              path="/home"
+              component={() => <Main cookies={this.props.cookies} />}
+            />
           </div>
         </HashRouter>
       </div>
@@ -24,4 +35,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withCookies(App);

@@ -6,6 +6,7 @@ CREATE DATABASE todo_database;
 CREATE TABLE todo(
     id SERIAL PRIMARY KEY,
     description  VARCHAR(255),
+    email VARCHAR(255),
     is_complete BOOLEAN
 );
 

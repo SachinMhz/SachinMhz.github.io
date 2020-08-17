@@ -10,7 +10,10 @@ const login = async (req, res, next) => {
     const user = await pool.query("SELECT * FROM users WHERE email=$1", [
       email,
     ]);
+
     const { hash_password } = user.rows[0];
+    const db_email = user.rows[0].email;
+    if (email !== db_email) next({ msg: "email not found", status: 404 });
     bcrypt.compare(password, hash_password, function (err, result) {
       // result == true
       if (err) {
