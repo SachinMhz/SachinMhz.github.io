@@ -119,3 +119,8 @@
   /* display: inline-block; */
   opacity: 100;
 }
+
+.button {
+  background-color: #32a88f;
+  color: black;
+}

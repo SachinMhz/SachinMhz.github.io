@@ -15,7 +15,7 @@ class TabBar extends React.Component {
       [tab]: true,
     });
   };
-  
+
   render() {
     const { changeVisibility } = this.props;
     const { all, completed, remaining } = this.state;
@@ -28,9 +28,9 @@ class TabBar extends React.Component {
             this.changeTab("all");
           }}
         >
-          <a href="#" title="show all" className="nav__text">
+          <span title="show all" className="nav__text">
             All
-          </a>
+          </span>
         </li>
         <li
           className={`nav__item ${completed && "active"}`}
@@ -39,9 +39,7 @@ class TabBar extends React.Component {
             this.changeTab("completed");
           }}
         >
-          <a href="#" title="show completed">
-            Completed
-          </a>
+          <span title="show completed">Completed</span>
         </li>
         <li
           className={`nav__item ${remaining && "active"}`}
@@ -50,9 +48,7 @@ class TabBar extends React.Component {
             this.changeTab("remaining");
           }}
         >
-          <a href="#" title="show remaining">
-            Remaining
-          </a>
+          <span title="show remaining">Remaining</span>
         </li>
       </ul>
     );
