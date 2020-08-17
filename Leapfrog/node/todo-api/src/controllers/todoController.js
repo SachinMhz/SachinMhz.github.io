@@ -3,6 +3,7 @@ const logger = require("../utils/logger");
 
 //get all todo
 const getAll = async (req, res, next) => {
+  console.log(req.user);
   try {
     const todo = await pool.query("SELECT * FROM todo ORDER BY id ASC");
     res.json(todo.rows);
@@ -36,7 +37,7 @@ const getCompleted = async (req, res, next) => {
       "SELECT * FROM todo WHERE is_complete = $1 ORDER BY id ASC",
       [true]
     );
-    console.log(remaining.rows)
+    console.log(remaining.rows);
     res.json(remaining.rows);
   } catch (err) {
     next(err);

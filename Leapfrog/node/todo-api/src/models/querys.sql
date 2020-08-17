@@ -13,5 +13,5 @@ CREATE TABLE todo(
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
     email  VARCHAR(255),
-    hashedPassword VARCHAR(255)
+    hash_password VARCHAR(255)
 );
