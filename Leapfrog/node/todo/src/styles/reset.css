@@ -1,0 +1,21 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.clearFix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+input {
+  outline: none;
+  padding: 20px 0px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
