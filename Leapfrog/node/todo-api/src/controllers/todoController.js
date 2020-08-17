@@ -54,9 +54,7 @@ const postTodo = async (req, res, next) => {
       "INSERT INTO todo (description,is_complete,email) VALUES ($1, $2,$3) RETURNING *",
       [description, false, req.user.email]
     );
-    const todo = await pool.query("SELECT * FROM todo ORDER BY id ASC");
-    res.json(todo.rows);
-    // res.json(newTodo.rows[0]);
+    res.json(newTodo.rows[0]);
   } catch (err) {
     next(err);
     logger.error(err);
@@ -68,19 +66,19 @@ const updateTodo = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { description } = req.body;
-    description
-      ? await pool.query("UPDATE todo SET description = $1 WHERE id = $2", [
-          description,
-          id,
-        ])
+    const updatedTodo = description
+      ? await pool.query(
+          "UPDATE todo SET description = $1 WHERE id = $2 RETURNING *",
+          [description, id]
+        )
       : await pool.query(
-          "UPDATE todo SET is_complete = NOT is_complete WHERE id = $1",
+          "UPDATE todo SET is_complete = NOT is_complete WHERE id = $1 RETURNING *",
           [id]
         );
     // res.json(newTodo.rows[0]);
-
+    console.log(updatedTodo.rows[0]);
     const todo = await pool.query("SELECT * FROM todo ORDER BY id ASC");
-    res.json(todo.rows);
+    res.json(updatedTodo.rows[0]);
     // res.json("complete status was toggle");
   } catch (err) {
     next(err);
@@ -92,14 +90,11 @@ const updateTodo = async (req, res, next) => {
 const deleteTodo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deleteQuery = await pool.query("DELETE FROM todo WHERE id = $1", [
-      id,
-    ]);
-    // res.json(newTodo.rows[0]);
-
-    const todo = await pool.query("SELECT * FROM todo ORDER BY id ASC");
-    res.json(todo.rows);
-    // res.json("todo was deleted");
+    const deleteQuery = await pool.query(
+      "DELETE FROM todo WHERE id = $1 RETURNING *",
+      [id]
+    );
+    res.json(deleteQuery.rows[0]);
   } catch (err) {
     next(err);
     logger.error(err);

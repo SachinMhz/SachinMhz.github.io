@@ -6,7 +6,6 @@ import ListHeader from "../components/listHeader";
 import TabBar from "../components/TabBar";
 import ListItem from "../components/listItem";
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -58,7 +57,11 @@ class App extends React.Component {
       requestOptions
     );
     const data = await response.json();
-    this.setState({ list: data });
+    const newList = this.state.list.map((todo) => {
+      if (todo.id !== data.id) return todo;
+      else return data;
+    });
+    this.setState({ list: newList });
   };
 
   updateItem = async (id, description) => {
@@ -75,10 +78,15 @@ class App extends React.Component {
       requestOptions
     );
     const data = await response.json();
-    this.setState({ list: data });
+    const newList = this.state.list.map((todo) => {
+      if (todo.id !== data.id) return todo;
+      else return data;
+    });
+    this.setState({ list: newList });
   };
 
   deleteItem = async (id) => {
+    console.log(this.state.list);
     const requestOptions = {
       method: "DELETE",
       headers: {
@@ -92,7 +100,8 @@ class App extends React.Component {
       requestOptions
     );
     const data = await response.json();
-    this.setState({ list: data });
+    const newList = this.state.list.filter((todo) => todo.id !== data.id);
+    this.setState({ list: newList });
   };
 
   changeVisibility = async (show) => {
@@ -157,7 +166,7 @@ class App extends React.Component {
       requestOptions
     );
     const data = await response.json();
-    this.setState({ list: data });
+    this.setState({ list: [...this.state.list, data] });
   };
 
   render() {

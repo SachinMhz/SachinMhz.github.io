@@ -51,7 +51,7 @@ class ListItem extends React.Component {
             }}
           />
         )}
-        <a
+        <span
           className="list-item__btn"
           onClick={() => deleteItem(item.id)}
           href="#"
@@ -62,22 +62,22 @@ class ListItem extends React.Component {
             src={require("../images/delete.png")}
             alt={"delete icon"}
           />
-        </a>
-        <a
+        </span>
+        <span
           className="list-item__btn"
           onClick={() => {
             this.textInput.current && this.textInput.current.focus();
             this.setState({ isEdited: !this.state.isEdited });
           }}
           href="#"
-          title="delete"
+          title="update"
         >
           <img
             className="icons"
             src={require("../images/edit.png")}
             alt={"delete icon"}
           />
-        </a>
+        </span>
       </li>
     );
   }
