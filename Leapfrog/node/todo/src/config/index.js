@@ -2,8 +2,8 @@ const BASE_URL = "http://localhost:8000/api";
 
 const endPoints = {
   todo: "/todo",
-  register: "/register",
-  login: "/login",
+  register: "/auth/register",
+  login: "/auth/login",
 };
 
 export default {
