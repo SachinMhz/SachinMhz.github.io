@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+import config from "../config";
 
 class Register extends React.Component {
   state = {
@@ -24,12 +25,12 @@ class Register extends React.Component {
       }),
     };
     const response = await fetch(
-      "http://localhost:8000/api/auth/register",
+      config.BASE_URL + config.endPoints.register,
       requestOptions
     );
     const data = await response.json();
     console.log(data);
-    if (data.status == 200) this.setState({ redirect: true });
+    if (data.status === 200) this.setState({ redirect: true });
     else this.setState({ error: data.msg });
   };
   render() {
@@ -57,10 +58,12 @@ class Register extends React.Component {
             placeholder="Password"
           />
         </div>
-        {this.state.error ? <div className="login-error">{this.state.error}</div> : null}
         <button className="button" onClick={this.register}>
           Register
         </button>
+        {this.state.error ? (
+          <div className="login-error">{this.state.error}</div>
+        ) : null}
         {this.state.redirect && <Redirect to="/login" />}
       </div>
     );

@@ -5,6 +5,7 @@ import Header from "../components/header";
 import ListHeader from "../components/listHeader";
 import TabBar from "../components/TabBar";
 import ListItem from "../components/listItem";
+import config from "../config";
 
 class App extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class App extends React.Component {
       },
     };
     const response = await fetch(
-      "http://localhost:8000/api/todo",
+      config.BASE_URL + config.endPoints.todo,
       requestOptions
     );
     const data = await response.json();
@@ -53,7 +54,7 @@ class App extends React.Component {
       body: JSON.stringify({ id }),
     };
     const response = await fetch(
-      "http://localhost:8000/api/todo/" + id,
+      config.BASE_URL + config.endPoints.todo + "/" + id,
       requestOptions
     );
     const data = await response.json();
@@ -74,7 +75,7 @@ class App extends React.Component {
       body: JSON.stringify({ id, description }),
     };
     const response = await fetch(
-      "http://localhost:8000/api/todo/" + id,
+      config.BASE_URL + config.endPoints.todo + "/" + id,
       requestOptions
     );
     const data = await response.json();
@@ -96,7 +97,7 @@ class App extends React.Component {
       body: JSON.stringify({ id }),
     };
     const response = await fetch(
-      "http://localhost:8000/api/todo/" + id,
+      config.BASE_URL + config.endPoints.todo + "/" + id,
       requestOptions
     );
     const data = await response.json();
@@ -105,7 +106,7 @@ class App extends React.Component {
   };
 
   changeVisibility = async (show) => {
-    let display = show == "all" ? "" : show;
+    let display = show === "all" ? "" : show;
     const requestOptions = {
       method: "GET",
       headers: {
@@ -114,7 +115,7 @@ class App extends React.Component {
       },
     };
     const response = await fetch(
-      "http://localhost:8000/api/todo/" + display,
+      config.BASE_URL + config.endPoints.todo + "/" + display,
       requestOptions
     );
 
@@ -146,7 +147,7 @@ class App extends React.Component {
       body: JSON.stringify({ description }),
     };
     const response = await fetch(
-      "http://localhost:8000/api/todo",
+      config.BASE_URL + config.endPoints.todo,
       requestOptions
     );
     const data = await response.json();
@@ -154,6 +155,9 @@ class App extends React.Component {
   };
 
   render() {
+    // if (!this.props.cookies.cookies.token) {
+    //   return <Redirect to="/login" />;
+    // }
     return (
       <div className="App">
         <Header cookies={this.props.cookies} />

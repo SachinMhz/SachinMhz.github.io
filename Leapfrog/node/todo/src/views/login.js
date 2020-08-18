@@ -1,8 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import Cookies from "universal-cookie";
-
-const cookies = new Cookies();
+import config from "../config";
 
 class Login extends React.Component {
   constructor(props) {
@@ -34,7 +32,7 @@ class Login extends React.Component {
       }),
     };
     const response = await fetch(
-      "http://localhost:8000/api/auth/login",
+      config.BASE_URL + config.endPoints.login,
       requestOptions
     );
 
@@ -76,15 +74,16 @@ class Login extends React.Component {
             placeholder="Password"
           />
         </div>
-        {this.state.err ? (
-          <div className="login-error">{this.state.err}</div>
-        ) : null}
+
         <button className="button" onClick={this.login}>
           Login
         </button>
         <Link className="button" to="/register">
           <button className="button">Register</button>
         </Link>
+        {this.state.err ? (
+          <div className="login-error">{this.state.err}</div>
+        ) : null}
         {/* {this.state.redirect && <Redirect to="/home" />} */}
       </div>
     );
