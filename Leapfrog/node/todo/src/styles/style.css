@@ -120,7 +120,40 @@
   opacity: 100;
 }
 
+.login-container {
+  width: 300px;
+  margin: auto;
+  padding: 40px;
+}
+.login-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
 .button {
+  display: block;
+  width: 100%;
   background-color: #32a88f;
   color: black;
+  padding: 20;
+  height: 40px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: #1cb695;
+}
+
+.input-container {
+  margin-bottom: 20px;
+}
+.login-label {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.login-input {
+  padding: 10px;
+  width: 100%;
 }

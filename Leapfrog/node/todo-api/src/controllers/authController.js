@@ -1,5 +1,5 @@
 const pool = require("../db");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const helper = require("../utils/helper");
 
 const saltRounds = 10; // saltRounds for bycrypt
@@ -7,16 +7,17 @@ const saltRounds = 10; // saltRounds for bycrypt
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const user = await pool.query("SELECT * FROM users WHERE email=$1", [
-      email,
-    ]);
+
+    var user = await pool.query("SELECT * FROM users WHERE email=$1", [email]);
+    console.log("length", user.rows.length);
+    if (user.rows.length === 0)
+      next({ msg: "email doesn't exists", status: 200 });
     const { hash_password } = user.rows[0];
-    const db_email = user.rows[0].email;
-    if (email !== db_email) next({ msg: "email not found", status: 404 });
     bcrypt.compare(password, hash_password, function (err, result) {
-      // result == true
-      if (err) {
-        return next(err);
+      //if password doesnt match result is false
+      //but err is also false ???
+      if (!result) {
+        return next({ msg: "incorrect password", status: 200 });
       }
       let data = { email };
       let token = helper.createToken(data);
@@ -24,33 +25,52 @@ const login = async (req, res, next) => {
     });
   } catch (err) {
     next(err);
-    logger.error(err);
   }
 };
 
 const register = async (req, res, next) => {
   try {
-    // const todo = await pool.query("SELECT * FROM todo ORDER BY id ASC");
-    const { email, password } = req.body;
-    //verify email and password
+    req
+      .checkBody("email")
+      .notEmpty()
+      .withMessage("Email is required")
+      .isEmail()
+      .withMessage("Please enter a proper email, eg: example@xyz.abc");
 
-    bcrypt.genSalt(saltRounds, function (err, salt) {
-      bcrypt.hash(password, salt, async function (err, hash) {
-        if (err) {
-          return next(err);
-        }
-        const query =
-          "INSERT INTO users (email, hash_password) VALUES ($1, $2) RETURNING *";
-        const value = [email, hash];
-        const todo = await pool.query(query, value);
-        res.json(todo.rows[0]);
-        // Store hash in your password DB.
+    req
+      .checkBody("password")
+      .notEmpty()
+      .withMessage("Password is required")
+      .isLength({ min: 6 })
+      .withMessage("Password must be at least 6 characters");
+
+    let errors = req.validationErrors();
+    console.log(errors);
+    if (errors) {
+      next({ msg: errors[0].msg, status: 300 });
+    } else {
+      // const todo = await pool.query("SELECT * FROM todo ORDER BY id ASC");
+      const { email, password } = req.body;
+      //verify email and password
+
+      bcrypt.genSalt(saltRounds, function (err, salt) {
+        bcrypt.hash(password, salt, async function (err, hash) {
+          if (err) {
+            return next(err);
+          }
+          const query =
+            "INSERT INTO users (email, hash_password) VALUES ($1, $2) RETURNING *";
+          const value = [email, hash];
+          const todo = await pool.query(query, value);
+
+          res.json({ msg: "registered successful", status: 200 });
+          // Store hash in your password DB.
+        });
       });
-    });
+    }
   } catch (err) {
     next(err);
     console.log(err);
-    logger.error(err);
   }
 };
 

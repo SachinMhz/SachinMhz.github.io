@@ -1,17 +1,18 @@
 const express = require("express");
 const cors = require("cors");
-const app = express();
 
 const routes = require("./routes");
 const logger = require("./utils/logger");
 const errorHandler = require("./middlewares/errorHandler");
 const pool = require("./db");
+const EXPRESS_VALIDATOR = require('express-validator');
 require("./env");
 
+const app = express();
 app.set("host", process.env.SERVER_HOST);
 app.set("port", process.env.SERVER_PORT);
 
-
+app.use(EXPRESS_VALIDATOR());
 app.use(cors());
 app.use(express.json());
 

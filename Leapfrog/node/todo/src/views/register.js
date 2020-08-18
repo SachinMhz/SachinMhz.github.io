@@ -6,6 +6,7 @@ class Register extends React.Component {
     email: "",
     password: "",
     redirect: false,
+    error: "",
   };
   setEmail = (e) => {
     this.setState({ email: e.target.value });
@@ -27,14 +28,18 @@ class Register extends React.Component {
       requestOptions
     );
     const data = await response.json();
-    console.log(data)
-    this.setState({ redirect: true });
+    console.log(data);
+    if (data.status == 200) this.setState({ redirect: true });
+    else this.setState({ error: data.msg });
   };
   render() {
     return (
       <div className="login-container">
+        <h1 className="login-header">Register</h1>
         <div className="input-container">
+          <div className="login-label">Email Address</div>
           <input
+            className="login-input"
             value={this.state.email}
             onChange={this.setEmail}
             type="text"
@@ -43,18 +48,20 @@ class Register extends React.Component {
         </div>
 
         <div className="input-container">
+          <div className="login-label">Password</div>
           <input
+            className="login-input"
             value={this.state.password}
             onChange={this.setPassword}
             type="password"
             placeholder="Password"
           />
         </div>
-
+        {this.state.error ? <div className="login-error">{this.state.error}</div> : null}
         <button className="button" onClick={this.register}>
           Register
         </button>
-        {this.state.redirect && <Redirect to="/home" />}
+        {this.state.redirect && <Redirect to="/login" />}
       </div>
     );
   }

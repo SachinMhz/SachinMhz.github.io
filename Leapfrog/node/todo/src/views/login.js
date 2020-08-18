@@ -13,6 +13,7 @@ class Login extends React.Component {
       password: "",
       error: "",
       redirect: this.cookies.cookies.email ? true : false,
+      err: "",
     };
   }
 
@@ -22,6 +23,7 @@ class Login extends React.Component {
   setPassword = (e) => {
     this.setState({ password: e.target.value });
   };
+
   login = async () => {
     const requestOptions = {
       method: "POST",
@@ -38,11 +40,13 @@ class Login extends React.Component {
 
     const data = await response.json();
     // console.log(data);
-    cookies.set("token", data.token, { path: "/" });
-    this.cookies.set("email", data.data.email);
-    this.cookies.set("token", data.token);
-
-    this.setState({ redirect: true });
+    if (data.data) {
+      this.cookies.set("email", data.data.email);
+      this.cookies.set("token", data.token);
+      this.setState({ redirect: true });
+    } else {
+      this.setState({ err: data.msg });
+    }
   };
   render() {
     if (this.state.redirect) {
@@ -50,8 +54,11 @@ class Login extends React.Component {
     }
     return (
       <div className="login-container">
+        <h1 className="login-header">Login</h1>
         <div className="input-container">
+          <div className="login-label">Email Address</div>
           <input
+            className="login-input"
             value={this.state.email}
             onChange={this.setEmail}
             type="text"
@@ -60,17 +67,24 @@ class Login extends React.Component {
         </div>
 
         <div className="input-container">
+          <div className="login-label">Password</div>
           <input
+            className="login-input"
             value={this.state.password}
             onChange={this.setPassword}
             type="password"
             placeholder="Password"
           />
         </div>
-
+        {this.state.err ? (
+          <div className="login-error">{this.state.err}</div>
+        ) : null}
         <button className="button" onClick={this.login}>
           Login
         </button>
+        <Link className="button" to="/register">
+          <button className="button">Register</button>
+        </Link>
         {/* {this.state.redirect && <Redirect to="/home" />} */}
       </div>
     );

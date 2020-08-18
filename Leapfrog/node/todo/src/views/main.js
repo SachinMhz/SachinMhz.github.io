@@ -136,22 +136,6 @@ class App extends React.Component {
     );
   };
 
-  fetchData = async () => {
-    const requestOptions = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.props.cookies.cookies.token,
-      },
-    };
-    const response = await fetch(
-      "http://localhost:8000/api/todo",
-      requestOptions
-    );
-    const data = await response.json();
-    console.log(data);
-  };
-
   postData = async (description) => {
     const requestOptions = {
       method: "POST",
@@ -200,7 +184,6 @@ class App extends React.Component {
             )}
           </ul>
         ) : null}
-        <button onClick={this.fetchData}>fetch</button>
       </div>
     );
   }
