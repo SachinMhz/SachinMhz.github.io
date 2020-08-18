@@ -16,12 +16,13 @@ class ListItem extends React.Component {
 
   onKeyPressed = (e) => {
     if (e.key === "Enter") {
-      this.props.updateItem(this.props.item.id, this.state.edit);
+      if (this.state.edit)
+        this.props.updateItem(this.props.item.id, this.state.edit);
       this.setState({ isEdited: false });
     }
   };
   render() {
-    const { item, completeItem, deleteItem, updateItem } = this.props;
+    const { item, completeItem, deleteItem } = this.props;
     let textStyle = item.is_complete
       ? "list-item__span text-cross"
       : "list-item__span";

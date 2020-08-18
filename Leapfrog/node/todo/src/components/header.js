@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Header extends React.Component {
   constructor(props) {
@@ -13,9 +13,14 @@ class Header extends React.Component {
   };
   render() {
     return (
-      <div>
-        <div className="header">Todo List</div>;
-        <Link className="button" to="/login" onClick={this.logOut}>
+      <div class="header-container">
+        {this.props.cookies.cookies.email && (
+          <div className="float-right">
+            Logged In User's Email : {this.props.cookies.cookies.email}
+          </div>
+        )}
+        <div className="header">Todo List</div>
+        <Link className="logOut-button" to="/login" onClick={this.logOut}>
           Log out
         </Link>
       </div>
