@@ -41,7 +41,7 @@ const getCompleted = async (req, res, next) => {
     );
     res.json(remaining.rows);
   } catch (err) {
-    next(err);
+    next({ msg: "error loading from server", status: 300, err });
     logger.error(err);
   }
 };
@@ -49,14 +49,25 @@ const getCompleted = async (req, res, next) => {
 //create new todo
 const postTodo = async (req, res, next) => {
   try {
-    const { description } = req.body;
-    const newTodo = await pool.query(
-      "INSERT INTO todo (description,is_complete,email) VALUES ($1, $2,$3) RETURNING *",
-      [description, false, req.user.email]
-    );
-    res.json(newTodo.rows[0]);
+    req
+      .checkBody("description")
+      .notEmpty()
+      .withMessage("description is required");
+
+    let errors = req.validationErrors();
+    console.log(errors);
+    if (errors) {
+      next({ msg: errors[0].msg, status: 300 });
+    } else {
+      const { description } = req.body;
+      const newTodo = await pool.query(
+        "INSERT INTO todo (description,is_complete,email) VALUES ($1, $2,$3) RETURNING *",
+        [description, false, req.user.email]
+      );
+      res.json(newTodo.rows[0]);
+    }
   } catch (err) {
-    next(err);
+    next({ msg: "error loading from server", status: 300, err });
     logger.error(err);
   }
 };
@@ -81,7 +92,7 @@ const updateTodo = async (req, res, next) => {
     res.json(updatedTodo.rows[0]);
     // res.json("complete status was toggle");
   } catch (err) {
-    next(err);
+    next({ msg: "error loading from server", status: 300, err });
     logger.error(err);
   }
 };
@@ -96,7 +107,7 @@ const deleteTodo = async (req, res, next) => {
     );
     res.json(deleteQuery.rows[0]);
   } catch (err) {
-    next(err);
+    next({ msg: "error loading from server", status: 300, err });
     logger.error(err);
   }
 };

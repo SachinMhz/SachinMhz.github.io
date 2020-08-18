@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Route, Redirect } from "react-router-dom";
+import { Route, Redirect, BrowserRouter } from "react-router-dom";
 import { withCookies } from "react-cookie";
 
 import "./styles/style.css";
@@ -13,7 +13,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <HashRouter>
+        <BrowserRouter>
           <div>
             <Route path="/" exact component={() => <Redirect to="/login" />} />
             <Route
@@ -29,7 +29,7 @@ class App extends React.Component {
               component={() => <Main cookies={this.props.cookies} />}
             />
           </div>
-        </HashRouter>
+        </BrowserRouter>
       </div>
     );
   }
