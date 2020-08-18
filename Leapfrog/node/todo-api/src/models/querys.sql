@@ -5,7 +5,7 @@ CREATE DATABASE todo_database;
 
 CREATE TABLE todo(
     id SERIAL PRIMARY KEY,
-    description  VARCHAR(255),
+    description  VARCHAR(255) NOT NULL,
     email VARCHAR(255),
     is_complete BOOLEAN
 );
@@ -13,6 +13,6 @@ CREATE TABLE todo(
 
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
-    email  VARCHAR(255),
+    email  VARCHAR(255) UNIQUE,
     hash_password VARCHAR(255)
 );
